@@ -10,11 +10,25 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var blackJackButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        blackJackButton.backgroundColor = UIColor.clearColor()
+        blackJackButton.layer.cornerRadius = 10
+        blackJackButton.layer.borderWidth = 3
+        blackJackButton.layer.borderColor = UIColor.blueColor().CGColor
     }
 
+    @IBAction func onBlackjackTapButton(sender: UIButton) {
+        self.performSegueWithIdentifier("main2BJsegue", sender: self)
+    }
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -16,6 +16,7 @@
 		C171BA351B5039070087D024 /* Card_Game_SuiteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C171BA341B5039070087D024 /* Card_Game_SuiteUITests.swift */; };
 		C171BA431B5039A00087D024 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C171BA421B5039A00087D024 /* Card.swift */; };
 		C171BA451B5044670087D024 /* BlackjackCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C171BA441B5044670087D024 /* BlackjackCard.swift */; };
+		C171BA471B504A220087D024 /* LeftToRightSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C171BA461B504A220087D024 /* LeftToRightSegue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		C171BA361B5039070087D024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C171BA421B5039A00087D024 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		C171BA441B5044670087D024 /* BlackjackCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlackjackCard.swift; sourceTree = "<group>"; };
+		C171BA461B504A220087D024 /* LeftToRightSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftToRightSegue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				C171BA201B5039070087D024 /* Info.plist */,
 				C171BA421B5039A00087D024 /* Card.swift */,
 				C171BA441B5044670087D024 /* BlackjackCard.swift */,
+				C171BA461B504A220087D024 /* LeftToRightSegue.swift */,
 			);
 			path = "Card Game Suite";
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			files = (
 				C171BA171B5039070087D024 /* ViewController.swift in Sources */,
 				C171BA431B5039A00087D024 /* Card.swift in Sources */,
+				C171BA471B504A220087D024 /* LeftToRightSegue.swift in Sources */,
 				C171BA451B5044670087D024 /* BlackjackCard.swift in Sources */,
 				C171BA151B5039070087D024 /* AppDelegate.swift in Sources */,
 			);
