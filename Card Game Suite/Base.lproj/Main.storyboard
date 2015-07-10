@@ -49,10 +49,10 @@
             </objects>
             <point key="canvasLocation" x="1329" y="364"/>
         </scene>
-        <!--View Controller-->
+        <!--Blackjack View Controller-->
         <scene sceneID="NUh-JD-8nf">
             <objects>
-                <viewController id="72n-Vd-8ZK" sceneMemberID="viewController">
+                <viewController id="72n-Vd-8ZK" customClass="BlackjackViewController" customModule="Card_Game_Suite" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0UI-Pq-zsS"/>
                         <viewControllerLayoutGuide type="bottom" id="2kY-FO-Exq"/>
