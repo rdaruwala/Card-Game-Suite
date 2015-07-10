@@ -23,7 +23,6 @@ class ViewController: UIViewController {
         blackJackButton.layer.cornerRadius = 10
         blackJackButton.layer.borderWidth = 3
         blackJackButton.layer.borderColor = UIColor.blueColor().CGColor
-        
     }
     
     @IBAction func onBlackjackTapButton(sender: UIButton) {
