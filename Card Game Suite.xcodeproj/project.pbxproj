@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0485D6A11B5056B800BD271E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485D6A01B5056B800BD271E /* User.swift */; };
 		C171BA151B5039070087D024 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C171BA141B5039070087D024 /* AppDelegate.swift */; };
 		C171BA171B5039070087D024 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C171BA161B5039070087D024 /* ViewController.swift */; };
 		C171BA1A1B5039070087D024 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C171BA181B5039070087D024 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0485D6A01B5056B800BD271E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C171BA111B5039070087D024 /* Card Game Suite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Card Game Suite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C171BA141B5039070087D024 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C171BA161B5039070087D024 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			children = (
 				C171BA141B5039070087D024 /* AppDelegate.swift */,
 				C171BA161B5039070087D024 /* ViewController.swift */,
+				0485D6A01B5056B800BD271E /* User.swift */,
 				C171BA4C1B5052CB0087D024 /* BlackjackViewController.swift */,
 				C171BA181B5039070087D024 /* Main.storyboard */,
 				C171BA1B1B5039070087D024 /* Assets.xcassets */,
@@ -273,6 +276,7 @@
 				C171BA451B5044670087D024 /* BlackjackCard.swift in Sources */,
 				C171BA151B5039070087D024 /* AppDelegate.swift in Sources */,
 				C171BA4D1B5052CB0087D024 /* BlackjackViewController.swift in Sources */,
+				0485D6A11B5056B800BD271E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +503,7 @@
 				C171BA3B1B5039070087D024 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C171BA3C1B5039070087D024 /* Build configuration list for PBXNativeTarget "Card Game SuiteTests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +512,7 @@
 				C171BA3E1B5039070087D024 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C171BA3F1B5039070087D024 /* Build configuration list for PBXNativeTarget "Card Game SuiteUITests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +521,7 @@
 				C171BA411B5039070087D024 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
