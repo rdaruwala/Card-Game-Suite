@@ -10,12 +10,20 @@ import UIKit
 
 class User {
     
-    var name = ""
-    var profilePic = UIImage(named: "default")
+    var name:String!
+    var profilePic:UIImage?
     
-    convenience init(name: String, profilePic: UIImage) {
-        self.init()
+    init(name: String, profilePic: UIImage) {
         self.name = name
         self.profilePic = profilePic
+    }
+    
+    init(name: String){
+        self.name = name
+        self.profilePic = nil
+    }
+    
+    init(){
+        self.name = "Guest"
     }
 }
