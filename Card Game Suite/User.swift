@@ -12,18 +12,23 @@ class User {
     
     var name:String!
     var profilePic:UIImage?
+    var password:String!
+    var loggedIn:Bool!
     
-    init(name: String, profilePic: UIImage) {
+    init(name: String, password: String, profilePic: UIImage) {
         self.name = name
         self.profilePic = profilePic
+        self.loggedIn = false
     }
     
     init(name: String){
         self.name = name
         self.profilePic = nil
+        self.loggedIn = false
     }
     
     init(){
         self.name = "Guest"
+        self.loggedIn = false
     }
 }

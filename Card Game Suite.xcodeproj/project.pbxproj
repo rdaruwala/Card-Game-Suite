@@ -111,9 +111,9 @@
 			children = (
 				C171BA141B5039070087D024 /* AppDelegate.swift */,
 				C171BA161B5039070087D024 /* ViewController.swift */,
+				C171BA4C1B5052CB0087D024 /* BlackjackViewController.swift */,
 				0485D6A01B5056B800BD271E /* User.swift */,
 				C17E78721B505D1900D67C95 /* Deck.swift */,
-				C171BA4C1B5052CB0087D024 /* BlackjackViewController.swift */,
 				C171BA181B5039070087D024 /* Main.storyboard */,
 				C171BA1B1B5039070087D024 /* Assets.xcassets */,
 				C171BA1D1B5039070087D024 /* LaunchScreen.storyboard */,
@@ -423,6 +423,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Card Game Suite/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rohandaruwala.Card-Game-Suite";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -434,6 +435,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Card Game Suite/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rohandaruwala.Card-Game-Suite";
 				PRODUCT_NAME = "$(TARGET_NAME)";
