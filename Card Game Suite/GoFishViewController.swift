@@ -10,6 +10,45 @@ import UIKit
 
 class GoFishViewController: UIViewController {
     
+    @IBOutlet weak var cardView1: UIImageView!
+    @IBOutlet weak var cardView2: UIImageView!
+    @IBOutlet weak var cardView3: UIImageView!
+    @IBOutlet weak var cardView4: UIImageView!
+    @IBOutlet weak var cardView5: UIImageView!
+    @IBOutlet weak var cardView6: UIImageView!
+    @IBOutlet weak var cardView7: UIImageView!
+    @IBOutlet weak var cardView8: UIImageView!
+    @IBOutlet weak var cardView9: UIImageView!
+    @IBOutlet weak var cardView10: UIImageView!
+    @IBOutlet weak var cardView11: UIImageView!
+    @IBOutlet weak var cardView12: UIImageView!
+    @IBOutlet weak var cardView13: UIImageView!
+    @IBOutlet weak var cardView14: UIImageView!
+    @IBOutlet weak var cardView15: UIImageView!
+    @IBOutlet weak var cardView16: UIImageView!
+    @IBOutlet weak var cardView17: UIImageView!
+    @IBOutlet weak var cardView18: UIImageView!
+    @IBOutlet weak var cardView19: UIImageView!
+    @IBOutlet weak var cardView20: UIImageView!
+    @IBOutlet weak var cardView21: UIImageView!
+    @IBOutlet weak var cardView22: UIImageView!
+    @IBOutlet weak var cardView23: UIImageView!
+    @IBOutlet weak var cardView24: UIImageView!
+    @IBOutlet weak var cardView25: UIImageView!
+    @IBOutlet weak var cardView26: UIImageView!
+    @IBOutlet weak var cardView27: UIImageView!
+    @IBOutlet weak var cardView28: UIImageView!
+    @IBOutlet weak var cardView29: UIImageView!
+    @IBOutlet weak var cardView30: UIImageView!
+    @IBOutlet weak var cardView31: UIImageView!
+    @IBOutlet weak var cardView32: UIImageView!
+    @IBOutlet weak var cardView33: UIImageView!
+    @IBOutlet weak var cardView34: UIImageView!
+    @IBOutlet weak var cardView35: UIImageView!
+    @IBOutlet weak var cardview36: UIImageView!
+    @IBOutlet weak var cardView37: UIImageView!
+    @IBOutlet weak var cardView38: UIImageView!
+    
     var middleDeck : Deck = Deck()
     var numberReceived:Int!
     var playerOneDeck : [Card] = []
