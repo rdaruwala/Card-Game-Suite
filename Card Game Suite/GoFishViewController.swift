@@ -71,10 +71,10 @@ class GoFishViewController: UIViewController {
         displayPlayer()
     }
     
-    func display(playerDeck : [Card]) {
+    func display(playerDeck : [Card?]) {
         for number in 0...38 {
             if playerDeck[number] != nil {
-                viewArray[number] = playerDeck[number].image
+                viewArray[number].image = playerDeck[number]!.image
             }
         }
     }
@@ -82,6 +82,7 @@ class GoFishViewController: UIViewController {
     func displayPlayer() {
         if numberReceived == 1 {
             if playersTurn == "Player One" {
+                display(playerOneDeck)
                 playersTurn = "AI"
             }
             else {
@@ -90,9 +91,11 @@ class GoFishViewController: UIViewController {
         }
         if numberReceived == 2 {
             if playersTurn == "Player One" {
+                display(playerOneDeck)
                 playersTurn = "Player Two"
             }
             else {
+                display(playerTwoDeck)
                 playersTurn = "Player One"
             }
         }
