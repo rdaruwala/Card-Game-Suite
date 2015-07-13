@@ -97,7 +97,7 @@ class ViewController: UIViewController {
         }
         else if(segue.identifier == "home2GFSegue)"){
             let next = segue.destinationViewController as! GoFishViewController
-            next.numberRecieved = numPlayers
+            next.numberReceived = numPlayers
         }
     }
     

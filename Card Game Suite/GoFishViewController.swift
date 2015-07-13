@@ -11,7 +11,7 @@ import UIKit
 class GoFishViewController: UIViewController {
     
     var middleDeck : Deck = Deck()
-    var numberReceived = 1
+    var numberReceived:Int!
     var playerOneDeck : [Card] = []
     var playerTwoDeck : [Card] = []
     var aiDeck : [Card] = []
