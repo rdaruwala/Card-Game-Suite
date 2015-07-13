@@ -61,10 +61,10 @@
             </objects>
             <point key="canvasLocation" x="1329" y="364"/>
         </scene>
-        <!--View Controller-->
+        <!--Go Fish View Controller-->
         <scene sceneID="Izr-bn-d5j">
             <objects>
-                <viewController id="qeD-RQ-ykb" sceneMemberID="viewController">
+                <viewController id="qeD-RQ-ykb" customClass="GoFishViewController" customModule="Card_Game_Suite" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Kcn-xL-Ijp"/>
                         <viewControllerLayoutGuide type="bottom" id="XR6-gM-1S5"/>
