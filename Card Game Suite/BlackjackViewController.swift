@@ -20,6 +20,7 @@ class BlackjackViewController: UIViewController {
     var gameDeck:Deck!
     var playerSetup:Int = 1
     var playerArray:[User]!
+    var dealer:User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,7 @@ class BlackjackViewController: UIViewController {
         let t:BlackjackCard = BlackjackCard(type: gameDeck.deck[15])
         print(String(t.BJValue))
         playerArray = []
+        dealer = User(name: "The Dealer")
         introLabelObject.alpha = 0
     }
     
@@ -103,6 +105,8 @@ class BlackjackViewController: UIViewController {
     }
     
     @IBAction func hitButtonAction(sender: AnyObject) {
+        let playersTurn:Int = findUserTurn()
+        
         
     }
     
