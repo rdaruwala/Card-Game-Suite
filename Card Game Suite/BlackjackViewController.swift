@@ -15,6 +15,20 @@ class BlackjackViewController: UIViewController {
     @IBOutlet weak var hitButton: UIButton!
     @IBOutlet weak var stayButton: UIButton!
     
+    @IBOutlet weak var cardImage1: UIImageView!
+    @IBOutlet weak var cardImage2: UIImageView!
+    @IBOutlet weak var cardImage3: UIImageView!
+    @IBOutlet weak var cardImage4: UIImageView!
+    @IBOutlet weak var cardImage5: UIImageView!
+    @IBOutlet weak var cardImage6: UIImageView!
+    @IBOutlet weak var cardImage7: UIImageView!
+    @IBOutlet weak var cardImage8: UIImageView!
+    @IBOutlet weak var cardImage9: UIImageView!
+    @IBOutlet weak var cardImage10: UIImageView!
+    @IBOutlet weak var cardImage11: UIImageView!
+    
+    var cardImageArray:[UIImageView]!
+    
     
     var numberRecieved:Int!
     var gameDeck:Deck!
@@ -29,6 +43,12 @@ class BlackjackViewController: UIViewController {
         playerArray = []
         dealer = User(name: "The Dealer")
         introLabelObject.alpha = 0
+        cardImageArray = [cardImage1, cardImage2, cardImage3, cardImage4, cardImage5, cardImage6, cardImage7, cardImage8, cardImage9, cardImage10, cardImage11]
+        
+        for image in cardImageArray{
+            image.image = gameDeck.deck[13].image
+        }
+        
     }
     
     override func viewDidAppear(animated: Bool) {

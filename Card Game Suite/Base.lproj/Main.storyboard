@@ -154,6 +154,17 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="cardImage1" destination="zfv-Yp-wLF" id="LXC-6N-ypa"/>
+                        <outlet property="cardImage10" destination="mWP-BB-Rcc" id="Xoa-1a-1dS"/>
+                        <outlet property="cardImage11" destination="wRI-u1-HIn" id="7Jv-fP-vNs"/>
+                        <outlet property="cardImage2" destination="964-IF-mDW" id="Oqp-P2-qy0"/>
+                        <outlet property="cardImage3" destination="EIJ-4Q-Ud7" id="Vhr-qN-u7n"/>
+                        <outlet property="cardImage4" destination="1cD-OB-BKX" id="Bzg-ag-LjB"/>
+                        <outlet property="cardImage5" destination="BxR-hr-3Yh" id="AwI-1g-VGZ"/>
+                        <outlet property="cardImage6" destination="MDo-wW-0jJ" id="JBn-cd-RqN"/>
+                        <outlet property="cardImage7" destination="Def-ID-mSM" id="Xjs-aI-gnF"/>
+                        <outlet property="cardImage8" destination="YeJ-UL-gDf" id="muy-WN-lUf"/>
+                        <outlet property="cardImage9" destination="VZ5-KC-6Co" id="hTz-wJ-jEo"/>
                         <outlet property="hitButton" destination="22R-sF-GHG" id="YWt-uz-rpR"/>
                         <outlet property="introLabelObject" destination="EYV-0y-2yN" id="xaD-5g-P9V"/>
                         <outlet property="stayButton" destination="vnf-cm-HIh" id="JcR-gn-gdM"/>
