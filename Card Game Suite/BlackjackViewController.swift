@@ -223,57 +223,6 @@ class BlackjackViewController: UIViewController {
     }
     
     
-    func beginGame(){
-        
-        for(var i = 0; i < playerArray.count; i++){
-            loadPlayerSetup(playerArray[i])
-            introLabelObject.text = "Now giving two cards to: " + playerArray[i].name
-            
-            let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
-            let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
-            
-            if(cardPicked.name == "Ace"){
-                
-                let actionSheet = UIAlertController(title: playerArray[i].name + "'s Card", message: playerArray[i].name + ", please select the value of your Ace", preferredStyle: .ActionSheet)
-                let oneOption = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
-                    cardPicked.BJValue = 1
-                }
-                let elevenOption = UIAlertAction(title: "Eleven", style: .Default){ (action) -> Void in
-                    cardPicked.BJValue = 11
-                }
-                actionSheet.addAction(oneOption)
-                actionSheet.addAction(elevenOption)
-                self.presentViewController(actionSheet, animated: true, completion: nil)
-                
-            }
-            
-            
-            
-            cardImage1.image = cardPicked.image
-            
-            let indexToPick2:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
-            let cardPicked2:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
-            if(cardPicked2.name == "Ace"){
-                let actionSheet2 = UIAlertController(title: playerArray[i].name + "'s Card", message: playerArray[i].name + ", please select the value of your Ace", preferredStyle: .ActionSheet)
-                let oneOption2 = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
-                    cardPicked2.BJValue = 1
-                }
-                let elevenOption2 = UIAlertAction(title: "Eleven", style: .Default){ (action) -> Void in
-                    cardPicked2.BJValue = 11
-                }
-                actionSheet2.addAction(oneOption2)
-                actionSheet2.addAction(elevenOption2)
-                self.presentViewController(actionSheet2, animated: true, completion: nil)
-            }
-            cardImage2.image = cardPicked2.image
-            
-            playerArray[i].score = playerArray[i].score + cardPicked.BJValue + cardPicked2.BJValue
-            updateLabelScores()
-            
-            //let timer = NSTimer(timeInterval: <#T##NSTimeInterval#>, target: <#T##AnyObject#>, selector: <#T##Selector#>, userInfo: <#T##AnyObject?#>, repeats: <#T##Bool#>)
-        }
-    }
-    
     func aBeginNewGame(){
         
         print("Iteration")
@@ -299,11 +248,13 @@ class BlackjackViewController: UIViewController {
                 let oneOption = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
                     cardPicked.BJValue = 1
                     self.loopIteration++
+                    self.playerArray[self.loopIteration].cardsInHand.append(cardPicked)
                     NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "aBeginNewGame", userInfo: nil, repeats: false)
                 }
                 let elevenOption = UIAlertAction(title: "Eleven", style: .Default){ (action) -> Void in
                     cardPicked.BJValue = 11
                     self.loopIteration++
+                    self.playerArray[self.loopIteration].cardsInHand.append(cardPicked)
                     NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "aBeginNewGame", userInfo: nil, repeats: false)
                 }
                 actionSheet.addAction(oneOption)
@@ -325,23 +276,30 @@ class BlackjackViewController: UIViewController {
                 let oneOption2 = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
                     cardPicked2.BJValue = 1
                     self.loopIteration++
+                    self.playerArray[self.loopIteration].cardsInHand.append(cardPicked2)
                     NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "aBeginNewGame", userInfo: nil, repeats: false)
                 }
                 let elevenOption2 = UIAlertAction(title: "Eleven", style: .Default){ (action) -> Void in
                     cardPicked2.BJValue = 11
                     self.loopIteration++
+                    self.playerArray[self.loopIteration].cardsInHand.append(cardPicked2)
                     NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "aBeginNewGame", userInfo: nil, repeats: false)
                 }
                 actionSheet2.addAction(oneOption2)
                 actionSheet2.addAction(elevenOption2)
                 self.presentViewController(actionSheet2, animated: true, completion: nil)
             }
+            
             cardImage2.image = cardPicked2.image
             
-            playerArray[loopIteration].score = playerArray[loopIteration].score + cardPicked.BJValue + cardPicked2.BJValue
-            updateLabelScores()
+
+            
             
             if(toNormalIterate){
+                playerArray[loopIteration].cardsInHand.append(cardPicked)
+                playerArray[loopIteration].cardsInHand.append(cardPicked2)
+                playerArray[loopIteration].score = playerArray[loopIteration].score + cardPicked.BJValue + cardPicked2.BJValue
+                updateLabelScores()
                 loopIteration++
                 NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "aBeginNewGame", userInfo: nil, repeats: true)
             }
@@ -483,6 +441,7 @@ class BlackjackViewController: UIViewController {
                                         self.presentViewController(actionSheet, animated: true, completion: nil)
                                         
                                     }
+                                    self.playerArray[playersTurn].cardsInHand.append(cardPicked)
                                     self.gameDeck.deck.removeAtIndex(indexToPick)
                                     self.playerArray[playersTurn].score += cardPicked.BJValue
                                     if(self.playerArray[playersTurn].score > 21){
@@ -557,6 +516,7 @@ class BlackjackViewController: UIViewController {
                             self.introLabelObject.alpha = 0.0
                             }, completion: { finished in
                                 self.playerArray[playersTurn].isTurn = false
+                                self.switchPlayer()
                         })
                 }
         }
@@ -589,8 +549,8 @@ class BlackjackViewController: UIViewController {
     }
     
     func findEmptyImageSlot(player: User)-> Int{
-        for(var i = 0; i < player.cardsInHand.count; i++){
-            if(player.cardsInHand[i].image == nil){return i}
+        for(var i = 0; i < cardImageArray.count; i++){
+            if(cardImageArray[i].image == nil){return i}
         }
         return -1
     }
