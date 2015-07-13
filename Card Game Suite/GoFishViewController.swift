@@ -45,7 +45,7 @@ class GoFishViewController: UIViewController {
     @IBOutlet weak var cardView33: UIImageView!
     @IBOutlet weak var cardView34: UIImageView!
     @IBOutlet weak var cardView35: UIImageView!
-    @IBOutlet weak var cardview36: UIImageView!
+    @IBOutlet weak var cardView36: UIImageView!
     @IBOutlet weak var cardView37: UIImageView!
     @IBOutlet weak var cardView38: UIImageView!
     @IBOutlet weak var cardView39: UIImageView!
