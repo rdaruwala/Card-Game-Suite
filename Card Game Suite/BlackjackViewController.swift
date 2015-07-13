@@ -24,7 +24,11 @@ class BlackjackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        gameDeck = Deck()
+        gameDeck = Deck(type: "BlackJack")
+        print(gameDeck.deck.count)
+        print(gameDeck.deck[15].name)
+        let t:BlackjackCard = BlackjackCard(type: gameDeck.deck[15])
+        print(String(t.BJValue))
         playerArray = []
         introLabelObject.alpha = 0
     }

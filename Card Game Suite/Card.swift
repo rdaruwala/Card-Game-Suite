@@ -31,5 +31,12 @@ class Card{
         self.description = name + " of " + suite
     }
     
+    init(type: Card){
+        self.suite = type.suite
+        self.name = type.name
+        self.image = type.image
+        self.description = name + " of " + suite
+    }
+    
     
 }
