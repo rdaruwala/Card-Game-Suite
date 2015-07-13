@@ -54,7 +54,7 @@
                         <outlet property="blackJackButton" destination="H5y-sn-CDp" id="qPa-FB-fya"/>
                         <outlet property="goFishButton" destination="ZRJ-Ch-WJr" id="d7W-gx-ZSX"/>
                         <segue destination="72n-Vd-8ZK" kind="custom" identifier="main2BJsegue" customClass="LeftToRightSegue" customModule="Card_Game_Suite" id="M5a-oc-LH6"/>
-                        <segue destination="qeD-RQ-ykb" kind="custom" identifier="home2GFSegue" customClass="LeftToRightSegue" id="qb4-pl-UqC"/>
+                        <segue destination="qeD-RQ-ykb" kind="show" identifier="home2GFSegue" id="uEs-zg-bqw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -288,7 +288,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d81-D3-qd7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1193" y="1122"/>
+            <point key="canvasLocation" x="1329" y="1149"/>
         </scene>
         <!--Blackjack View Controller-->
         <scene sceneID="NUh-JD-8nf">

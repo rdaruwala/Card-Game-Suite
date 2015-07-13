@@ -52,7 +52,7 @@ class GoFishViewController: UIViewController {
     
     var viewArray : [UIImageView] = []
     var middleDeck : Deck = Deck()
-    var numberReceived:Int!
+    var numberReceived = 0
     var playerOneDeck : [Card] = []
     var playerTwoDeck : [Card] = []
     var aiDeck : [Card] = []
@@ -63,6 +63,10 @@ class GoFishViewController: UIViewController {
     var booksPlayerTwo : [String] = []
     var booksAI : [String] = []
     var a : [String] = []
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

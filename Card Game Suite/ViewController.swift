@@ -75,16 +75,16 @@ class ViewController: UIViewController {
             self.numPlayers = 2
             self.performSegueWithIdentifier("home2GFSegue", sender: self)
         }
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
-                self.dismissViewControllerAnimated(true, completion: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
+            self.dismissViewControllerAnimated(true, completion: nil)
             
         }
         
-            actionSheet.addAction(singleplayer)
-            actionSheet.addAction(twoPlayers)
-            actionSheet.addAction(cancelAction)
-            
-            self.presentViewController(actionSheet, animated: true, completion: nil)
+        actionSheet.addAction(singleplayer)
+        actionSheet.addAction(twoPlayers)
+        actionSheet.addAction(cancelAction)
+        
+        self.presentViewController(actionSheet, animated: true, completion: nil)
     }
     
     
@@ -95,7 +95,7 @@ class ViewController: UIViewController {
         }
         else if(segue.identifier == "home2GFSegue)"){
             let next = segue.destinationViewController as! GoFishViewController
-            next.numberReceived = numPlayers
+            next.numberReceived = numPlayers!
         }
     }
     
