@@ -26,6 +26,13 @@ class BlackjackViewController: UIViewController {
     @IBOutlet weak var cardImage9: UIImageView!
     @IBOutlet weak var cardImage10: UIImageView!
     @IBOutlet weak var cardImage11: UIImageView!
+    
+    @IBOutlet weak var dealerScoreLabel: UILabel!
+    @IBOutlet weak var p1ScoreLabel: UILabel!
+    @IBOutlet weak var p2ScoreLabel: UILabel!
+    @IBOutlet weak var p3ScoreLabel: UILabel!
+    @IBOutlet weak var p4ScoreLabel: UILabel!
+    
 
     
     var cardImageArray:[UIImageView]!
@@ -46,9 +53,11 @@ class BlackjackViewController: UIViewController {
         introLabelObject.alpha = 0
         cardImageArray = [cardImage1, cardImage2, cardImage3, cardImage4, cardImage5, cardImage6, cardImage7, cardImage8, cardImage9, cardImage10, cardImage11]
         
-        for image in cardImageArray{
+        for image in cardImageArray{image.image = gameDeck.deck[42].image}
+        
+        /*for image in cardImageArray{
             image.image = nil
-        }
+        }*/
         
         hitButton.backgroundColor = UIColor.clearColor()
         hitButton.layer.cornerRadius = 10
@@ -61,6 +70,12 @@ class BlackjackViewController: UIViewController {
         stayButton.layer.borderWidth = 3
         stayButton.layer.borderColor = UIColor.blueColor().CGColor
         stayButton.hidden = true
+        
+        dealerScoreLabel.hidden = true
+        p1ScoreLabel.hidden = true
+        p2ScoreLabel.hidden = true
+        p3ScoreLabel.hidden = true
+        p4ScoreLabel.hidden = true
         
         
     }
