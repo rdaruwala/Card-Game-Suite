@@ -16,6 +16,7 @@ class User {
     var loggedIn:Bool!
     var isTurn:Bool
     var isOut:Bool
+    var score:Int
     
     init(name: String, password: String, profilePic: UIImage) {
         self.name = name
@@ -23,6 +24,7 @@ class User {
         self.loggedIn = false
         self.isTurn = false
         self.isOut = false
+        self.score = 0
     }
     
     init(name: String){
@@ -31,6 +33,7 @@ class User {
         self.loggedIn = false
         self.isTurn = false
         self.isOut = false
+        self.score = 0
     }
     
     init(){
@@ -38,5 +41,6 @@ class User {
         self.loggedIn = false
         self.isTurn = false
         self.isOut = false
+        self.score = 0
     }
 }
