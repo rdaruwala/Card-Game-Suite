@@ -44,6 +44,7 @@ class BlackjackViewController: UIViewController {
     var gameDeck:Deck!
     var playerSetup:Int = 1
     var playerArray:[User]!
+    var playerArray2:[User]!
     var dealer:User!
     var playerTurn:Int = 0
     
@@ -119,6 +120,7 @@ class BlackjackViewController: UIViewController {
                             (action) -> Void in
                             let player = User(name: (alertController.textFields?.first!.text)!)
                             self.playerArray.append(player)
+                            self.playerArray2.append(player)
                             if(self.playerSetup != self.numberRecieved){
                                 self.playerSetup++
                                 self.setupGame()
@@ -534,6 +536,7 @@ class BlackjackViewController: UIViewController {
                             self.introLabelObject.alpha = 0.0
                             }, completion: { finished in
                                 self.playerArray[playersTurn].isTurn = false
+                                self.playerArray.removeAtIndex(playersTurn)
                                 self.switchPlayer()
                         })
                 }
@@ -573,46 +576,78 @@ class BlackjackViewController: UIViewController {
         return -1
     }
     
+    func checkForWinner(){
+        if(numberRecieved > 1){
+            if(playerArray.count == 0){
+                var winnerPlayer:User = User()
+                for(var i = 0; i < playerArray2.count; i++){
+                    if(playerArray2[i].score > 21){playerArray2.removeAtIndex(i)}
+                }
+                for(var i = 0; i < playerArray2.count; i++){
+                    if(playerArray2[i].score > winnerPlayer.score){
+                        winnerPlayer = playerArray2[i]
+                    }
+                }
+                if(winnerPlayer.score > dealer.score){
+                    winner(winnerPlayer)
+                }
+                else{
+                    winner(dealer)
+                }
+            }
+        }
+        else{
+            if(playerArray.count == 0){
+                if(playerArray2[1].score > dealer.score){
+                    winner(playerArray2[1])
+                }
+                else{
+                    winner(dealer)
+                }
+            }
+        }
+    }
+    
     func updateLabelScores(){
         
         dealerScoreLabel.text = "The Dealer's Score: " + String(dealer.score)
         
-        for(var i = 0; i < playerArray.count
+        for(var i = 0; i < playerArray2.count
             ; i++){
                 if(i == 0){
-                    if let test:User = playerArray[i]{
+                    if let test:User = playerArray2[i]{
                         p1ScoreLabel.hidden = false
-                        p1ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
+                        p1ScoreLabel.text = playerArray2[i].name + "'s Score: " + String(playerArray2[i].score)
                     }
                     else{
-                        p1ScoreLabel.text = "Player " + String(i) + " is out."
+                        p1ScoreLabel.text = playerArray[i].name + " is out."
                     }
                 }
                 if(i == 1){
-                    if let test:User = playerArray[i]{
+                    if let test:User = playerArray2[i]{
                         p2ScoreLabel.hidden = false
-                        p2ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
+                        p2ScoreLabel.text = playerArray2[i].name + "'s Score: " + String(playerArray2[i].score)
                     }
                     else{
-                        p2ScoreLabel.text = "Player " + String(i) + " is out."
+                        p2ScoreLabel.text = playerArray[i].name + " is out."
                     }
                 }
                 if(i == 2){
-                    if let test:User = playerArray[i]{
+                    if let test:User = playerArray2[i]{
                         p3ScoreLabel.hidden = false
-                        p3ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
+                        p3ScoreLabel.text = playerArray2[i].name + "'s Score: " + String(playerArray2[i].score)
                     }
                     else{
-                        p3ScoreLabel.text = "Player " + String(i) + " is out."
+                        p3ScoreLabel.text = playerArray[i].name + " is out."
                     }
                 }
                 if(i == 3){
-                    if let test:User = playerArray[i]{
+                    if let test:User = playerArray2[i]{
                         p4ScoreLabel.hidden = false
-                        p4ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
+                        p4ScoreLabel.text = playerArray2[i].name + "'s Score: " + String(playerArray2[i].score)
                     }
                     else{
-                        p4ScoreLabel.text = "Player " + String(i) + " is out."
+                        p4ScoreLabel.text = playerArray[i].name + " is out."
                     }
                 }
                 
