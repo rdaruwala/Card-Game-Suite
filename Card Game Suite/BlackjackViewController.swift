@@ -148,7 +148,7 @@ class BlackjackViewController: UIViewController {
                                         UIView.animateWithDuration(1.5, animations: { () -> Void in
                                             self.introLabelObject.alpha = 0.0
                                             }, completion: { finished in
-                                                //TODO NEXT TURN FUNCTION?
+                                                //TODO NEXT TURN FUNCTION
                                         })
                                 })
                             }
@@ -195,7 +195,7 @@ class BlackjackViewController: UIViewController {
         
         let alert = UIAlertController(title: "Winner!", message: winner.name + " has won the game!", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Return to home screen", style: UIAlertActionStyle.Default, handler: {void in
-            //TODO SEGUE TO HOME SCREEN
+            self.performSegueWithIdentifier("2homefromBJ", sender: self)
         }))
         self.presentViewController(alert, animated: true, completion: nil)
         

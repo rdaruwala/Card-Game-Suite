@@ -138,12 +138,12 @@
 			isa = PBXGroup;
 			children = (
 				C171BA141B5039070087D024 /* AppDelegate.swift */,
+				C171BA181B5039070087D024 /* Main.storyboard */,
+				C171BA1D1B5039070087D024 /* LaunchScreen.storyboard */,
 				C102BC481B5383C600D1800F /* Misc */,
 				C102BC471B5383B400D1800F /* View Controllers */,
 				C102BC461B5383A700D1800F /* Classes */,
-				C171BA181B5039070087D024 /* Main.storyboard */,
 				C171BA1B1B5039070087D024 /* Assets.xcassets */,
-				C171BA1D1B5039070087D024 /* LaunchScreen.storyboard */,
 				C171BA201B5039070087D024 /* Info.plist */,
 			);
 			path = "Card Game Suite";

@@ -17,6 +17,7 @@ class User {
     var isTurn:Bool
     var isOut:Bool
     var score:Int
+    var cardsInHand:[Card]
     
     init(name: String, password: String, profilePic: UIImage) {
         self.name = name
@@ -25,6 +26,7 @@ class User {
         self.isTurn = false
         self.isOut = false
         self.score = 0
+        self.cardsInHand = []
     }
     
     init(name: String){
@@ -34,6 +36,7 @@ class User {
         self.isTurn = false
         self.isOut = false
         self.score = 0
+        self.cardsInHand = []
     }
     
     init(){
@@ -42,5 +45,6 @@ class User {
         self.isTurn = false
         self.isOut = false
         self.score = 0
+        self.cardsInHand = []
     }
 }
