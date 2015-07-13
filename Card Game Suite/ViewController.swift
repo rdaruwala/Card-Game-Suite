@@ -11,6 +11,8 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var blackJackButton: UIButton!
+    @IBOutlet weak var goFishButton: UIButton!
+    
     
     var numPlayers:Int?
     
@@ -23,6 +25,11 @@ class ViewController: UIViewController {
         blackJackButton.layer.cornerRadius = 10
         blackJackButton.layer.borderWidth = 3
         blackJackButton.layer.borderColor = UIColor.blueColor().CGColor
+        
+        goFishButton.backgroundColor = UIColor.clearColor()
+        goFishButton.layer.cornerRadius = 10
+        goFishButton.layer.borderWidth = 3
+        goFishButton.layer.borderColor = UIColor.blueColor().CGColor
     }
     
     @IBAction func onBlackjackTapButton(sender: UIButton) {
@@ -59,9 +66,39 @@ class ViewController: UIViewController {
         
     }
     
+    
+    @IBAction func onGoFishButtonTap(sender: AnyObject) {
+        let actionSheet = UIAlertController(title: "Select Players", message: "Select the number of players", preferredStyle: .ActionSheet)
+        let singleplayer = UIAlertAction(title: "One player", style: .Default){ (action) -> Void in
+            self.numPlayers = 1
+            self.performSegueWithIdentifier("home2GFSegue", sender: self)
+        }
+        let twoPlayers = UIAlertAction(title: "Two players", style: .Default){ (action) -> Void in
+            self.numPlayers = 2
+            self.performSegueWithIdentifier("home2GFSegue", sender: self)
+        }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            
+        }
+        
+            actionSheet.addAction(singleplayer)
+            actionSheet.addAction(twoPlayers)
+            actionSheet.addAction(cancelAction)
+            
+            self.presentViewController(actionSheet, animated: true, completion: nil)
+    }
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "main2BJsegue"){
         let next =  segue.destinationViewController as! BlackjackViewController
         next.numberRecieved = numPlayers
+        }
+        else if(segue.identifier == "home2GFSegue)"){
+            let next = segue.destinationViewController as! GoFishViewController
+            next.numberRecieved = numPlayers
+        }
     }
     
     

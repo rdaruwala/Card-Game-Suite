@@ -30,11 +30,21 @@
                                     <action selector="onBlackjackTapButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MAp-Wd-Gv2"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZRJ-Ch-WJr">
+                                <rect key="frame" x="20" y="307" width="560" height="30"/>
+                                <state key="normal" title="Go Fish"/>
+                                <connections>
+                                    <action selector="onGoFishButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="maY-iO-DgU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZRJ-Ch-WJr" secondAttribute="trailing" id="11Y-vM-qSp"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="ZRJ-Ch-WJr" secondAttribute="leading" id="6KY-7U-Dcc"/>
                             <constraint firstAttribute="leadingMargin" secondItem="s4Z-91-xQy" secondAttribute="leading" id="7Ww-KA-6h5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="s4Z-91-xQy" secondAttribute="trailing" id="YzO-rN-7c6"/>
+                            <constraint firstItem="ZRJ-Ch-WJr" firstAttribute="top" secondItem="H5y-sn-CDp" secondAttribute="bottom" constant="20" id="ivt-Cu-lF4"/>
                             <constraint firstAttribute="leadingMargin" secondItem="H5y-sn-CDp" secondAttribute="leading" id="krs-4V-sks"/>
                             <constraint firstAttribute="trailingMargin" secondItem="H5y-sn-CDp" secondAttribute="trailing" id="x8p-4f-mrt"/>
                         </constraints>
@@ -42,12 +52,32 @@
                     <navigationItem key="navigationItem" title="Card Game Suite" id="b1w-QF-MTT"/>
                     <connections>
                         <outlet property="blackJackButton" destination="H5y-sn-CDp" id="qPa-FB-fya"/>
+                        <outlet property="goFishButton" destination="ZRJ-Ch-WJr" id="d7W-gx-ZSX"/>
                         <segue destination="72n-Vd-8ZK" kind="custom" identifier="main2BJsegue" customClass="LeftToRightSegue" customModule="Card_Game_Suite" id="M5a-oc-LH6"/>
+                        <segue destination="qeD-RQ-ykb" kind="custom" identifier="home2GFSegue" customClass="LeftToRightSegue" id="qb4-pl-UqC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1329" y="364"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Izr-bn-d5j">
+            <objects>
+                <viewController id="qeD-RQ-ykb" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Kcn-xL-Ijp"/>
+                        <viewControllerLayoutGuide type="bottom" id="XR6-gM-1S5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="935-K1-bMq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d81-D3-qd7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1193" y="1122"/>
         </scene>
         <!--Blackjack View Controller-->
         <scene sceneID="NUh-JD-8nf">

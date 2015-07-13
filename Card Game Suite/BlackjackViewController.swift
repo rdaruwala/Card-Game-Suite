@@ -33,7 +33,7 @@ class BlackjackViewController: UIViewController {
     @IBOutlet weak var p3ScoreLabel: UILabel!
     @IBOutlet weak var p4ScoreLabel: UILabel!
     
-
+    
     
     var cardImageArray:[UIImageView]!
     
@@ -43,6 +43,7 @@ class BlackjackViewController: UIViewController {
     var playerSetup:Int = 1
     var playerArray:[User]!
     var dealer:User!
+    var playerTurn:Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +57,7 @@ class BlackjackViewController: UIViewController {
         for image in cardImageArray{image.image = gameDeck.deck[42].image}
         
         /*for image in cardImageArray{
-            image.image = nil
+        image.image = nil
         }*/
         
         hitButton.backgroundColor = UIColor.clearColor()
@@ -81,6 +82,7 @@ class BlackjackViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
         setupGame()
         
     }
@@ -92,65 +94,146 @@ class BlackjackViewController: UIViewController {
     }
     
     func setupGame(){
-        let alertController = UIAlertController(
-            title: "Add Player",
-            message: "Enter name for player " + String(playerSetup),
-            preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let okAction = UIAlertAction(
-            title: "Continue", style: UIAlertActionStyle.Default) {
-                (action) -> Void in
-                let player = User(name: (alertController.textFields?.first!.text)!)
-                self.playerArray.append(player)
-                if(self.playerSetup != self.numberRecieved){
-                    self.playerSetup++
-                    self.setupGame()
-                }
-                else{
-                    self.introLabelObject.text = "Rohan, George, and Jason present..."
-                    let doubleValue = NSNumber(double: 2.5)
-                    UIView.animateWithDuration(NSTimeInterval(doubleValue.doubleValue), animations: { () -> Void in
-                        self.introLabelObject.alpha = 1.0
-                        return
-                        }, completion: { finished in
-                            UIView.animateWithDuration(2.5, animations: { () -> Void in
-                                self.introLabelObject.alpha = 0.0
-                                return
-                                }, completion: { finished in
-                                    self.introLabelObject.text = "Cardgames Suite BlackJack"
-                                    UIView.animateWithDuration(2.5, animations: { () -> Void in
-                                        self.introLabelObject.alpha = 1.0
-                                        return
-                                        }, completion: { finished in
-                                            UIView.animateWithDuration(2.5, animations: { () -> Void in
-                                                self.introLabelObject.alpha = 0.0
-                                                return
-                                                }, completion: { finished in
-                                                    self.beginGame()
-                                            })
-                                    })
-                            })
-                    })
+        if(playerSetup == 1){
+            let beginningController = UIAlertController(
+                title: "Welcome!",
+                message: "You will now create the players for this game",
+                preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let continueAction = UIAlertAction(
+                title: "Okay", style: UIAlertActionStyle.Default) {
+                    (action) -> Void in
                     
-                }
+                    let alertController = UIAlertController(
+                        title: "Add Player",
+                        message: "Enter name for player " + String(self.playerSetup),
+                        preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    let okAction = UIAlertAction(
+                        title: "Continue", style: UIAlertActionStyle.Default) {
+                            (action) -> Void in
+                            let player = User(name: (alertController.textFields?.first!.text)!)
+                            self.playerArray.append(player)
+                            if(self.playerSetup != self.numberRecieved){
+                                self.playerSetup++
+                                self.setupGame()
+                            }
+                            else{
+                                self.introLabelObject.text = "Rohan, George, and Jason present..."
+                                let doubleValue = NSNumber(double: 2.5)
+                                UIView.animateWithDuration(NSTimeInterval(doubleValue.doubleValue), animations: { () -> Void in
+                                    self.introLabelObject.alpha = 1.0
+                                    return
+                                    }, completion: { finished in
+                                        UIView.animateWithDuration(2.5, animations: { () -> Void in
+                                            self.introLabelObject.alpha = 0.0
+                                            return
+                                            }, completion: { finished in
+                                                self.introLabelObject.text = "Cardgames Suite BlackJack"
+                                                UIView.animateWithDuration(2.5, animations: { () -> Void in
+                                                    self.introLabelObject.alpha = 1.0
+                                                    return
+                                                    }, completion: { finished in
+                                                        UIView.animateWithDuration(2.5, animations: { () -> Void in
+                                                            self.introLabelObject.alpha = 0.0
+                                                            return
+                                                            }, completion: { finished in
+                                                                self.beginGame()
+                                                        })
+                                                })
+                                        })
+                                })
+                                
+                            }
+                    }
+                    
+                    alertController.addTextFieldWithConfigurationHandler {
+                        (playerName) -> Void in
+                    }
+                    
+                    alertController.addAction(okAction)
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+            }
+            
+            beginningController.addAction(continueAction)
+            self.presentViewController(beginningController, animated: true, completion: nil)
+            
         }
         
-        alertController.addTextFieldWithConfigurationHandler {
-            (playerName) -> Void in
-        }
         
-        alertController.addAction(okAction)
-        
-        presentViewController(alertController, animated: true, completion: nil)
     }
     
     
     func beginGame(){
         
+        
+        
+        
+    }
+    
+    func switchPlayer(){
+        playerTurn++
+        if(playerTurn > numberRecieved){
+            playerTurn = 1
+            dealerDraw()
+        }
+        
+        introLabelObject.text = "It is now"
+    }
+    
+    func passThePhone(){
+        
     }
     
     func dealerDraw(){
-        
+        if(!dealer.isOut){
+            introLabelObject.text = "It is now the dealer's turn"
+            UIView.animateWithDuration(1.5, animations: { () -> Void in
+                self.introLabelObject.alpha = 1.0
+                }) { finished in
+                    UIView.animateWithDuration(1.5, animations: { () -> Void in
+                        self.introLabelObject.alpha = 0.0
+                        }, completion: { finished in
+                            var toHit = false
+                            for(var i = 0; i < self.playerArray.count; i++){
+                                if(self.dealer.score < self.playerArray[i].score){
+                                    toHit = true
+                                }
+                            }
+                            if(toHit){
+                                let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+                                let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
+                                self.dealer.score += cardPicked.BJValue
+                                self.introLabelObject.text = "The Dealer drew a " + cardPicked.name + " giving a total score of: " + String(self.dealer.score) + "."
+                                UIView.animateWithDuration(1.5, animations: { () -> Void in
+                                    self.introLabelObject.alpha = 1.0
+                                    }, completion: { finished in
+                                        UIView.animateWithDuration(1.5, animations: { () -> Void in
+                                            self.introLabelObject.alpha = 0.0
+                                            }, completion: { finished in
+                                                if(self.dealer.score > 21){
+                                                    self.introLabelObject.text = "The dealer is out!"
+                                                    self.introLabelObject.textColor = UIColor.greenColor()
+                                                    UIView.animateWithDuration(1.5, animations: { () -> Void in
+                                                        self.introLabelObject.alpha = 1.5
+                                                        }, completion: { finished in
+                                                            UIView.animateWithDuration(1.5, animations: { () -> Void in
+                                                                self.introLabelObject.alpha = 0.0
+                                                                }, completion: { finished in
+                                                                    self.introLabelObject.textColor = UIColor.redColor()
+                                                                    self.dealer.isOut = true
+                                                                    
+                                                            })
+                                                    })
+                                                }
+                                        })
+                                })
+                            }
+                            
+                    })
+            }
+        }
     }
     
     @IBAction func hitButtonAction(sender: AnyObject) {
@@ -183,7 +266,7 @@ class BlackjackViewController: UIViewController {
                                 actionSheet.addAction(oneOption)
                                 actionSheet.addAction(elevenOption)
                                 self.presentViewController(actionSheet, animated: true, completion: nil)
-
+                                
                             }
                             self.gameDeck.deck.removeAtIndex(indexToPick)
                             self.playerArray[playersTurn].score += cardPicked.BJValue
