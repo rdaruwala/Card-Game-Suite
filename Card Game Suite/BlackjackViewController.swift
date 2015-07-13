@@ -322,18 +322,20 @@ class BlackjackViewController: UIViewController {
     func switchPlayer(){
         updateLabelScores()
         unloadPlayerSetup()
-        playerTurn++
-        if(playerTurn > numberRecieved){
+        if(playerTurn == 0){playerTurn++}
+        if(playerTurn > playerArray.count){
             playerTurn = 1
             dealerDraw()
         }
         
         checkForWinner()
-        
-        if(playerArray.count > 1){
+        print(playerArray.count)
+        print(playerArray2.count)
+        if(playerArray.count >= 1){
             passThePhone()
             introLabelObject.text = "It is now " + playerArray[playerTurn-1].name + "'s turn."
             playerArray[playerTurn-1].isTurn = true
+            print(playerArray[playerTurn-1].name)
             loadPlayerSetup(playerArray[playerTurn-1])
             UIView.animateWithDuration(1.5, animations: { () -> Void in
                 self.introLabelObject.alpha = 1.0
@@ -406,6 +408,7 @@ class BlackjackViewController: UIViewController {
                                                             })
                                                         }
                                                         self.updateLabelScores()
+                                                        self.switchPlayer()
                                                 })
                                         })
                                     }
@@ -470,12 +473,10 @@ class BlackjackViewController: UIViewController {
                                         
                                     }
                                     self.playerArray[playersTurn].cardsInHand.append(cardPicked)
-                                    self.playerArray2[playersTurn].cardsInHand.append(cardPicked)
                                     self.gameDeck.deck.removeAtIndex(indexToPick)
                                     self.playerArray[playersTurn].score += cardPicked.BJValue
-                                    self.playerArray2[playersTurn].score += cardPicked.BJValue
                                     if(self.playerArray[playersTurn].score > 21){
-                                        self.introLabelObject.text = self.playerArray[playersTurn].name + " got a " + String(cardPicked.BJValue) + ", bringing the total score to" + String(self.playerArray[playersTurn].score) + "."
+                                        self.introLabelObject.text = self.playerArray[playersTurn].name + " got a " + String(cardPicked.BJValue) + ", bringing the total score to " + String(self.playerArray[playersTurn].score) + "."
                                         UIView.animateWithDuration(1.5, animations: { () -> Void in
                                             self.introLabelObject.alpha = 1.0
                                             }, completion: { finished in
@@ -490,6 +491,7 @@ class BlackjackViewController: UIViewController {
                                                                     self.introLabelObject.alpha = 0.0
                                                                     }, completion: { finished in
                                                                         self.playerArray.removeAtIndex(playersTurn)
+                                                                        self.playerTurn++
                                                                         self.switchPlayer()
                                                                 })
                                                         })
@@ -507,6 +509,7 @@ class BlackjackViewController: UIViewController {
                                                 UIView.animateWithDuration(1.5, animations: { () -> Void in
                                                     self.introLabelObject.alpha = 0.0
                                                     }, completion: { finished in
+                                                        self.playerTurn++
                                                         self.switchPlayer()
                                                 })
                                         })
@@ -541,7 +544,7 @@ class BlackjackViewController: UIViewController {
             self.introLabelObject.alpha = 0.0
             }) { finished in
                 let playersTurn:Int = self.findUserTurn()
-                self.playerArray[self.playerTurn-1].isTurn = false
+                self.playerArray[playersTurn].isTurn = false
                 UIView.animateWithDuration(5.0, animations: { () -> Void in
                     self.introLabelObject.text = self.playerArray[playersTurn].name + "has decided to stay"
                     self.introLabelObject.alpha = 1.0
@@ -551,6 +554,7 @@ class BlackjackViewController: UIViewController {
                             }, completion: { finished in
                                 self.playerArray[playersTurn].isTurn = false
                                 self.playerArray.removeAtIndex(playersTurn)
+                                self.playerTurn++
                                 self.switchPlayer()
                         })
                 }
@@ -624,46 +628,46 @@ class BlackjackViewController: UIViewController {
     
     func updateLabelScores(){
         
-        dealerScoreLabel.text = "The Dealer's Score: " + String(dealer.score)
+        /* dealerScoreLabel.text = "The Dealer's Score: " + String(dealer.score)
         
         for(var i = 0; i < playerArray2.count; i++){
-                if(i == 0){
-                    if let test:User = playerArray2[i]{
-                        p1ScoreLabel.hidden = false
-                        p1ScoreLabel.text = playerArray2[i].name + "'s Score: " + String(playerArray2[i].score)
-                    }
-                    else{
-                        p1ScoreLabel.text = playerArray[i].name + " is out."
-                    }
-                }
-                if(i == 1){
-                    if let test:User = playerArray2[i]{
-                        p2ScoreLabel.hidden = false
-                        p2ScoreLabel.text = playerArray2[i].name + "'s Score: " + String(playerArray2[i].score)
-                    }
-                    else{
-                        p2ScoreLabel.text = playerArray[i].name + " is out."
-                    }
-                }
-                if(i == 2){
-                    if let test:User = playerArray2[i]{
-                        p3ScoreLabel.hidden = false
-                        p3ScoreLabel.text = playerArray2[i].name + "'s Score: " + String(playerArray2[i].score)
-                    }
-                    else{
-                        p3ScoreLabel.text = playerArray[i].name + " is out."
-                    }
-                }
-                if(i == 3){
-                    if let test:User = playerArray2[i]{
-                        p4ScoreLabel.hidden = false
-                        p4ScoreLabel.text = playerArray2[i].name + "'s Score: " + String(playerArray2[i].score)
-                    }
-                    else{
-                        p4ScoreLabel.text = playerArray[i].name + " is out."
-                    }
-                }
-                
+        if(i == 0){
+        if let test:User = playerArray2[i]{
+        p1ScoreLabel.hidden = false
+        p1ScoreLabel.text = playerArray2[i].name + "'s Score: " + String(playerArray2[i].score)
         }
+        else{
+        p1ScoreLabel.text = playerArray[i].name + " is out."
+        }
+        }
+        if(i == 1){
+        if let test:User = playerArray2[i]{
+        p2ScoreLabel.hidden = false
+        p2ScoreLabel.text = playerArray2[i].name + "'s Score: " + String(playerArray2[i].score)
+        }
+        else{
+        p2ScoreLabel.text = playerArray[i].name + " is out."
+        }
+        }
+        if(i == 2){
+        if let test:User = playerArray2[i]{
+        p3ScoreLabel.hidden = false
+        p3ScoreLabel.text = playerArray2[i].name + "'s Score: " + String(playerArray2[i].score)
+        }
+        else{
+        p3ScoreLabel.text = playerArray[i].name + " is out."
+        }
+        }
+        if(i == 3){
+        if let test:User = playerArray2[i]{
+        p4ScoreLabel.hidden = false
+        p4ScoreLabel.text = playerArray2[i].name + "'s Score: " + String(playerArray2[i].score)
+        }
+        else{
+        p4ScoreLabel.text = playerArray[i].name + " is out."
+        }
+        }
+        
+        }*/
     }
 }
