@@ -64,10 +64,16 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22R-sF-GHG">
                                 <rect key="frame" x="140" y="499" width="30" height="30"/>
                                 <state key="normal" title="Hit"/>
+                                <connections>
+                                    <action selector="hitButtonAction:" destination="72n-Vd-8ZK" eventType="touchUpInside" id="Zmg-IT-tnC"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vnf-cm-HIh">
                                 <rect key="frame" x="411" y="499" width="31" height="30"/>
                                 <state key="normal" title="Stay"/>
+                                <connections>
+                                    <action selector="stayButtonAction:" destination="72n-Vd-8ZK" eventType="touchUpInside" id="CpK-Pj-Tgk"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EYV-0y-2yN">
                                 <rect key="frame" x="20" y="82" width="560" height="21"/>
@@ -75,6 +81,9 @@
                                 <color key="textColor" red="1" green="0.0588715764" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zfv-Yp-wLF">
+                                <rect key="frame" x="140" y="152" width="240" height="128"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -87,7 +96,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="hitButton" destination="22R-sF-GHG" id="YWt-uz-rpR"/>
                         <outlet property="introLabelObject" destination="EYV-0y-2yN" id="xaD-5g-P9V"/>
+                        <outlet property="stayButton" destination="vnf-cm-HIh" id="JcR-gn-gdM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WK5-dP-EcU" userLabel="First Responder" sceneMemberID="firstResponder"/>

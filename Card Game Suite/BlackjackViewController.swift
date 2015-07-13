@@ -12,6 +12,8 @@ import UIKit
 class BlackjackViewController: UIViewController {
     
     @IBOutlet weak var introLabelObject: UILabel!
+    @IBOutlet weak var hitButton: UIButton!
+    @IBOutlet weak var stayButton: UIButton!
     
     
     var numberRecieved:Int!
@@ -54,31 +56,6 @@ class BlackjackViewController: UIViewController {
                     self.setupGame()
                 }
                 else{
-                    /*self.introLabelObject.text = "Rohan, George, and Jason present..."
-                    let doubleValue = NSNumber(double: 5.0)
-                    UIView.animateWithDuration(NSTimeInterval(doubleValue.doubleValue), animations: { () -> Void in
-                        self.introLabelObject.alpha = 1.0
-                        return
-                        }, completion: { ()  -> Void in
-                            UIView.animateWithDuration(5.0, animations: { () -> Void in
-                                self.introLabelObject.alpha = 0.0
-                                return
-                                }, completion: { () -> Void in
-                                    self.introLabelObject.text = "Cardgames Suite BlackJack"
-                                    UIView.animateWithDuration(5.0, animations: { () -> Void in
-                                        self.introLabelObject.alpha = 1.0
-                                        return
-                                        }, completion: { () -> Void in
-                                            UIView.animateWithDuration(5.0, animations: { () -> Void in
-                                                self.introLabelObject.alpha = 0.0
-                                                return
-                                                }, completion: { () -> Void in
-                                                    print("DONE AY")
-                                            })
-                                    })
-                            })
-                    })*/
-                    
                     self.introLabelObject.text = "Rohan, George, and Jason present..."
                     let doubleValue = NSNumber(double: 2.5)
                     UIView.animateWithDuration(NSTimeInterval(doubleValue.doubleValue), animations: { () -> Void in
@@ -98,12 +75,12 @@ class BlackjackViewController: UIViewController {
                                                 self.introLabelObject.alpha = 0.0
                                                 return
                                                 }, completion: { finished in
-                                                    print("DONE AY")
+                                                    self.beginGame()
                                             })
                                     })
                             })
                     })
-            
+                    
                 }
         }
         
@@ -117,7 +94,41 @@ class BlackjackViewController: UIViewController {
     }
     
     
-    func setupGameView(){
+    func beginGame(){
+        
+    }
+    
+    @IBAction func hitButtonAction(sender: AnyObject) {
+        
+    }
+    
+    
+    func findUserTurn()->Int{
+        for(var i = 0; i < playerArray.count; i++){
+            if(playerArray[i].isTurn){
+                return i
+            }
+        }
+        return -1
+    }
+    
+    
+    
+    @IBAction func stayButtonAction(sender: AnyObject) {
+        
+        let playersTurn:Int = findUserTurn()
+        
+        UIView.animateWithDuration(5.0, animations: { () -> Void in
+            self.introLabelObject.text = self.playerArray[playersTurn].name + "has decided to stay"
+            self.introLabelObject.alpha = 1.0
+            }) { finished in
+                UIView.animateWithDuration(1.5, animations: { () -> Void in
+                    self.introLabelObject.alpha = 0.0
+                    }, completion: { finished in
+                        self.playerArray[playersTurn].isTurn = false
+                })
+        }
+        
     }
     
     
