@@ -17,7 +17,7 @@ class GoFishViewController: UIViewController {
     var aiDeck : [Card] = []
     var randomNumber = 0
     var numberofReceivedCards = 0
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getStartingCards()
