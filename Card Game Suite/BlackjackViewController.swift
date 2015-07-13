@@ -149,6 +149,10 @@ class BlackjackViewController: UIViewController {
         
     }
     
+    func dealerDraw(){
+        
+    }
+    
     @IBAction func hitButtonAction(sender: AnyObject) {
         
         let playersTurn:Int = findUserTurn()
