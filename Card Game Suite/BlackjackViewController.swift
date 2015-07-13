@@ -83,7 +83,9 @@ class BlackjackViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        setupGame()
+        //setupGame()
+        updateLabelScores()
+        let timer = NSTimer(timeInterval: 1.5, target: self, selector: Selector("setupGame"), userInfo: nil, repeats: false)
         
     }
     
@@ -173,6 +175,7 @@ class BlackjackViewController: UIViewController {
     }
     
     func switchPlayer(){
+        updateLabelScores()
         playerTurn++
         if(playerTurn > numberRecieved){
             playerTurn = 1
@@ -243,6 +246,7 @@ class BlackjackViewController: UIViewController {
                                                                 }, completion: { finished in
                                                                     self.introLabelObject.textColor = UIColor.redColor()
                                                                     self.dealer.isOut = true
+                                                                    self.switchPlayer()
                                                                     
                                                             })
                                                     })
@@ -307,7 +311,8 @@ class BlackjackViewController: UIViewController {
                                                                 UIView.animateWithDuration(1.5, animations: { () -> Void in
                                                                     self.introLabelObject.alpha = 0.0
                                                                     }, completion: { finished in
-                                                                        playerArray.removeAtIndex(playersTurn)
+                                                                        self.playerArray.removeAtIndex(playersTurn)
+                                                                        self.switchPlayer()
                                                                 })
                                                         })
                                                 })
@@ -324,7 +329,7 @@ class BlackjackViewController: UIViewController {
                                                 UIView.animateWithDuration(1.5, animations: { () -> Void in
                                                     self.introLabelObject.alpha = 0.0
                                                     }, completion: { finished in
-                                                        //TODO NEXT TURN FUNCTION
+                                                        self.switchPlayer()
                                                 })
                                         })
                                     }
@@ -399,6 +404,47 @@ class BlackjackViewController: UIViewController {
             if(player.cardsInHand[i].image == nil){return i}
         }
         return -1
+    }
+    
+    func updateLabelScores(){
+        
+        dealerScoreLabel.text = "The Dealer's Score: " + String(dealer.score)
+        
+        for(var i = 0; i < numberRecieved; i++){
+            if(i == 0){
+                if let test:User = playerArray[i]{
+                p1ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
+                }
+                else{
+                    p1ScoreLabel.text = "Player " + String(i) + " is out."
+                }
+            }
+            if(i == 1){
+                if let test:User = playerArray[i]{
+                p2ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
+                }
+                else{
+                    p2ScoreLabel.text = "Player " + String(i) + " is out."
+                }
+            }
+            if(i == 2){
+                if let test:User = playerArray[i]{
+                p3ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
+                }
+                else{
+                    p3ScoreLabel.text = "Player " + String(i) + " is out."
+                }
+            }
+            if(i == 3){
+                if let test:User = playerArray[i]{
+                p4ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
+                }
+                else{
+                    p4ScoreLabel.text = "Player " + String(i) + " is out."
+                }
+            }
+            
+        }
     }
     
     
