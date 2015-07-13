@@ -166,19 +166,58 @@ class BlackjackViewController: UIViewController {
     
     func beginGame(){
         
+        
+        
+        
     }
     
     func dealerDraw(){
-        introLabelObject.text = "It is now the dealer's turn"
-        UIView.animateWithDuration(1.5, animations: { () -> Void in
-            self.introLabelObject.alpha = 1.0
-            }) { finished in
-                UIView.animateWithDuration(1.5, animations: { () -> Void in
-                    self.introLabelObject.alpha = 0.0
-                    }, completion: { finished in
-                        let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
-                        let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
-                })
+        if(!dealer.isOut){
+            introLabelObject.text = "It is now the dealer's turn"
+            UIView.animateWithDuration(1.5, animations: { () -> Void in
+                self.introLabelObject.alpha = 1.0
+                }) { finished in
+                    UIView.animateWithDuration(1.5, animations: { () -> Void in
+                        self.introLabelObject.alpha = 0.0
+                        }, completion: { finished in
+                            var toHit = false
+                            for(var i = 0; i < self.playerArray.count; i++){
+                                if(self.dealer.score < self.playerArray[i].score){
+                                    toHit = true
+                                }
+                            }
+                            if(toHit){
+                                let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+                                let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
+                                self.dealer.score += cardPicked.BJValue
+                                self.introLabelObject.text = "The Dealer drew a " + cardPicked.name + " giving a total score of: " + String(self.dealer.score) + "."
+                                UIView.animateWithDuration(1.5, animations: { () -> Void in
+                                    self.introLabelObject.alpha = 1.0
+                                    }, completion: { finished in
+                                        UIView.animateWithDuration(1.5, animations: { () -> Void in
+                                            self.introLabelObject.alpha = 0.0
+                                            }, completion: { finished in
+                                                if(self.dealer.score > 21){
+                                                    self.introLabelObject.text = "The dealer is out!"
+                                                    self.introLabelObject.textColor = UIColor.greenColor()
+                                                    UIView.animateWithDuration(1.5, animations: { () -> Void in
+                                                        self.introLabelObject.alpha = 1.5
+                                                        }, completion: { finished in
+                                                            UIView.animateWithDuration(1.5, animations: { () -> Void in
+                                                                self.introLabelObject.alpha = 0.0
+                                                                }, completion: { finished in
+                                                                    self.introLabelObject.textColor = UIColor.redColor()
+                                                                    self.dealer.isOut = true
+                                                                    
+                                                            })
+                                                    })
+                                                }
+                                        })
+                                })
+                            }
+                            
+                    })
+            }
         }
     }
     
