@@ -71,13 +71,13 @@ class GoFishViewController: UIViewController {
         displayPlayer()
     }
     
-   /* func display(playerDeck : [Card]) {
+    func display(playerDeck : [Card]) {
         for number in 0...38 {
             if playerDeck[number] != nil {
                 viewArray[number].image = playerDeck[number]!.image
             }
         }
-    }*/
+    }
     
     func displayPlayer() {
         if numberReceived == 1 {

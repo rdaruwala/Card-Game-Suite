@@ -236,7 +236,7 @@ class BlackjackViewController: UIViewController {
             return
         }
         if(loopIteration < numberRecieved){
-
+            
             
             loadPlayerSetup(playerArray[loopIteration])
             introLabelObject.text = "Now giving two cards to: " + playerArray[loopIteration].name
@@ -301,7 +301,7 @@ class BlackjackViewController: UIViewController {
             
             cardImage2.image = cardPicked2.image
             
-
+            
             
             
             if(toNormalIterate){
@@ -355,66 +355,72 @@ class BlackjackViewController: UIViewController {
     
     func dealerDraw(){
         if(dealer.isOut == false){
-            introLabelObject.text = "It is now the dealer's turn"
             UIView.animateWithDuration(1.5, animations: { () -> Void in
-                self.introLabelObject.alpha = 1.0
-                }) { finished in
+                self.introLabelObject.alpha = 0.0
+                }, completion: { finished in
+                    self.introLabelObject.text = "It is now the dealer's turn"
                     UIView.animateWithDuration(1.5, animations: { () -> Void in
-                        self.introLabelObject.alpha = 0.0
-                        }, completion: { finished in
-                            var toHit = false
-                            for(var i = 0; i < self.playerArray.count; i++){
-                                if(self.dealer.score < self.playerArray[i].score){
-                                    toHit = true
-                                }
-                            }
-                            if(toHit){
-                                let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
-                                let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
-                                self.dealer.score += cardPicked.BJValue
-                                self.introLabelObject.text = "The Dealer drew a " + cardPicked.name + " giving a total score of: " + String(self.dealer.score) + "."
-                                UIView.animateWithDuration(1.5, animations: { () -> Void in
-                                    self.introLabelObject.alpha = 1.0
-                                    }, completion: { finished in
+                        self.introLabelObject.alpha = 1.0
+                        }) { finished in
+                            UIView.animateWithDuration(1.5, animations: { () -> Void in
+                                self.introLabelObject.alpha = 0.0
+                                }, completion: { finished in
+                                    var toHit = false
+                                    for(var i = 0; i < self.playerArray.count; i++){
+                                        if(self.dealer.score < self.playerArray[i].score){
+                                            toHit = true
+                                        }
+                                    }
+                                    if(toHit){
+                                        let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+                                        let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
+                                        self.dealer.score += cardPicked.BJValue
+                                        self.introLabelObject.text = "The Dealer drew a " + cardPicked.name + " giving a total score of: " + String(self.dealer.score) + "."
                                         UIView.animateWithDuration(1.5, animations: { () -> Void in
-                                            self.introLabelObject.alpha = 0.0
+                                            self.introLabelObject.alpha = 1.0
                                             }, completion: { finished in
-                                                if(self.dealer.score > 21){
-                                                    self.introLabelObject.text = "The dealer is out!"
-                                                    self.introLabelObject.textColor = UIColor.greenColor()
-                                                    self.dealer.isOut = true
-                                                    UIView.animateWithDuration(1.5, animations: { () -> Void in
-                                                        self.introLabelObject.alpha = 1.5
-                                                        }, completion: { finished in
+                                                UIView.animateWithDuration(1.5, animations: { () -> Void in
+                                                    self.introLabelObject.alpha = 0.0
+                                                    }, completion: { finished in
+                                                        if(self.dealer.score > 21){
+                                                            self.introLabelObject.text = "The dealer is out!"
+                                                            self.introLabelObject.textColor = UIColor.greenColor()
+                                                            self.dealer.isOut = true
                                                             UIView.animateWithDuration(1.5, animations: { () -> Void in
-                                                                self.introLabelObject.alpha = 0.0
+                                                                self.introLabelObject.alpha = 1.5
                                                                 }, completion: { finished in
-                                                                    self.introLabelObject.textColor = UIColor.redColor()
-                                                                    self.dealer.isOut = true
-                                                                    self.switchPlayer()
-                                                                    
+                                                                    UIView.animateWithDuration(1.5, animations: { () -> Void in
+                                                                        self.introLabelObject.alpha = 0.0
+                                                                        }, completion: { finished in
+                                                                            self.introLabelObject.textColor = UIColor.redColor()
+                                                                            self.dealer.isOut = true
+                                                                            self.switchPlayer()
+                                                                            
+                                                                    })
                                                             })
-                                                    })
-                                                }
-                                                self.updateLabelScores()
+                                                        }
+                                                        self.updateLabelScores()
+                                                })
                                         })
-                                })
-                            }
-                            else{
-                                self.introLabelObject.text = "The dealer is staying."
-                                UIView.animateWithDuration(1.5, animations: { () -> Void in
-                                    self.introLabelObject.alpha = 1.0
-                                    }, completion: { finished in
+                                    }
+                                    else{
+                                        self.introLabelObject.text = "The dealer is staying."
                                         UIView.animateWithDuration(1.5, animations: { () -> Void in
-                                            self.introLabelObject.alpha = 0.0
+                                            self.introLabelObject.alpha = 1.0
                                             }, completion: { finished in
-                                                self.switchPlayer()
+                                                UIView.animateWithDuration(1.5, animations: { () -> Void in
+                                                    self.introLabelObject.alpha = 0.0
+                                                    }, completion: { finished in
+                                                        self.switchPlayer()
+                                                })
                                         })
-                                })
-                            }
-                            
-                    })
-            }
+                                    }
+                                    
+                            })
+                    }
+                    
+            })
+            
         }
         
     }
@@ -573,43 +579,43 @@ class BlackjackViewController: UIViewController {
         
         for(var i = 0; i < playerArray.count
             ; i++){
-            if(i == 0){
-                if let test:User = playerArray[i]{
-                    p1ScoreLabel.hidden = false
-                    p1ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
+                if(i == 0){
+                    if let test:User = playerArray[i]{
+                        p1ScoreLabel.hidden = false
+                        p1ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
+                    }
+                    else{
+                        p1ScoreLabel.text = "Player " + String(i) + " is out."
+                    }
                 }
-                else{
-                    p1ScoreLabel.text = "Player " + String(i) + " is out."
+                if(i == 1){
+                    if let test:User = playerArray[i]{
+                        p2ScoreLabel.hidden = false
+                        p2ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
+                    }
+                    else{
+                        p2ScoreLabel.text = "Player " + String(i) + " is out."
+                    }
                 }
-            }
-            if(i == 1){
-                if let test:User = playerArray[i]{
-                    p2ScoreLabel.hidden = false
-                    p2ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
+                if(i == 2){
+                    if let test:User = playerArray[i]{
+                        p3ScoreLabel.hidden = false
+                        p3ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
+                    }
+                    else{
+                        p3ScoreLabel.text = "Player " + String(i) + " is out."
+                    }
                 }
-                else{
-                    p2ScoreLabel.text = "Player " + String(i) + " is out."
+                if(i == 3){
+                    if let test:User = playerArray[i]{
+                        p4ScoreLabel.hidden = false
+                        p4ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
+                    }
+                    else{
+                        p4ScoreLabel.text = "Player " + String(i) + " is out."
+                    }
                 }
-            }
-            if(i == 2){
-                if let test:User = playerArray[i]{
-                    p3ScoreLabel.hidden = false
-                    p3ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
-                }
-                else{
-                    p3ScoreLabel.text = "Player " + String(i) + " is out."
-                }
-            }
-            if(i == 3){
-                if let test:User = playerArray[i]{
-                    p4ScoreLabel.hidden = false
-                    p4ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
-                }
-                else{
-                    p4ScoreLabel.text = "Player " + String(i) + " is out."
-                }
-            }
-            
+                
         }
     }
 }
