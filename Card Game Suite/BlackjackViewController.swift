@@ -47,8 +47,21 @@ class BlackjackViewController: UIViewController {
         cardImageArray = [cardImage1, cardImage2, cardImage3, cardImage4, cardImage5, cardImage6, cardImage7, cardImage8, cardImage9, cardImage10, cardImage11]
         
         for image in cardImageArray{
-            image.image = gameDeck.deck[13].image
+            image.image = nil
         }
+        
+        hitButton.backgroundColor = UIColor.clearColor()
+        hitButton.layer.cornerRadius = 10
+        hitButton.layer.borderWidth = 3
+        hitButton.layer.borderColor = UIColor.blueColor().CGColor
+        hitButton.hidden = true
+        
+        stayButton.backgroundColor = UIColor.clearColor()
+        stayButton.layer.cornerRadius = 10
+        stayButton.layer.borderWidth = 3
+        stayButton.layer.borderColor = UIColor.blueColor().CGColor
+        stayButton.hidden = true
+        
         
     }
     
@@ -135,6 +148,24 @@ class BlackjackViewController: UIViewController {
                         }, completion: { finished in
                             let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
                             let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
+                            
+                            let imageIndex = self.findEmptyImageSlot(self.playerArray[playersTurn])
+                            self.cardImageArray[imageIndex].image = cardPicked.image
+                            
+                            if(cardPicked.name == "Ace"){
+                                
+                                let actionSheet = UIAlertController(title: "Select Value", message: "Select the value of your Ace", preferredStyle: .ActionSheet)
+                                let oneOption = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
+                                    cardPicked.BJValue = 1
+                                }
+                                let elevenOption = UIAlertAction(title: "Eleven", style: .Default){ (action) -> Void in
+                                    cardPicked.BJValue = 11
+                                }
+                                actionSheet.addAction(oneOption)
+                                actionSheet.addAction(elevenOption)
+                                self.presentViewController(actionSheet, animated: true, completion: nil)
+
+                            }
                             self.gameDeck.deck.removeAtIndex(indexToPick)
                             self.playerArray[playersTurn].score += cardPicked.BJValue
                             if(self.playerArray[playersTurn].score > 21){
@@ -222,7 +253,24 @@ class BlackjackViewController: UIViewController {
         
     }
     
+    func loadPlayerSetup(player: User){
+        for(var i = 0; i < player.cardsInHand.count; i++){
+            cardImageArray[i].image = player.cardsInHand[i].image
+        }
+    }
     
+    func unloadPlayerSetup(){
+        for image in cardImageArray{
+            image.image = nil
+        }
+    }
+    
+    func findEmptyImageSlot(player: User)-> Int{
+        for(var i = 0; i < player.cardsInHand.count; i++){
+            if(player.cardsInHand[i].image == nil){return i}
+        }
+        return -1
+    }
     
     
 }
