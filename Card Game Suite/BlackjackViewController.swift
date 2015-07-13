@@ -53,6 +53,7 @@ class BlackjackViewController: UIViewController {
         
         gameDeck = Deck(type: "BlackJack")
         playerArray = []
+        playerArray2 = []
         dealer = User(name: "The Dealer")
         introLabelObject.alpha = 0
         cardImageArray = [cardImage1, cardImage2, cardImage3, cardImage4, cardImage5, cardImage6, cardImage7, cardImage8, cardImage9, cardImage10, cardImage11]
@@ -178,6 +179,7 @@ class BlackjackViewController: UIViewController {
                     (action) -> Void in
                     let player = User(name: (alertController.textFields?.first!.text)!)
                     self.playerArray.append(player)
+                    self.playerArray2.append(player)
                     if(self.playerSetup != self.numberRecieved){
                         self.playerSetup++
                         self.setupGame()
@@ -326,6 +328,8 @@ class BlackjackViewController: UIViewController {
             dealerDraw()
         }
         
+        checkForWinner()
+        
         if(playerArray.count > 1){
             passThePhone()
             introLabelObject.text = "It is now " + playerArray[playerTurn-1].name + "'s turn."
@@ -428,6 +432,10 @@ class BlackjackViewController: UIViewController {
     }
     
     @IBAction func hitButtonAction(sender: AnyObject) {
+        
+        hitButton.hidden = true
+        stayButton.hidden = true
+        
         UIView.animateWithDuration(1, animations: { () -> Void in
             self.introLabelObject.alpha = 0.0
             }) { finished in
@@ -462,8 +470,10 @@ class BlackjackViewController: UIViewController {
                                         
                                     }
                                     self.playerArray[playersTurn].cardsInHand.append(cardPicked)
+                                    self.playerArray2[playersTurn].cardsInHand.append(cardPicked)
                                     self.gameDeck.deck.removeAtIndex(indexToPick)
                                     self.playerArray[playersTurn].score += cardPicked.BJValue
+                                    self.playerArray2[playersTurn].score += cardPicked.BJValue
                                     if(self.playerArray[playersTurn].score > 21){
                                         self.introLabelObject.text = self.playerArray[playersTurn].name + " got a " + String(cardPicked.BJValue) + ", bringing the total score to" + String(self.playerArray[playersTurn].score) + "."
                                         UIView.animateWithDuration(1.5, animations: { () -> Void in
@@ -523,6 +533,10 @@ class BlackjackViewController: UIViewController {
     
     
     @IBAction func stayButtonAction(sender: AnyObject) {
+        
+        hitButton.hidden = true
+        stayButton.hidden = true
+        
         UIView.animateWithDuration(1, animations: { () -> Void in
             self.introLabelObject.alpha = 0.0
             }) { finished in
@@ -612,8 +626,7 @@ class BlackjackViewController: UIViewController {
         
         dealerScoreLabel.text = "The Dealer's Score: " + String(dealer.score)
         
-        for(var i = 0; i < playerArray2.count
-            ; i++){
+        for(var i = 0; i < playerArray2.count; i++){
                 if(i == 0){
                     if let test:User = playerArray2[i]{
                         p1ScoreLabel.hidden = false
