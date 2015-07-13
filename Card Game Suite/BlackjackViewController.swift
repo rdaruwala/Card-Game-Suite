@@ -43,6 +43,7 @@ class BlackjackViewController: UIViewController {
     var playerSetup:Int = 1
     var playerArray:[User]!
     var dealer:User!
+    var playerTurn:Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,6 +169,20 @@ class BlackjackViewController: UIViewController {
         
         
         
+        
+    }
+    
+    func switchPlayer(){
+        playerTurn++
+        if(playerTurn > numberRecieved){
+            playerTurn = 1
+            dealerDraw()
+        }
+        
+        introLabelObject.text = "It is now"
+    }
+    
+    func passThePhone(){
         
     }
     
