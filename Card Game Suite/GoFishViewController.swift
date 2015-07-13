@@ -20,6 +20,10 @@ class GoFishViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        getStartingCards()
+    }
+    
+    func getStartingCards() {
         if numberReceived == 1 {
             randomNumber = Int(arc4random_uniform(52))
             for _ in 1...7 {
@@ -29,6 +33,18 @@ class GoFishViewController: UIViewController {
                 randomNumber = Int(arc4random_uniform(UInt32(middleDeck.deck.count)))
                 let appendedAICard = middleDeck.deck[randomNumber]
                 aiDeck.append(appendedAICard)
+                middleDeck.deck.removeAtIndex(randomNumber)
+                randomNumber = Int(arc4random_uniform(UInt32(middleDeck.deck.count)))
+            }
+        }
+        if numberReceived == 2 {
+            for _ in 1...7 {
+                let appendedCard = middleDeck.deck[randomNumber]
+                playerOneDeck.append(appendedCard)
+                middleDeck.deck.removeAtIndex(randomNumber)
+                randomNumber = Int(arc4random_uniform(UInt32(middleDeck.deck.count)))
+                let appendedCardTwo = middleDeck.deck[randomNumber]
+                playerTwoDeck.append(appendedCardTwo)
                 middleDeck.deck.removeAtIndex(randomNumber)
                 randomNumber = Int(arc4random_uniform(UInt32(middleDeck.deck.count)))
             }
