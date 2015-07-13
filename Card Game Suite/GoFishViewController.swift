@@ -52,7 +52,7 @@ class GoFishViewController: UIViewController {
     
     var viewArray : [UIImageView] = []
     var middleDeck : Deck = Deck()
-    var numberReceived:Int!
+    var numberReceived = 0
     var playerOneDeck : [Card] = []
     var playerTwoDeck : [Card] = []
     var aiDeck : [Card] = []
