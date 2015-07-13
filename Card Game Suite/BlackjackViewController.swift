@@ -179,11 +179,31 @@ class BlackjackViewController: UIViewController {
             dealerDraw()
         }
         
-        introLabelObject.text = "It is now"
+        if(playerArray.count > 1){
+            passThePhone()
+            introLabelObject.text = "It is now " + playerArray[playerTurn].name + "'s turn."
+            UIView.animateWithDuration(1.5, animations: { () -> Void in
+                self.introLabelObject.alpha = 1.0
+                }, completion: { finished in
+                    UIView.animateWithDuration(1.5, animations: { () -> Void in
+                        self.introLabelObject.alpha = 0.0
+                        }, completion: { finished in
+                            self.introLabelObject.text = "Hit or Stay?"
+                            self.hitButton.hidden = false
+                            self.stayButton.hidden = false
+                            UIView.animateWithDuration(1.5, animations: { () -> Void in
+                                self.introLabelObject.alpha = 1.0
+                                }, completion: nil)
+                    })
+            })
+        }
     }
     
     func passThePhone(){
-        
+        let alert = UIAlertController(title: "Pass Phone", message: "Please pass the phone to: " + playerArray[playerTurn].name + ".", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.Default, handler: {void in
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func dealerDraw(){
@@ -237,79 +257,83 @@ class BlackjackViewController: UIViewController {
     }
     
     @IBAction func hitButtonAction(sender: AnyObject) {
-        
-        let playersTurn:Int = findUserTurn()
-        if(playerArray[playersTurn].isOut == false){
-            
-            introLabelObject.text = playerArray[playersTurn].name + " has decided to hit."
-            UIView.animateWithDuration(2, animations: { () -> Void in
-                self.introLabelObject.alpha = 1.0
-                }, completion: { finished in
+        UIView.animateWithDuration(1, animations: { () -> Void in
+            self.introLabelObject.alpha = 0.0
+            }) { finished in
+                let playersTurn:Int = self.findUserTurn()
+                if(self.playerArray[playersTurn].isOut == false){
+                    
+                    self.introLabelObject.text = self.playerArray[playersTurn].name + " has decided to hit."
                     UIView.animateWithDuration(2, animations: { () -> Void in
-                        self.introLabelObject.alpha = 0.0
+                        self.introLabelObject.alpha = 1.0
                         }, completion: { finished in
-                            let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
-                            let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
-                            
-                            let imageIndex = self.findEmptyImageSlot(self.playerArray[playersTurn])
-                            self.cardImageArray[imageIndex].image = cardPicked.image
-                            
-                            if(cardPicked.name == "Ace"){
-                                
-                                let actionSheet = UIAlertController(title: "Select Value", message: "Select the value of your Ace", preferredStyle: .ActionSheet)
-                                let oneOption = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
-                                    cardPicked.BJValue = 1
-                                }
-                                let elevenOption = UIAlertAction(title: "Eleven", style: .Default){ (action) -> Void in
-                                    cardPicked.BJValue = 11
-                                }
-                                actionSheet.addAction(oneOption)
-                                actionSheet.addAction(elevenOption)
-                                self.presentViewController(actionSheet, animated: true, completion: nil)
-                                
-                            }
-                            self.gameDeck.deck.removeAtIndex(indexToPick)
-                            self.playerArray[playersTurn].score += cardPicked.BJValue
-                            if(self.playerArray[playersTurn].score > 21){
-                                self.introLabelObject.text = self.playerArray[playersTurn].name + " got a " + String(cardPicked.BJValue) + ", bringing the total score to" + String(self.playerArray[playersTurn].score) + "."
-                                UIView.animateWithDuration(1.5, animations: { () -> Void in
-                                    self.introLabelObject.alpha = 1.0
-                                    }, completion: { finished in
+                            UIView.animateWithDuration(2, animations: { () -> Void in
+                                self.introLabelObject.alpha = 0.0
+                                }, completion: { finished in
+                                    let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+                                    let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
+                                    
+                                    let imageIndex = self.findEmptyImageSlot(self.playerArray[playersTurn])
+                                    self.cardImageArray[imageIndex].image = cardPicked.image
+                                    
+                                    if(cardPicked.name == "Ace"){
+                                        
+                                        let actionSheet = UIAlertController(title: "Select Value", message: "Select the value of your Ace", preferredStyle: .ActionSheet)
+                                        let oneOption = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
+                                            cardPicked.BJValue = 1
+                                        }
+                                        let elevenOption = UIAlertAction(title: "Eleven", style: .Default){ (action) -> Void in
+                                            cardPicked.BJValue = 11
+                                        }
+                                        actionSheet.addAction(oneOption)
+                                        actionSheet.addAction(elevenOption)
+                                        self.presentViewController(actionSheet, animated: true, completion: nil)
+                                        
+                                    }
+                                    self.gameDeck.deck.removeAtIndex(indexToPick)
+                                    self.playerArray[playersTurn].score += cardPicked.BJValue
+                                    if(self.playerArray[playersTurn].score > 21){
+                                        self.introLabelObject.text = self.playerArray[playersTurn].name + " got a " + String(cardPicked.BJValue) + ", bringing the total score to" + String(self.playerArray[playersTurn].score) + "."
                                         UIView.animateWithDuration(1.5, animations: { () -> Void in
-                                            self.introLabelObject.alpha = 0.0
+                                            self.introLabelObject.alpha = 1.0
                                             }, completion: { finished in
-                                                self.introLabelObject.text = self.playerArray[playersTurn].name + " is out!"
                                                 UIView.animateWithDuration(1.5, animations: { () -> Void in
-                                                    self.introLabelObject.alpha = 1.0
+                                                    self.introLabelObject.alpha = 0.0
                                                     }, completion: { finished in
+                                                        self.introLabelObject.text = self.playerArray[playersTurn].name + " is out!"
                                                         UIView.animateWithDuration(1.5, animations: { () -> Void in
-                                                            self.introLabelObject.alpha = 0.0
+                                                            self.introLabelObject.alpha = 1.0
                                                             }, completion: { finished in
-                                                                playerArray.removeAtIndex(playersTurn)
+                                                                UIView.animateWithDuration(1.5, animations: { () -> Void in
+                                                                    self.introLabelObject.alpha = 0.0
+                                                                    }, completion: { finished in
+                                                                        playerArray.removeAtIndex(playersTurn)
+                                                                })
                                                         })
                                                 })
                                         })
-                                })
-                            }
-                            else if(self.playerArray[playersTurn].score == 21){
-                                self.winner(self.playerArray[playersTurn])
-                            }
-                            else{
-                                self.introLabelObject.text = self.playerArray[playersTurn].name + " got a " + String(cardPicked.BJValue) + ", bringing the total score to" + String(self.playerArray[playersTurn].score) + "."
-                                UIView.animateWithDuration(1.5, animations: { () -> Void in
-                                    self.introLabelObject.alpha = 1.0
-                                    }, completion: { finished in
+                                    }
+                                    else if(self.playerArray[playersTurn].score == 21){
+                                        self.winner(self.playerArray[playersTurn])
+                                    }
+                                    else{
+                                        self.introLabelObject.text = self.playerArray[playersTurn].name + " got a " + String(cardPicked.BJValue) + ", bringing the total score to" + String(self.playerArray[playersTurn].score) + "."
                                         UIView.animateWithDuration(1.5, animations: { () -> Void in
-                                            self.introLabelObject.alpha = 0.0
+                                            self.introLabelObject.alpha = 1.0
                                             }, completion: { finished in
-                                                //TODO NEXT TURN FUNCTION
+                                                UIView.animateWithDuration(1.5, animations: { () -> Void in
+                                                    self.introLabelObject.alpha = 0.0
+                                                    }, completion: { finished in
+                                                        //TODO NEXT TURN FUNCTION
+                                                })
                                         })
-                                })
-                            }
+                                    }
+                            })
+                            
                     })
                     
-            })
-            
+                }
+                
         }
     }
     
@@ -326,18 +350,21 @@ class BlackjackViewController: UIViewController {
     
     
     @IBAction func stayButtonAction(sender: AnyObject) {
-        
-        let playersTurn:Int = findUserTurn()
-        
-        UIView.animateWithDuration(5.0, animations: { () -> Void in
-            self.introLabelObject.text = self.playerArray[playersTurn].name + "has decided to stay"
-            self.introLabelObject.alpha = 1.0
+        UIView.animateWithDuration(1, animations: { () -> Void in
+            self.introLabelObject.alpha = 0.0
             }) { finished in
-                UIView.animateWithDuration(1.5, animations: { () -> Void in
-                    self.introLabelObject.alpha = 0.0
-                    }, completion: { finished in
-                        self.playerArray[playersTurn].isTurn = false
-                })
+                let playersTurn:Int = self.findUserTurn()
+                
+                UIView.animateWithDuration(5.0, animations: { () -> Void in
+                    self.introLabelObject.text = self.playerArray[playersTurn].name + "has decided to stay"
+                    self.introLabelObject.alpha = 1.0
+                    }) { finished in
+                        UIView.animateWithDuration(1.5, animations: { () -> Void in
+                            self.introLabelObject.alpha = 0.0
+                            }, completion: { finished in
+                                self.playerArray[playersTurn].isTurn = false
+                        })
+                }
         }
         
     }
