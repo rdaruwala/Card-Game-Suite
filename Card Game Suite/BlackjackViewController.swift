@@ -228,7 +228,7 @@ class BlackjackViewController: UIViewController {
         print("Iteration")
         var toNormalIterate = true
         while(waiting == true){
-            NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: nil, userInfo: self, repeats: false)
+            NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("aBeginNewGame"), userInfo: self, repeats: false)
         }
         if (loopIteration == numberRecieved){
             loopIteration = 9001
@@ -571,9 +571,11 @@ class BlackjackViewController: UIViewController {
         
         dealerScoreLabel.text = "The Dealer's Score: " + String(dealer.score)
         
-        for(var i = 0; i < numberRecieved; i++){
+        for(var i = 0; i < playerArray.count
+            ; i++){
             if(i == 0){
                 if let test:User = playerArray[i]{
+                    p1ScoreLabel.hidden = false
                     p1ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
                 }
                 else{
@@ -582,6 +584,7 @@ class BlackjackViewController: UIViewController {
             }
             if(i == 1){
                 if let test:User = playerArray[i]{
+                    p2ScoreLabel.hidden = false
                     p2ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
                 }
                 else{
@@ -590,6 +593,7 @@ class BlackjackViewController: UIViewController {
             }
             if(i == 2){
                 if let test:User = playerArray[i]{
+                    p3ScoreLabel.hidden = false
                     p3ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
                 }
                 else{
@@ -598,6 +602,7 @@ class BlackjackViewController: UIViewController {
             }
             if(i == 3){
                 if let test:User = playerArray[i]{
+                    p4ScoreLabel.hidden = false
                     p4ScoreLabel.text = playerArray[i].name + "'s Score: " + String(playerArray[i].score)
                 }
                 else{
