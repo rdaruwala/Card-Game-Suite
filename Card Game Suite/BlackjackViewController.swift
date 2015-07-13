@@ -26,6 +26,7 @@ class BlackjackViewController: UIViewController {
     @IBOutlet weak var cardImage9: UIImageView!
     @IBOutlet weak var cardImage10: UIImageView!
     @IBOutlet weak var cardImage11: UIImageView!
+
     
     var cardImageArray:[UIImageView]!
     
