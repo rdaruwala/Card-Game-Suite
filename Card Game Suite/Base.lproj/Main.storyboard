@@ -275,7 +275,8 @@
                         <outlet property="cardView34" destination="1Yw-sS-XOO" id="l0T-3f-oIx"/>
                         <outlet property="cardView35" destination="VI4-SB-DTM" id="orJ-Ve-qfx"/>
                         <outlet property="cardView37" destination="pWL-5I-Qdx" id="3pS-zK-MNx"/>
-                        <outlet property="cardView38" destination="pyr-M0-9lE" id="eRv-aS-cPB"/>
+                        <outlet property="cardView38" destination="pyr-M0-9lE" id="7VX-Bh-ZkU"/>
+                        <outlet property="cardView39" destination="cpV-ea-0Ra" id="wej-Rc-qA1"/>
                         <outlet property="cardView4" destination="p4Y-QM-G2A" id="BJH-1y-SwM"/>
                         <outlet property="cardView5" destination="MFb-bX-xhS" id="iZz-IA-2vR"/>
                         <outlet property="cardView6" destination="Nt1-rn-JLJ" id="dnX-1m-Md2"/>
