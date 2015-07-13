@@ -27,6 +27,10 @@ class GoFishViewController: UIViewController {
                 playerOneDeck.append(appendedCard)
                 middleDeck.deck.removeAtIndex(randomNumber)
                 randomNumber = Int(arc4random_uniform(UInt32(middleDeck.deck.count)))
+                let appendedAICard = middleDeck.deck[randomNumber]
+                aiDeck.append(appendedAICard)
+                middleDeck.deck.removeAtIndex(randomNumber)
+                randomNumber = Int(arc4random_uniform(UInt32(middleDeck.deck.count)))
             }
         }
     }
