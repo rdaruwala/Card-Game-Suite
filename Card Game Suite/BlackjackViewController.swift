@@ -6,70 +6,119 @@
 //  Copyright © 2015 iOS Mobile Makers Class. All rights reserved.
 //
 
+
 import UIKit
 
 class BlackjackViewController: UIViewController {
     
+    @IBOutlet weak var introLabelObject: UILabel!
+    
+    
     var numberRecieved:Int!
     var gameDeck:Deck!
-    
+    var playerSetup:Int = 1
     var playerArray:[User]!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         gameDeck = Deck()
         playerArray = []
+        introLabelObject.alpha = 0
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        setupGame()
         
     }
     
-    override func viewWillAppear(animated: Bool) {
-        let timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("setupPlayers"), userInfo: nil, repeats: false)
-    }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func setupPlayers(){
+    func setupGame(){
+        let alertController = UIAlertController(
+            title: "Add Player",
+            message: "Enter name for player " + String(playerSetup),
+            preferredStyle: UIAlertControllerStyle.Alert)
         
-        for(var i = 0; i < numberRecieved; i++){
-
-        
-            /*let alert = UIAlertView()
-            alert.title = "Player " + String(i+1) + " name:"
-            alert.addButtonWithTitle("Done")
-            alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
-            alert.addButtonWithTitle("Cancel")
-            alert.show()
+        let okAction = UIAlertAction(
+            title: "Continue", style: UIAlertActionStyle.Default) {
+                (action) -> Void in
+                let player = User(name: (alertController.textFields?.first!.text)!)
+                self.playerArray.append(player)
+                if(self.playerSetup != self.numberRecieved){
+                    self.playerSetup++
+                    self.setupGame()
+                }
+                else{
+                    /*self.introLabelObject.text = "Rohan, George, and Jason present..."
+                    let doubleValue = NSNumber(double: 5.0)
+                    UIView.animateWithDuration(NSTimeInterval(doubleValue.doubleValue), animations: { () -> Void in
+                        self.introLabelObject.alpha = 1.0
+                        return
+                        }, completion: { ()  -> Void in
+                            UIView.animateWithDuration(5.0, animations: { () -> Void in
+                                self.introLabelObject.alpha = 0.0
+                                return
+                                }, completion: { () -> Void in
+                                    self.introLabelObject.text = "Cardgames Suite BlackJack"
+                                    UIView.animateWithDuration(5.0, animations: { () -> Void in
+                                        self.introLabelObject.alpha = 1.0
+                                        return
+                                        }, completion: { () -> Void in
+                                            UIView.animateWithDuration(5.0, animations: { () -> Void in
+                                                self.introLabelObject.alpha = 0.0
+                                                return
+                                                }, completion: { () -> Void in
+                                                    print("DONE AY")
+                                            })
+                                    })
+                            })
+                    })*/
+                    
+                    self.introLabelObject.text = "Rohan, George, and Jason present..."
+                    let doubleValue = NSNumber(double: 2.5)
+                    UIView.animateWithDuration(NSTimeInterval(doubleValue.doubleValue), animations: { () -> Void in
+                        self.introLabelObject.alpha = 1.0
+                        return
+                        }, completion: { finished in
+                            UIView.animateWithDuration(2.5, animations: { () -> Void in
+                                self.introLabelObject.alpha = 0.0
+                                return
+                                }, completion: { finished in
+                                    self.introLabelObject.text = "Cardgames Suite BlackJack"
+                                    UIView.animateWithDuration(2.5, animations: { () -> Void in
+                                        self.introLabelObject.alpha = 1.0
+                                        return
+                                        }, completion: { finished in
+                                            UIView.animateWithDuration(2.5, animations: { () -> Void in
+                                                self.introLabelObject.alpha = 0.0
+                                                return
+                                                }, completion: { finished in
+                                                    print("DONE AY")
+                                            })
+                                    })
+                            })
+                    })
             
-            let textField = alert.textFieldAtIndex(0)
-            var player = User(name: textField!.text!)
-            playerArray.append(player)*/
-            
-            var alertController = UIAlertController(
-                title: "Add Player",
-                message: "Enter name for player " + String(i+1),
-                preferredStyle: UIAlertControllerStyle.Alert)
-            
-            var okAction = UIAlertAction(
-                title: "Continue", style: UIAlertActionStyle.Default) {
-                    (action) -> Void in
-                    let player = User(name: (alertController.textFields?.first!.text)!)
-                    self.playerArray.append(player)
-            }
-            
-            alertController.addTextFieldWithConfigurationHandler {
-                (playerName) -> Void in
-            }
-            
-            alertController.addAction(okAction)
-            
-            presentViewController(alertController, animated: true, completion: nil)
-        
+                }
         }
+        
+        alertController.addTextFieldWithConfigurationHandler {
+            (playerName) -> Void in
+        }
+        
+        alertController.addAction(okAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
-
+    
+    func setupGameView(){
+    }
+    
+    
 }
