@@ -34,7 +34,7 @@ class BlackjackViewController: UIViewController {
     @IBOutlet weak var p4ScoreLabel: UILabel!
     
     var loopIteration = 0
-    
+    var waiting = false
     
     
     var cardImageArray:[UIImageView]!
@@ -227,6 +227,9 @@ class BlackjackViewController: UIViewController {
         
         print("Iteration")
         var toNormalIterate = true
+        while(waiting == true){
+            NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: nil, userInfo: self, repeats: false)
+        }
         if (loopIteration == numberRecieved){
             loopIteration = 9001
             NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "switchPlayer", userInfo: nil, repeats: false)
@@ -244,17 +247,20 @@ class BlackjackViewController: UIViewController {
             gameDeck.deck.removeAtIndex(indexToPick)
             if(cardPicked.name == "Ace"){
                 toNormalIterate = false
+                waiting = true
                 let actionSheet = UIAlertController(title: playerArray[loopIteration].name + "'s Card", message: playerArray[loopIteration].name + ", please select the value of your Ace", preferredStyle: .ActionSheet)
                 let oneOption = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
                     cardPicked.BJValue = 1
                     self.loopIteration++
                     self.playerArray[self.loopIteration].cardsInHand.append(cardPicked)
+                    self.waiting = false
                     NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "aBeginNewGame", userInfo: nil, repeats: false)
                 }
                 let elevenOption = UIAlertAction(title: "Eleven", style: .Default){ (action) -> Void in
                     cardPicked.BJValue = 11
                     self.loopIteration++
                     self.playerArray[self.loopIteration].cardsInHand.append(cardPicked)
+                    self.waiting = false
                     NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "aBeginNewGame", userInfo: nil, repeats: false)
                 }
                 actionSheet.addAction(oneOption)
@@ -271,18 +277,21 @@ class BlackjackViewController: UIViewController {
             let cardPicked2:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick2])
             gameDeck.deck.removeAtIndex(indexToPick2)
             if(cardPicked2.name == "Ace"){
+                waiting = true
                 toNormalIterate = false
                 let actionSheet2 = UIAlertController(title: playerArray[loopIteration].name + "'s Card", message: playerArray[loopIteration].name + ", please select the value of your Ace", preferredStyle: .ActionSheet)
                 let oneOption2 = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
                     cardPicked2.BJValue = 1
                     self.loopIteration++
                     self.playerArray[self.loopIteration].cardsInHand.append(cardPicked2)
+                    self.waiting = false
                     NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "aBeginNewGame", userInfo: nil, repeats: false)
                 }
                 let elevenOption2 = UIAlertAction(title: "Eleven", style: .Default){ (action) -> Void in
                     cardPicked2.BJValue = 11
                     self.loopIteration++
                     self.playerArray[self.loopIteration].cardsInHand.append(cardPicked2)
+                    self.waiting = false
                     NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "aBeginNewGame", userInfo: nil, repeats: false)
                 }
                 actionSheet2.addAction(oneOption2)
@@ -308,6 +317,7 @@ class BlackjackViewController: UIViewController {
     
     func switchPlayer(){
         updateLabelScores()
+        unloadPlayerSetup()
         playerTurn++
         if(playerTurn > numberRecieved){
             playerTurn = 1
@@ -318,6 +328,7 @@ class BlackjackViewController: UIViewController {
             passThePhone()
             introLabelObject.text = "It is now " + playerArray[playerTurn-1].name + "'s turn."
             playerArray[playerTurn-1].isTurn = true
+            loadPlayerSetup(playerArray[playerTurn-1])
             UIView.animateWithDuration(1.5, animations: { () -> Void in
                 self.introLabelObject.alpha = 1.0
                 }, completion: { finished in
@@ -343,7 +354,7 @@ class BlackjackViewController: UIViewController {
     }
     
     func dealerDraw(){
-        if(!dealer.isOut){
+        if(dealer.isOut == false){
             introLabelObject.text = "It is now the dealer's turn"
             UIView.animateWithDuration(1.5, animations: { () -> Void in
                 self.introLabelObject.alpha = 1.0
@@ -371,6 +382,7 @@ class BlackjackViewController: UIViewController {
                                                 if(self.dealer.score > 21){
                                                     self.introLabelObject.text = "The dealer is out!"
                                                     self.introLabelObject.textColor = UIColor.greenColor()
+                                                    self.dealer.isOut = true
                                                     UIView.animateWithDuration(1.5, animations: { () -> Void in
                                                         self.introLabelObject.alpha = 1.5
                                                         }, completion: { finished in
