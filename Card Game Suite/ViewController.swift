@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.barTintColor = UIColor.blackColor()
         
         blackJackButton.backgroundColor = UIColor.clearColor()
         blackJackButton.layer.cornerRadius = 10

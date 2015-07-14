@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Card Game Suite-->
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Card_Game_Suite" customModuleProvider="target" sceneMemberID="viewController">
@@ -35,6 +35,7 @@
                                 <state key="normal" title="Go Fish"/>
                                 <connections>
                                     <action selector="onGoFishButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="maY-iO-DgU"/>
+                                    <segue destination="qeD-RQ-ykb" kind="custom" identifier="home2GFSegue" customClass="LeftToRightSegue" id="9xx-w4-OJ5"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -49,12 +50,11 @@
                             <constraint firstAttribute="trailingMargin" secondItem="H5y-sn-CDp" secondAttribute="trailing" id="x8p-4f-mrt"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Card Game Suite" id="b1w-QF-MTT"/>
+                    <navigationItem key="navigationItem" id="b1w-QF-MTT"/>
                     <connections>
                         <outlet property="blackJackButton" destination="H5y-sn-CDp" id="qPa-FB-fya"/>
                         <outlet property="goFishButton" destination="ZRJ-Ch-WJr" id="d7W-gx-ZSX"/>
                         <segue destination="72n-Vd-8ZK" kind="custom" identifier="main2BJsegue" customClass="LeftToRightSegue" customModule="Card_Game_Suite" id="M5a-oc-LH6"/>
-                        <segue destination="qeD-RQ-ykb" kind="show" identifier="home2GFSegue" id="uEs-zg-bqw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
