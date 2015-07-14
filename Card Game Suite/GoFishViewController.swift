@@ -52,7 +52,7 @@ class GoFishViewController: UIViewController {
     
     var viewArray : [UIImageView] = []
     var middleDeck : Deck = Deck()
-    var numberReceived = 0
+    var numberReceived = 1
     var playerOneDeck : [Card] = []
     var playerTwoDeck : [Card] = []
     var aiDeck : [Card] = []
@@ -73,7 +73,7 @@ class GoFishViewController: UIViewController {
     
     func display(playerDeck : [Card]) {
         for number in 0...38 {
-            if let a : Card = playerDeck[number] {
+            if playerDeck.count - 1 >= number{
                 viewArray[number].image = playerDeck[number].image
             }
         }
