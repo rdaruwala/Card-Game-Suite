@@ -38,7 +38,7 @@ class GoFishModalViewController: UIViewController {
     @IBAction func cardTapRecognizer(sender: UITapGestureRecognizer) {
         for image in cardImageArray {
             if (CGRectContainsPoint(image.frame, sender.locationInView(view))) {
-                selectedCard = "You selected the \(image.)"
+                selectedCard = "You selected the \(image)"
                 askingLabel.text = selectedCard
             }
         }
