@@ -47,6 +47,7 @@ class BlackjackViewController: UIViewController {
     var playerArray2:[User]!
     var dealer:User!
     var playerTurn:Int = 0
+    var dealerIn = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -255,17 +256,15 @@ class BlackjackViewController: UIViewController {
                 let actionSheet = UIAlertController(title: playerArray[loopIteration].name + "'s Card", message: playerArray[loopIteration].name + ", please select the value of your Ace", preferredStyle: .ActionSheet)
                 let oneOption = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
                     cardPicked.BJValue = 1
-                    self.loopIteration++
                     self.playerArray[self.loopIteration].cardsInHand.append(cardPicked)
                     self.waiting = false
-                    NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "aBeginNewGame", userInfo: nil, repeats: false)
+                    //NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "aBeginNewGame", userInfo: nil, repeats: false)
                 }
                 let elevenOption = UIAlertAction(title: "Eleven", style: .Default){ (action) -> Void in
                     cardPicked.BJValue = 11
-                    self.loopIteration++
                     self.playerArray[self.loopIteration].cardsInHand.append(cardPicked)
                     self.waiting = false
-                    NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "aBeginNewGame", userInfo: nil, repeats: false)
+                    //NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "aBeginNewGame", userInfo: nil, repeats: false)
                 }
                 actionSheet.addAction(oneOption)
                 actionSheet.addAction(elevenOption)
@@ -320,15 +319,17 @@ class BlackjackViewController: UIViewController {
     }
     
     func switchPlayer(){
+        print("TOP")
         updateLabelScores()
         unloadPlayerSetup()
         if(playerTurn == 0){playerTurn++}
         if(playerTurn > playerArray.count){
             playerTurn = 1
+        }
+        if(playerArray.count == 0){
             dealerDraw()
         }
         
-        checkForWinner()
         print(playerArray.count)
         print(playerArray2.count)
         if(playerArray.count >= 1){
@@ -394,6 +395,8 @@ class BlackjackViewController: UIViewController {
                                                             self.introLabelObject.text = "The dealer is out!"
                                                             self.introLabelObject.textColor = UIColor.greenColor()
                                                             self.dealer.isOut = true
+                                                            self.dealerIn = false
+                                                            self.checkForWinner()
                                                             UIView.animateWithDuration(1.5, animations: { () -> Void in
                                                                 self.introLabelObject.alpha = 1.5
                                                                 }, completion: { finished in
@@ -402,13 +405,20 @@ class BlackjackViewController: UIViewController {
                                                                         }, completion: { finished in
                                                                             self.introLabelObject.textColor = UIColor.redColor()
                                                                             self.dealer.isOut = true
+                                                                            self.dealerIn = false
                                                                             self.switchPlayer()
                                                                             
                                                                     })
                                                             })
                                                         }
                                                         self.updateLabelScores()
-                                                        self.switchPlayer()
+                                                        toHit = false
+                                                        for(var i = 0; i < self.playerArray.count; i++){
+                                                            if(self.dealer.score < self.playerArray[i].score){
+                                                                toHit = true
+                                                            }
+                                                        }
+                                                        if(toHit){self.dealerDraw()}
                                                 })
                                         })
                                     }
@@ -420,7 +430,9 @@ class BlackjackViewController: UIViewController {
                                                 UIView.animateWithDuration(1.5, animations: { () -> Void in
                                                     self.introLabelObject.alpha = 0.0
                                                     }, completion: { finished in
-                                                        self.switchPlayer()
+                                                        self.dealerIn = false
+                                                        self.checkForWinner()
+                                                        
                                                 })
                                         })
                                     }
@@ -491,7 +503,7 @@ class BlackjackViewController: UIViewController {
                                                                     self.introLabelObject.alpha = 0.0
                                                                     }, completion: { finished in
                                                                         self.playerArray.removeAtIndex(playersTurn)
-                                                                        self.playerTurn++
+                                                                        //self.playerTurn++
                                                                         self.switchPlayer()
                                                                 })
                                                         })
@@ -546,7 +558,7 @@ class BlackjackViewController: UIViewController {
                 let playersTurn:Int = self.findUserTurn()
                 self.playerArray[playersTurn].isTurn = false
                 UIView.animateWithDuration(5.0, animations: { () -> Void in
-                    self.introLabelObject.text = self.playerArray[playersTurn].name + "has decided to stay"
+                    self.introLabelObject.text = self.playerArray[playersTurn].name + " has decided to stay"
                     self.introLabelObject.alpha = 1.0
                     }) { finished in
                         UIView.animateWithDuration(1.5, animations: { () -> Void in
@@ -554,7 +566,7 @@ class BlackjackViewController: UIViewController {
                             }, completion: { finished in
                                 self.playerArray[playersTurn].isTurn = false
                                 self.playerArray.removeAtIndex(playersTurn)
-                                self.playerTurn++
+                                //self.playerTurn++
                                 self.switchPlayer()
                         })
                 }
@@ -569,7 +581,7 @@ class BlackjackViewController: UIViewController {
         
         let alert = UIAlertController(title: "Winner!", message: winner.name + " has won the game!", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Return to home screen", style: UIAlertActionStyle.Default, handler: {void in
-            self.performSegueWithIdentifier("2homefromBJ", sender: self)
+            self.dismissViewControllerAnimated(true, completion: nil)
         }))
         self.presentViewController(alert, animated: true, completion: nil)
         
@@ -601,6 +613,11 @@ class BlackjackViewController: UIViewController {
                 for(var i = 0; i < playerArray2.count; i++){
                     if(playerArray2[i].score > 21){playerArray2.removeAtIndex(i)}
                 }
+                if(playerArray2.count == 0){
+                    if(dealer.isOut == false){
+                        winner(dealer)
+                    }
+                }
                 for(var i = 0; i < playerArray2.count; i++){
                     if(playerArray2[i].score > winnerPlayer.score){
                         winnerPlayer = playerArray2[i]
@@ -616,8 +633,8 @@ class BlackjackViewController: UIViewController {
         }
         else{
             if(playerArray.count == 0){
-                if(playerArray2[1].score > dealer.score){
-                    winner(playerArray2[1])
+                if(playerArray2[0].score > dealer.score){
+                    winner(playerArray2[0])
                 }
                 else{
                     winner(dealer)
