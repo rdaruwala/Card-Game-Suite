@@ -56,6 +56,9 @@ class BlackjackViewController: UIViewController {
         playerArray = []
         playerArray2 = []
         dealer = User(name: "The Dealer")
+        introLabelObject.lineBreakMode = .ByWordWrapping
+        introLabelObject.numberOfLines = 5
+        
         introLabelObject.alpha = 0
         cardImageArray = [cardImage1, cardImage2, cardImage3, cardImage4, cardImage5, cardImage6, cardImage7, cardImage8, cardImage9, cardImage10, cardImage11]
         
