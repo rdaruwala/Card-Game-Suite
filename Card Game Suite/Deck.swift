@@ -74,7 +74,7 @@ class Deck{
     
     init(type: String){
         if(type == "BlackJack"){
-            let d1 = BlackjackCard(name: "Ace", suite: "Diamonds", image: UIImage(named: "d1.png")!, value: 1)
+        //r    let d1 = BlackjackCard(name: "Ace", suite: "Diamonds", image: UIImage(named: "d1.png")!, value: 1)
             let d2 = BlackjackCard(name: "Two", suite: "Diamonds", image: UIImage(named: "d2.png")!, value: 2)
             let d3 = BlackjackCard(name: "Three", suite: "Diamonds", image: UIImage(named: "d3.png")!, value: 3)
             let d4 = BlackjackCard(name: "Four", suite: "Diamonds" , image: UIImage(named: "d4.png")!, value: 4)
@@ -88,7 +88,7 @@ class Deck{
             let dq = BlackjackCard(name: "Queen", suite: "Diamonds", image: UIImage(named: "dq.png")!, value: 10)
             let dk = BlackjackCard(name: "King", suite: "Diamonds", image: UIImage(named: "dk.png")!, value: 10)
             
-            let c1 = BlackjackCard(name: "Ace", suite: "Clovers", image: UIImage(named: "c1.png")!, value: 1)
+          //  let c1 = BlackjackCard(name: "Ace", suite: "Clovers", image: UIImage(named: "c1.png")!, value: 1)
             let c2 = BlackjackCard(name: "Two", suite: "Clovers", image: UIImage(named: "c2.png")!, value: 2)
             let c3 = BlackjackCard(name: "Three", suite: "Clovers", image: UIImage(named: "c3.png")!, value: 3)
             let c4 = BlackjackCard(name: "Four", suite: "Clovers", image: UIImage(named: "c4.png")!, value: 4)
@@ -102,7 +102,7 @@ class Deck{
             let cq = BlackjackCard(name: "Queen", suite: "Clovers", image: UIImage(named: "cq.png")!, value: 10)
             let ck = BlackjackCard(name: "King", suite: "Clovers", image: UIImage(named: "ck.png")!, value: 10)
             
-            let h1 = BlackjackCard(name: "Ace", suite: "Hearts", image: UIImage(named: "h1.png")!, value: 1)
+          //  let h1 = BlackjackCard(name: "Ace", suite: "Hearts", image: UIImage(named: "h1.png")!, value: 1)
             let h2 = BlackjackCard(name: "Two", suite: "Hearts", image: UIImage(named: "h2.png")!, value: 2)
             let h3 = BlackjackCard(name: "Three", suite: "Hearts", image: UIImage(named: "h3.png")!, value: 3)
             let h4 = BlackjackCard(name: "Four", suite: "Hearts", image: UIImage(named: "h4.png")!, value: 4)
@@ -116,7 +116,7 @@ class Deck{
             let hq = BlackjackCard(name: "Queen", suite: "Hearts", image: UIImage(named: "hq.png")!, value: 10)
             let hk = BlackjackCard(name: "King", suite: "Hearts", image: UIImage(named: "hk.png")!, value: 10)
             
-            let s1 = BlackjackCard(name: "Ace", suite: "Spades", image: UIImage(named: "s1.png")!, value: 1)
+            //let s1 = BlackjackCard(name: "Ace", suite: "Spades", image: UIImage(named: "s1.png")!, value: 1)
             let s2 = BlackjackCard(name: "Two", suite: "Spades", image: UIImage(named: "s2.png")!, value: 2)
             let s3 = BlackjackCard(name: "Three", suite: "Spades", image: UIImage(named: "s3.png")!, value: 3)
             let s4 = BlackjackCard(name: "Four", suite: "Spades", image: UIImage(named: "s4.png")!, value: 4)
@@ -129,7 +129,8 @@ class Deck{
             let sj = BlackjackCard(name: "Jack", suite: "Spades", image: UIImage(named: "sj.png")!, value: 10)
             let sq = BlackjackCard(name: "Queen", suite: "Spades", image: UIImage(named: "sq.png")!, value: 10)
             let sk = BlackjackCard(name: "King", suite: "Spades", image: UIImage(named: "sk.png")!, value: 10)
-            deck = [d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,dj,dq,dk,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,cj,cq,ck,h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,hj,hq,hk,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,sj,sq,sk]
+            //deck = [d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,dj,dq,dk,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,cj,cq,ck,h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,hj,hq,hk,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,sj,sq,sk]
+            deck = [d2,d3,d4,d5,d6,d7,d8,d9,d10,dj,dq,dk,c2,c3,c4,c5,c6,c7,c8,c9,c10,cj,cq,ck,h2,h3,h4,h5,h6,h7,h8,h9,h10,hj,hq,hk,s2,s3,s4,s5,s6,s7,s8,s9,s10,sj,sq,sk]
         }
         if(deck != nil){
         }
