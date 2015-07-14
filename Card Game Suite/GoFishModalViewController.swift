@@ -11,30 +11,36 @@ import UIKit
 class GoFishModalViewController: UIViewController {
     
     @IBOutlet weak var askingLabel: UILabel!
-    @IBOutlet weak var cardLabel1: UIImageView!
-    @IBOutlet weak var cardLabel2: UIImageView!
-    @IBOutlet weak var cardLabel3: UIImageView!
-    @IBOutlet weak var cardLabel4: UIImageView!
-    @IBOutlet weak var cardLabel5: UIImageView!
-    @IBOutlet weak var cardLabel6: UIImageView!
-    @IBOutlet weak var cardLabel7: UIImageView!
-    @IBOutlet weak var cardLabel8: UIImageView!
-    @IBOutlet weak var cardLabel9: UIImageView!
-    @IBOutlet weak var cardLabel10: UIImageView!
-    @IBOutlet weak var cardLabel11: UIImageView!
-    @IBOutlet weak var cardLabel12: UIImageView!
-    @IBOutlet weak var cardLabel13: UIImageView!
-    
+    @IBOutlet weak var ace: UIImageView!
+    @IBOutlet weak var two: UIImageView!
+    @IBOutlet weak var three: UIImageView!
+    @IBOutlet weak var four: UIImageView!
+    @IBOutlet weak var five: UIImageView!
+    @IBOutlet weak var six: UIImageView!
+    @IBOutlet weak var seven: UIImageView!
+    @IBOutlet weak var eight: UIImageView!
+    @IBOutlet weak var nine: UIImageView!
+    @IBOutlet weak var ten: UIImageView!
+    @IBOutlet weak var jack: UIImageView!
+    @IBOutlet weak var queen: UIImageView!
+    @IBOutlet weak var king: UIImageView!
+
     var player = "Player One"
     var opposingPlayer = "AI"
     var cardImageArray : [UIImageView] = []
+    var selectedCard = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        cardImageArray = [cardLabel1, cardLabel2, cardLabel3, cardLabel4, cardLabel5, cardLabel6, cardLabel7, cardLabel8, cardLabel9, cardLabel10, cardLabel11, cardLabel12, cardLabel13]
+        cardImageArray = [ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king]
     }
-    
-    @IBAction func labelTapRecognizer(sender: UITapGestureRecognizer) {
-        
+
+    @IBAction func cardTapRecognizer(sender: UITapGestureRecognizer) {
+        for image in cardImageArray {
+            if (CGRectContainsPoint(image.frame, sender.locationInView(view))) {
+                selectedCard = "You selected the \(image.)"
+                askingLabel.text = selectedCard
+            }
+        }
     }
 }

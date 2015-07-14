@@ -260,42 +260,55 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XvO-JA-DcO">
                                 <rect key="frame" x="273" y="405" width="50" height="75"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X1p-vV-bpw">
                                 <rect key="frame" x="196" y="405" width="50" height="75"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7YX-Mn-NGX">
                                 <rect key="frame" x="130" y="405" width="50" height="75"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="24e-Eg-bKI">
                                 <rect key="frame" x="420" y="306" width="50" height="75"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="80D-z6-Hpn">
                                 <rect key="frame" x="348" y="306" width="50" height="75"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bfr-Sp-EBA">
                                 <rect key="frame" x="273" y="306" width="50" height="75"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HH3-lC-wEP">
                                 <rect key="frame" x="196" y="306" width="50" height="75"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wd0-MA-2AU">
                                 <rect key="frame" x="130" y="306" width="50" height="75"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vvy-OI-121">
                                 <rect key="frame" x="130" y="204" width="50" height="75"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ae-YA-meI">
                                 <rect key="frame" x="200" y="204" width="50" height="75"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJz-u0-Hun">
                                 <rect key="frame" x="348" y="204" width="50" height="75"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Ev-QJ-jd2">
                                 <rect key="frame" x="273" y="204" width="50" height="75"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kJi-9B-TOq">
                                 <rect key="frame" x="420" y="204" width="50" height="75"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select Card to Ask For" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zZp-ac-RGN">
                                 <rect key="frame" x="213" y="131" width="171" height="21"/>
@@ -307,33 +320,17 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="PYH-w8-ZhG" appends="YES" id="Sky-ue-O8Z"/>
+                            <outletCollection property="gestureRecognizers" destination="G5j-x8-QOI" appends="YES" id="Lo1-O2-7p8"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="L8n-cT-fgi"/>
                     <connections>
                         <outlet property="askingLabel" destination="zZp-ac-RGN" id="CCw-k8-UMB"/>
-                        <outlet property="cardLabel1" destination="Vvy-OI-121" id="OMv-BA-QFZ"/>
-                        <outlet property="cardLabel10" destination="24e-Eg-bKI" id="OOg-aF-MAD"/>
-                        <outlet property="cardLabel11" destination="7YX-Mn-NGX" id="Rho-jl-ykB"/>
-                        <outlet property="cardLabel12" destination="X1p-vV-bpw" id="niT-hP-VTe"/>
-                        <outlet property="cardLabel13" destination="XvO-JA-DcO" id="aiQ-Ho-qGZ"/>
-                        <outlet property="cardLabel2" destination="5ae-YA-meI" id="aWF-YN-8cZ"/>
-                        <outlet property="cardLabel3" destination="8Ev-QJ-jd2" id="Tlv-35-aKm"/>
-                        <outlet property="cardLabel4" destination="hJz-u0-Hun" id="hcl-1a-d6c"/>
-                        <outlet property="cardLabel5" destination="kJi-9B-TOq" id="1bK-Mo-4PP"/>
-                        <outlet property="cardLabel6" destination="Wd0-MA-2AU" id="r34-RI-syV"/>
-                        <outlet property="cardLabel7" destination="HH3-lC-wEP" id="BT3-En-SAy"/>
-                        <outlet property="cardLabel8" destination="bfr-Sp-EBA" id="Zts-zl-NtN"/>
-                        <outlet property="cardLabel9" destination="80D-z6-Hpn" id="n2g-As-qdk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HCQ-2i-Ach" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="PYH-w8-ZhG">
+                <tapGestureRecognizer id="G5j-x8-QOI">
                     <pressTypeMask key="allowedPressTypes"/>
-                    <connections>
-                        <action selector="labelTapRecognizer:" destination="gt3-Gb-tcD" id="Vrv-Gw-K69"/>
-                    </connections>
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3634" y="1149"/>
