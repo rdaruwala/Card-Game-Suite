@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		044DE05A1B5591D900EF6023 /* GoFishModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044DE0591B5591D900EF6023 /* GoFishModalViewController.swift */; };
 		04798BE71B53FF9900D61CE7 /* GoFishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04798BE61B53FF9900D61CE7 /* GoFishViewController.swift */; };
 		0485D6A11B5056B800BD271E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485D6A01B5056B800BD271E /* User.swift */; };
 		C171BA151B5039070087D024 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C171BA141B5039070087D024 /* AppDelegate.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		044DE0591B5591D900EF6023 /* GoFishModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoFishModalViewController.swift; sourceTree = "<group>"; };
 		04798BE61B53FF9900D61CE7 /* GoFishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoFishViewController.swift; sourceTree = "<group>"; };
 		0485D6A01B5056B800BD271E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C171BA111B5039070087D024 /* Card Game Suite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Card Game Suite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				C171BA161B5039070087D024 /* ViewController.swift */,
+				044DE0591B5591D900EF6023 /* GoFishModalViewController.swift */,
 				C171BA4C1B5052CB0087D024 /* BlackjackViewController.swift */,
 				04798BE61B53FF9900D61CE7 /* GoFishViewController.swift */,
 			);
@@ -308,6 +311,7 @@
 				C17E78731B505D1900D67C95 /* Deck.swift in Sources */,
 				C171BA151B5039070087D024 /* AppDelegate.swift in Sources */,
 				C171BA4D1B5052CB0087D024 /* BlackjackViewController.swift in Sources */,
+				044DE05A1B5591D900EF6023 /* GoFishModalViewController.swift in Sources */,
 				0485D6A11B5056B800BD271E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

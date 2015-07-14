@@ -35,7 +35,7 @@
                                 <state key="normal" title="Go Fish"/>
                                 <connections>
                                     <action selector="onGoFishButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="maY-iO-DgU"/>
-                                    <segue destination="EfK-1U-yUo" kind="custom" identifier="home2GFSegue" customClass="LeftToRightSegue" id="9xx-w4-OJ5"/>
+                                    <segue destination="EfK-1U-yUo" kind="show" identifier="home2GFSegue" id="9xx-w4-OJ5"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -249,7 +249,7 @@
         <!--Go Fish Modal View Controller-->
         <scene sceneID="6pG-m5-9oq">
             <objects>
-                <viewController id="gt3-Gb-tcD" userLabel="Go Fish Modal View Controller" sceneMemberID="viewController">
+                <viewController id="gt3-Gb-tcD" userLabel="Go Fish Modal View Controller" customClass="GoFishModalViewController" customModule="Card_Game_Suite" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lzv-wE-EuH"/>
                         <viewControllerLayoutGuide type="bottom" id="JLl-11-lVD"/>
@@ -300,15 +300,41 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select Card to Ask For" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zZp-ac-RGN">
                                 <rect key="frame" x="213" y="131" width="171" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="PYH-w8-ZhG" appends="YES" id="Sky-ue-O8Z"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="L8n-cT-fgi"/>
+                    <connections>
+                        <outlet property="askingLabel" destination="zZp-ac-RGN" id="CCw-k8-UMB"/>
+                        <outlet property="cardLabel1" destination="Vvy-OI-121" id="OMv-BA-QFZ"/>
+                        <outlet property="cardLabel10" destination="24e-Eg-bKI" id="OOg-aF-MAD"/>
+                        <outlet property="cardLabel11" destination="7YX-Mn-NGX" id="Rho-jl-ykB"/>
+                        <outlet property="cardLabel12" destination="X1p-vV-bpw" id="niT-hP-VTe"/>
+                        <outlet property="cardLabel13" destination="XvO-JA-DcO" id="aiQ-Ho-qGZ"/>
+                        <outlet property="cardLabel2" destination="5ae-YA-meI" id="aWF-YN-8cZ"/>
+                        <outlet property="cardLabel3" destination="8Ev-QJ-jd2" id="Tlv-35-aKm"/>
+                        <outlet property="cardLabel4" destination="hJz-u0-Hun" id="hcl-1a-d6c"/>
+                        <outlet property="cardLabel5" destination="kJi-9B-TOq" id="1bK-Mo-4PP"/>
+                        <outlet property="cardLabel6" destination="Wd0-MA-2AU" id="r34-RI-syV"/>
+                        <outlet property="cardLabel7" destination="HH3-lC-wEP" id="BT3-En-SAy"/>
+                        <outlet property="cardLabel8" destination="bfr-Sp-EBA" id="Zts-zl-NtN"/>
+                        <outlet property="cardLabel9" destination="80D-z6-Hpn" id="n2g-As-qdk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HCQ-2i-Ach" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="PYH-w8-ZhG">
+                    <pressTypeMask key="allowedPressTypes"/>
+                    <connections>
+                        <action selector="labelTapRecognizer:" destination="gt3-Gb-tcD" id="Vrv-Gw-K69"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3634" y="1149"/>
         </scene>
