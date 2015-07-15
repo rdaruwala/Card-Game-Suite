@@ -47,10 +47,6 @@ class ViewController: UIViewController {
             self.numPlayers = 3
             self.performSegueWithIdentifier("main2BJsegue", sender: self)
         }
-        let fourPlayers = UIAlertAction(title: "Four players", style: .Default){ (action) -> Void in
-            self.numPlayers = 4
-            self.performSegueWithIdentifier("main2BJsegue", sender: self)
-        }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
             self.dismissViewControllerAnimated(true, completion: nil)
         }
@@ -58,7 +54,6 @@ class ViewController: UIViewController {
         actionSheet.addAction(singleplayer)
         actionSheet.addAction(twoPlayers)
         actionSheet.addAction(threePlayers)
-        actionSheet.addAction(fourPlayers)
         actionSheet.addAction(cancelAction)
         
         self.presentViewController(actionSheet, animated: true, completion: nil)
