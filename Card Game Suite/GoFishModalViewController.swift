@@ -11,6 +11,7 @@ import UIKit
 class GoFishModalViewController: UIViewController {
     
     @IBOutlet weak var askingLabel: UILabel!
+    @IBOutlet weak var answerLabel: UILabel!
     @IBOutlet weak var ace: UIImageView!
     @IBOutlet weak var two: UIImageView!
     @IBOutlet weak var three: UIImageView!
@@ -24,8 +25,10 @@ class GoFishModalViewController: UIViewController {
     @IBOutlet weak var jack: UIImageView!
     @IBOutlet weak var queen: UIImageView!
     @IBOutlet weak var king: UIImageView!
+    @IBOutlet weak var endTurnButton: UIButton!
     
     var player = "Player One"
+    var notPlayer = "Player Two"
     var numberReceived = 1
     var opposingPlayer = "AI"
     var cardImageArray : [UIImageView] = []
@@ -43,12 +46,18 @@ class GoFishModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         cardImageArray = [ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king]
-        cardTypes = ["ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"]
+        cardTypes = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
+        endTurnButton.enabled = false
+        print("\(aiDeck.count)")
+        for card in aiDeck {
+            print(card.name)
+        }
     }
     
     @IBAction func cardTapRecognizer(sender: UITapGestureRecognizer) {
         cardAsking = 0
         cardRemoval = 0
+        numberOfGottenCards = 0
         if canBeTapped == true {
             for image in cardImageArray {
                 if (CGRectContainsPoint(image.frame, sender.locationInView(view))) {
@@ -63,29 +72,57 @@ class GoFishModalViewController: UIViewController {
                                 for aiCard in aiDeck {
                                     if aiCard.name == card.name {
                                         aiDeck.removeAtIndex(cardRemoval)
+                                        cardRemoval--
                                     }
                                     cardRemoval++
+                                    print(cardRemoval)
                                 }
                             }
+                            answerLabel.text = "The AI has \(numberOfGottenCards) \(cardTypes[cardAsking])s"
+                            endTurnButton.enabled = true
                         }
                     }
                     else if numberReceived == 2 {
-                        for card in aiDeck {
-                            if card.name == selectedCard {
-                                numberOfGottenCards++
-                                playerOneDeck.append(card)
-                                for twoCard in playerTwoDeck {
-                                    if twoCard.name == card.name {
-                                        playerTwoDeck.removeAtIndex(cardRemoval)
+                        if player == "Player One" {
+                            for card in playerTwoDeck {
+                                if card.name == selectedCard {
+                                    numberOfGottenCards++
+                                    playerOneDeck.append(card)
+                                    for twoCard in playerTwoDeck {
+                                        if twoCard.name == card.name {
+                                            playerTwoDeck.removeAtIndex(cardRemoval)
+                                        }
+                                        cardRemoval++
                                     }
-                                    cardRemoval++
                                 }
                             }
+                            answerLabel.text = "\(notPlayer) has \(numberOfGottenCards) \(cardTypes[cardAsking])s"
+                            endTurnButton.enabled = true
+                        }
+                        else if player == "Player Two" {
+                            for card in playerOneDeck {
+                                if card.name == selectedCard {
+                                    numberOfGottenCards++
+                                    playerOneDeck.append(card)
+                                    for oneCard in playerOneDeck {
+                                        if oneCard.name == card.name {
+                                            playerTwoDeck.removeAtIndex(cardRemoval)
+                                        }
+                                        cardRemoval++
+                                    }
+                                }
+                            }
+                            answerLabel.text = "\(notPlayer) has \(numberOfGottenCards) \(cardTypes[cardAsking])s"
+                            endTurnButton.enabled = true
                         }
                     }
                 }
                 cardAsking++
             }
         }
+    }
+    
+    @IBAction func onEndTurnButtonPressed(sender: AnyObject) {
+        
     }
 }

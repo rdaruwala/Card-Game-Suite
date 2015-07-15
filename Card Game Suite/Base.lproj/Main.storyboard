@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.20" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YkK-Po-T2t">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.20" systemVersion="14D2134" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YkK-Po-T2t">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.16"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -35,7 +35,6 @@
                                 <state key="normal" title="Go Fish"/>
                                 <connections>
                                     <action selector="onGoFishButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="maY-iO-DgU"/>
-                                    <segue destination="EfK-1U-yUo" kind="show" identifier="home2GFSegue" id="9xx-w4-OJ5"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -55,11 +54,12 @@
                         <outlet property="blackJackButton" destination="H5y-sn-CDp" id="qPa-FB-fya"/>
                         <outlet property="goFishButton" destination="ZRJ-Ch-WJr" id="d7W-gx-ZSX"/>
                         <segue destination="72n-Vd-8ZK" kind="custom" identifier="main2BJsegue" customClass="LeftToRightSegue" customModule="Card_Game_Suite" id="M5a-oc-LH6"/>
+                        <segue destination="aAE-vl-rUz" kind="showDetail" identifier="home2GFSegue" id="Oze-x9-lKT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1329" y="364"/>
+            <point key="canvasLocation" x="1339" y="373"/>
         </scene>
         <!--Go Fish View Controller-->
         <scene sceneID="Izr-bn-d5j">
@@ -196,7 +196,7 @@
                     <navigationItem key="navigationItem" id="lUB-pF-5S8">
                         <barButtonItem key="rightBarButtonItem" title="End Turn" id="QSW-t9-Msd">
                             <connections>
-                                <segue destination="Mv8-O8-ODw" kind="presentation" id="Vua-dc-Dv1"/>
+                                <segue destination="Mv8-O8-ODw" kind="showDetail" id="Vua-dc-Dv1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -244,7 +244,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d81-D3-qd7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2141" y="1149"/>
+            <point key="canvasLocation" x="2061" y="1144"/>
         </scene>
         <!--Go Fish Modal View Controller-->
         <scene sceneID="6pG-m5-9oq">
@@ -258,62 +258,76 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XvO-JA-DcO">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dk" translatesAutoresizingMaskIntoConstraints="NO" id="XvO-JA-DcO">
                                 <rect key="frame" x="273" y="405" width="50" height="75"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X1p-vV-bpw">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dq" translatesAutoresizingMaskIntoConstraints="NO" id="X1p-vV-bpw">
                                 <rect key="frame" x="196" y="405" width="50" height="75"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7YX-Mn-NGX">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dj" translatesAutoresizingMaskIntoConstraints="NO" id="7YX-Mn-NGX">
                                 <rect key="frame" x="130" y="405" width="50" height="75"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="24e-Eg-bKI">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="d10" translatesAutoresizingMaskIntoConstraints="NO" id="24e-Eg-bKI">
                                 <rect key="frame" x="420" y="306" width="50" height="75"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="80D-z6-Hpn">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="d9" translatesAutoresizingMaskIntoConstraints="NO" id="80D-z6-Hpn">
                                 <rect key="frame" x="348" y="306" width="50" height="75"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bfr-Sp-EBA">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="d8" translatesAutoresizingMaskIntoConstraints="NO" id="bfr-Sp-EBA">
                                 <rect key="frame" x="273" y="306" width="50" height="75"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HH3-lC-wEP">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="d7" translatesAutoresizingMaskIntoConstraints="NO" id="HH3-lC-wEP">
                                 <rect key="frame" x="196" y="306" width="50" height="75"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wd0-MA-2AU">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="d6" translatesAutoresizingMaskIntoConstraints="NO" id="Wd0-MA-2AU">
                                 <rect key="frame" x="130" y="306" width="50" height="75"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vvy-OI-121">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="d1" translatesAutoresizingMaskIntoConstraints="NO" id="Vvy-OI-121">
                                 <rect key="frame" x="130" y="204" width="50" height="75"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ae-YA-meI">
-                                <rect key="frame" x="200" y="204" width="50" height="75"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="d2" translatesAutoresizingMaskIntoConstraints="NO" id="5ae-YA-meI">
+                                <rect key="frame" x="196" y="204" width="50" height="75"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJz-u0-Hun">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="d4" translatesAutoresizingMaskIntoConstraints="NO" id="hJz-u0-Hun">
                                 <rect key="frame" x="348" y="204" width="50" height="75"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Ev-QJ-jd2">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="d3" translatesAutoresizingMaskIntoConstraints="NO" id="8Ev-QJ-jd2">
                                 <rect key="frame" x="273" y="204" width="50" height="75"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kJi-9B-TOq">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="d5" translatesAutoresizingMaskIntoConstraints="NO" id="kJi-9B-TOq">
                                 <rect key="frame" x="420" y="204" width="50" height="75"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select Card to Ask For" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zZp-ac-RGN">
-                                <rect key="frame" x="213" y="131" width="171" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select Card to Ask For" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zZp-ac-RGN">
+                                <rect key="frame" x="96" y="128" width="405" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bt7-Ll-7HV">
+                                <rect key="frame" x="243" y="516" width="111" height="40"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="End Turn"/>
+                                <connections>
+                                    <action selector="onEndTurnButtonPressed:" destination="gt3-Gb-tcD" eventType="touchUpInside" id="eVF-jb-b6v"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOi-da-1FY">
+                                <rect key="frame" x="96" y="157" width="405" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -325,15 +339,33 @@
                     </view>
                     <navigationItem key="navigationItem" id="L8n-cT-fgi"/>
                     <connections>
+                        <outlet property="ace" destination="Vvy-OI-121" id="YX3-aX-CYd"/>
+                        <outlet property="answerLabel" destination="DOi-da-1FY" id="O7B-NG-dah"/>
                         <outlet property="askingLabel" destination="zZp-ac-RGN" id="CCw-k8-UMB"/>
+                        <outlet property="eight" destination="bfr-Sp-EBA" id="c0h-UH-MKa"/>
+                        <outlet property="endTurnButton" destination="Bt7-Ll-7HV" id="jcs-FJ-XOO"/>
+                        <outlet property="five" destination="kJi-9B-TOq" id="BrE-iF-gAF"/>
+                        <outlet property="four" destination="hJz-u0-Hun" id="2T5-RE-U8g"/>
+                        <outlet property="jack" destination="7YX-Mn-NGX" id="SOG-XK-kji"/>
+                        <outlet property="king" destination="XvO-JA-DcO" id="CoW-sM-qUu"/>
+                        <outlet property="nine" destination="80D-z6-Hpn" id="E93-z2-F5F"/>
+                        <outlet property="queen" destination="X1p-vV-bpw" id="WJU-lR-fU0"/>
+                        <outlet property="seven" destination="HH3-lC-wEP" id="67c-C0-3Bm"/>
+                        <outlet property="six" destination="Wd0-MA-2AU" id="RkW-f1-68z"/>
+                        <outlet property="ten" destination="24e-Eg-bKI" id="Zjf-rd-Yf8"/>
+                        <outlet property="three" destination="8Ev-QJ-jd2" id="VWO-Cr-J1T"/>
+                        <outlet property="two" destination="5ae-YA-meI" id="m5t-ME-UHn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HCQ-2i-Ach" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="G5j-x8-QOI">
                     <pressTypeMask key="allowedPressTypes"/>
+                    <connections>
+                        <action selector="cardTapRecognizer:" destination="gt3-Gb-tcD" id="q53-wM-pdf"/>
+                    </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3634" y="1149"/>
+            <point key="canvasLocation" x="3428" y="1144"/>
         </scene>
         <!--Blackjack View Controller-->
         <scene sceneID="NUh-JD-8nf">
@@ -529,7 +561,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u1r-6Z-lLc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="332" y="364"/>
+            <point key="canvasLocation" x="639" y="373"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NEa-rw-BhL">
@@ -547,25 +579,40 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WGO-C4-cQk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2822" y="1149"/>
+            <point key="canvasLocation" x="2752" y="1144"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="vEP-Rr-rdd">
+        <scene sceneID="bQT-TW-22j">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EfK-1U-yUo" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aAE-vl-rUz" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sDn-iU-Da7">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NmR-mj-fPZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="qeD-RQ-ykb" kind="relationship" relationship="rootViewController" id="c7y-Af-QSn"/>
+                        <segue destination="qeD-RQ-ykb" kind="relationship" relationship="rootViewController" id="kLO-ri-Ic3"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vkO-Sv-BRR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sTg-g9-DoJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1329" y="1149"/>
+            <point key="canvasLocation" x="1339" y="1144"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="d1" width="71" height="96"/>
+        <image name="d10" width="71" height="96"/>
+        <image name="d2" width="71" height="96"/>
+        <image name="d3" width="71" height="96"/>
+        <image name="d4" width="71" height="96"/>
+        <image name="d5" width="71" height="96"/>
+        <image name="d6" width="71" height="96"/>
+        <image name="d7" width="71" height="96"/>
+        <image name="d8" width="71" height="96"/>
+        <image name="d9" width="71" height="96"/>
+        <image name="dj" width="71" height="96"/>
+        <image name="dk" width="71" height="96"/>
+        <image name="dq" width="71" height="96"/>
+    </resources>
 </document>
