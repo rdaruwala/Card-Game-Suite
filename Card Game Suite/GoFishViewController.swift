@@ -83,20 +83,16 @@ class GoFishViewController: UIViewController {
         if numberReceived == 1 {
             if playersTurn == "Player One" {
                 display(playerOneDeck)
-                playersTurn = "AI"
             }
             else {
-                playersTurn = "Player One"
             }
         }
         if numberReceived == 2 {
             if playersTurn == "Player One" {
                 display(playerOneDeck)
-                playersTurn = "Player Two"
             }
             else {
                 display(playerTwoDeck)
-                playersTurn = "Player One"
             }
         }
     }
@@ -173,6 +169,16 @@ class GoFishViewController: UIViewController {
                 middleDeck.deck.removeAtIndex(randomNumber)
                 randomNumber = Int(arc4random_uniform(UInt32(middleDeck.deck.count)))
             }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let next = segue.destinationViewController as! GoFishModalViewController
+        if numberReceived == 1 {
+            next.playerOneDeck = playerOneDeck
+            next.aiDeck = aiDeck
+            next.middleDeck = middleDeck
+            next.numberReceived = numberReceived
         }
     }
 }
