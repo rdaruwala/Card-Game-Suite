@@ -27,6 +27,7 @@ class GoFishModalViewController: UIViewController {
     @IBOutlet weak var king: UIImageView!
     @IBOutlet weak var endTurnButton: UIButton!
     
+    
     var player = "Player One"
     var notPlayer = "Player Two"
     var numberReceived = 1
@@ -47,7 +48,10 @@ class GoFishModalViewController: UIViewController {
         super.viewDidLoad()
         cardImageArray = [ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king]
         cardTypes = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
+        askingLabel.text = "Please choose a Card"
+        answerLabel.text = ""
         endTurnButton.enabled = false
+        canBeTapped = true
         print("\(aiDeck.count)")
         for card in aiDeck {
             print(card.name)
@@ -81,6 +85,13 @@ class GoFishModalViewController: UIViewController {
                             answerLabel.text = "The AI has \(numberOfGottenCards) \(cardTypes[cardAsking])s"
                             endTurnButton.enabled = true
                         }
+                        if numberOfGottenCards == 0 {
+                            let randomNumber = Int(arc4random_uniform(UInt32(middleDeck.deck.count)))
+                            let randomCard : Card = middleDeck.deck[randomNumber]
+                            playerOneDeck.append(randomCard)
+                            middleDeck.deck.removeAtIndex(randomNumber)
+                            answerLabel.text = "The AI has no \(selectedCard)s, you Go Fish."
+                        }
                     }
                     else if numberReceived == 2 {
                         if player == "Player One" {
@@ -98,6 +109,12 @@ class GoFishModalViewController: UIViewController {
                             }
                             answerLabel.text = "\(notPlayer) has \(numberOfGottenCards) \(cardTypes[cardAsking])s"
                             endTurnButton.enabled = true
+                            if numberOfGottenCards == 0 {
+                                let randomNumber = Int(arc4random_uniform(UInt32(middleDeck.deck.count)))
+                                let randomCard : Card = middleDeck.deck[randomNumber]
+                                playerOneDeck.append(randomCard)
+                                middleDeck.deck.removeAtIndex(randomNumber)
+                            }
                         }
                         else if player == "Player Two" {
                             for card in playerOneDeck {
@@ -114,6 +131,12 @@ class GoFishModalViewController: UIViewController {
                             }
                             answerLabel.text = "\(notPlayer) has \(numberOfGottenCards) \(cardTypes[cardAsking])s"
                             endTurnButton.enabled = true
+                            if numberOfGottenCards == 0 {
+                                let randomNumber = Int(arc4random_uniform(UInt32(middleDeck.deck.count)))
+                                let randomCard : Card = middleDeck.deck[randomNumber]
+                                playerTwoDeck.append(randomCard)
+                                middleDeck.deck.removeAtIndex(randomNumber)
+                            }
                         }
                     }
                 }
@@ -123,6 +146,56 @@ class GoFishModalViewController: UIViewController {
     }
     
     @IBAction func onEndTurnButtonPressed(sender: AnyObject) {
-        
+        if opposingPlayer == "Player One" || opposingPlayer == "Player Two" {
+            let endTurnController = UIAlertController(title: "Turn Complete", message: "Please pass the phone to \(opposingPlayer)", preferredStyle: UIAlertControllerStyle.Alert)
+            let passedAction = UIAlertAction(title: "Passed", style: UIAlertActionStyle.Default) { (action) -> Void in
+                if self.player == "Player One" && self.opposingPlayer == "AI" {
+                    self.player = "AI"
+                    self.opposingPlayer = "Player One"
+                }
+                else if self.player == "Player One" && self.opposingPlayer == "Player Two" {
+                    self.player = "Player Two"
+                    self.opposingPlayer = "Player One"
+                }
+                else if self.player == "Player Two" && self.opposingPlayer == "Player One" {
+                    self.player = "Player One"
+                    self.opposingPlayer = "Player Two"
+                }
+                self.performSegueWithIdentifier("return2GFSegue", sender: self)
+            }
+            endTurnController.addAction(passedAction)
+            self.presentViewController(endTurnController, animated: true, completion: nil)
+        }
+        else {
+            let endTurnController = UIAlertController(title: "Turn Complete", message: "Your turn is complete", preferredStyle: UIAlertControllerStyle.Alert)
+            let passedAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action) -> Void in
+                if self.player == "Player One" && self.opposingPlayer == "AI" {
+                    self.player = "AI"
+                    self.opposingPlayer = "Player One"
+                }
+                else if self.player == "Player One" && self.opposingPlayer == "Player Two" {
+                    self.player = "Player Two"
+                    self.opposingPlayer = "Player One"
+                }
+                else if self.player == "Player Two" && self.opposingPlayer == "Player One" {
+                    self.player = "Player One"
+                    self.opposingPlayer = "Player Two"
+                }
+                self.performSegueWithIdentifier("return2GFSegue", sender: self)
+            }
+            endTurnController.addAction(passedAction)
+            self.presentViewController(endTurnController, animated: true, completion: nil)
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let next = segue.destinationViewController as! UINavigationController
+        let top = next.topViewController as! GoFishViewController
+        top.playersTurn = player
+        top.notPlayersTurn = opposingPlayer
+        top.numberReceived = numberReceived
+        top.middleDeck.deck = middleDeck.deck
+        top.playerOneDeck = playerOneDeck
+        top.playerTwoDeck = playerTwoDeck
     }
 }
