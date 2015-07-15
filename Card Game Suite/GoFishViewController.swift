@@ -89,7 +89,7 @@ class GoFishViewController: UIViewController {
     var opponentBookLabels : [UILabel] = []
     var randomNumber = 0
     var playersTurn = "Player One"
-    var notPlayersTurn = "Player Two"
+    var notPlayersTurn = "AI"
     var potentialBookNumber = 0
     var booksPlayerOne : [String] = []
     var booksPlayerTwo : [String] = []
@@ -116,6 +116,9 @@ class GoFishViewController: UIViewController {
         if playersTurn == "AI" {
             aiTurn()
         }
+        if numberReceived == 2 && playersTurn == "Player One" {
+            notPlayersTurn = "Player Two"
+        }
         for bookLabel in yourBookLabels {
             bookLabel.text = ""
         }
@@ -138,6 +141,9 @@ class GoFishViewController: UIViewController {
     func displayPlayer() {
         if numberReceived == 1 {
             display(playerOneDeck)
+            yourBooksDisplayed = 0
+            opponentBooksDisplayed = 0
+            playerLabel.text = playersTurn
             for book in booksPlayerOne {
                 yourBookLabels[yourBooksDisplayed].text = book
                 yourBooksDisplayed++
@@ -148,11 +154,28 @@ class GoFishViewController: UIViewController {
             }
         }
         if numberReceived == 2 {
+            playerLabel.text = playersTurn
             if playersTurn == "Player One" {
                 display(playerOneDeck)
+                for book in booksPlayerOne {
+                    yourBookLabels[yourBooksDisplayed].text = book
+                    yourBooksDisplayed++
+                }
+                for opponentBook in booksPlayerTwo {
+                    opponentBookLabels[opponentBooksDisplayed].text = opponentBook
+                    opponentBooksDisplayed++
+                }
             }
             else {
                 display(playerTwoDeck)
+                for book in booksPlayerTwo {
+                    yourBookLabels[yourBooksDisplayed].text = book
+                    yourBooksDisplayed++
+                }
+                for opponentBook in booksPlayerOne {
+                    opponentBookLabels[opponentBooksDisplayed].text = opponentBook
+                    opponentBooksDisplayed++
+                }
             }
         }
     }
@@ -208,6 +231,7 @@ class GoFishViewController: UIViewController {
         if numberReceived == 1 {
             randomNumber = Int(arc4random_uniform(52))
             for _ in 1...7 {
+                print("appending")
                 let appendedCard = middleDeck.deck[randomNumber]
                 playerOneDeck.append(appendedCard)
                 middleDeck.deck.removeAtIndex(randomNumber)
@@ -242,13 +266,21 @@ class GoFishViewController: UIViewController {
                     aiDeck.append(card)
                     playerOneDeck.removeAtIndex(removalNumber)
                     stolenCards++
+                    removalNumber--
                 }
                 removalNumber++
+            }
+            if stolenCards == 0 {
+                let randomNumber = Int(arc4random_uniform(UInt32(middleDeck.deck.count)))
+                let randomCard : Card = middleDeck.deck[randomNumber]
+                aiDeck.append(randomCard)
+                middleDeck.deck.removeAtIndex(randomNumber)
             }
             checkForBooks()
             let aiActionController = UIAlertController(title: "AI's Turn", message: "The AI has taken it's turn. It asked you for a \(stolenCardType). It took \(stolenCards) \(stolenCardType)s.", preferredStyle: UIAlertControllerStyle.Alert)
             let aiAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
                 self.playersTurn = "Player One"
+                self.notPlayersTurn = "AI"
             })
             aiActionController.addAction(aiAlertAction)
             self.presentViewController(aiActionController, animated: true, completion: nil)
@@ -301,13 +333,14 @@ class GoFishViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let next = segue.destinationViewController as! UINavigationController
         let top = next.topViewController as! GoFishModalViewController
+        print(numberReceived)
         if numberReceived == 1 {
             top.playerOneDeck = playerOneDeck
             top.aiDeck = aiDeck
-            top.middleDeck = middleDeck
+            top.middleDeck.deck = middleDeck.deck
             top.numberReceived = numberReceived
             top.player = playersTurn
-            top.notPlayer = notPlayersTurn
+            top.opposingPlayer = notPlayersTurn
         }
         else if numberReceived == 2 {
             top.playerOneDeck = playerOneDeck
@@ -315,7 +348,7 @@ class GoFishViewController: UIViewController {
             top.middleDeck = middleDeck
             top.numberReceived = numberReceived
             top.player = playersTurn
-            top.notPlayer = notPlayersTurn
+            top.opposingPlayer = notPlayersTurn
         }
     }
 }
