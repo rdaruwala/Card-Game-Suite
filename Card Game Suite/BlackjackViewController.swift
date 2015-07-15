@@ -241,7 +241,7 @@ class BlackjackViewController: UIViewController {
             if (loopIteration >= numberRecieved){
                 loopIteration = 9001
                 
-                /*  let indexToPick3:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+                let indexToPick3:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
                 let cardPicked3:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick3])
                 gameDeck.deck.removeAtIndex(indexToPick3)
                 dealer.score += cardPicked3.BJValue
@@ -249,7 +249,7 @@ class BlackjackViewController: UIViewController {
                 let indexToPick4:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
                 let cardPicked4:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick4])
                 gameDeck.deck.removeAtIndex(indexToPick4)
-                dealer.score += cardPicked4.BJValue*/
+                dealer.score += cardPicked4.BJValue
                 
                 NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("switchPlayer"), userInfo: nil, repeats: false)
                 
@@ -292,6 +292,7 @@ class BlackjackViewController: UIViewController {
             introLabelObject.alpha = 1.0
             
             let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+            //let indexToPick:Int = 0
             let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
             gameDeck.deck.removeAtIndex(indexToPick)
             cardImage1.image = cardPicked.image
@@ -321,9 +322,12 @@ class BlackjackViewController: UIViewController {
                 
             }
             else{
-                playerArray[self.pickNumber].cardsInHand.append(cardPicked)
-                self.pickSecondCard()
-                return
+                if let temp:User? = playerArray[self.pickNumber]{
+                    
+                    playerArray[self.pickNumber].cardsInHand.append(cardPicked)
+                    self.pickSecondCard()
+                    return
+                }
             }
         }
         
@@ -333,7 +337,7 @@ class BlackjackViewController: UIViewController {
             }
         }
         else{
-            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("pickFirstCard"), userInfo: nil, repeats: true)
+            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("pickFirstCard"), userInfo: nil, repeats: false) //CHECK
         }
         
         
@@ -375,8 +379,10 @@ class BlackjackViewController: UIViewController {
                 
             }
             else{
-                playerArray[self.pickNumber].cardsInHand.append(cardPicked2)
-                startSetup = true
+                if let temp:User? = playerArray[self.pickNumber]{
+                    playerArray[self.pickNumber].cardsInHand.append(cardPicked2)
+                    startSetup = true
+                }
             }
         }
         
