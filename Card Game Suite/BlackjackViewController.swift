@@ -241,7 +241,7 @@ class BlackjackViewController: UIViewController {
             if (loopIteration >= numberRecieved){
                 loopIteration = 9001
                 
-              /*  let indexToPick3:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+                /*  let indexToPick3:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
                 let cardPicked3:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick3])
                 gameDeck.deck.removeAtIndex(indexToPick3)
                 dealer.score += cardPicked3.BJValue
@@ -259,24 +259,24 @@ class BlackjackViewController: UIViewController {
                     unloadPlayerSetup()
                     pickFirstCard()
                 }
-               /* else{
-                    NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("switchPlayer"), userInfo: nil, repeats: false)
+                /* else{
+                NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("switchPlayer"), userInfo: nil, repeats: false)
                 }*/
             }
             if(loopIteration >= numberRecieved){
                 
             }
             else{
-              //  if(waiting){
+                //  if(waiting){
                 
                 //    if(startSetup){
-                        loopIteration++
+                loopIteration++
                 NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("aBeginNewGame"), userInfo: nil, repeats: false)
                 //    }
-                }
-           // }
+            }
+            // }
         }
-      //  NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("aBeginNewGame"), userInfo: nil, repeats: true)
+        //  NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("aBeginNewGame"), userInfo: nil, repeats: true)
     }
     
     func pickFirstCard(){
@@ -344,10 +344,9 @@ class BlackjackViewController: UIViewController {
             return
         }
         if(waiting){
-            //  let indexToPick2:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
-            let indexToPick2:Int = 0
+            let indexToPick2:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
             let cardPicked2:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick2])
-            //      gameDeck.deck.removeAtIndex(indexToPick2)
+            gameDeck.deck.removeAtIndex(indexToPick2)
             cardImage2.image = cardPicked2.image
             print("2 " + cardPicked2.name)
             waiting = true
@@ -409,7 +408,9 @@ class BlackjackViewController: UIViewController {
             print(playerArray.count)
             print(playerArray2.count)
             if(playerArray.count >= 1){
-                passThePhone()
+                if(playerArray.count != 1){
+                    passThePhone()
+                }
                 introLabelObject.text = "It is now " + playerArray[playerTurn-1].name + "'s turn."
                 playerArray[playerTurn-1].isTurn = true
                 print(playerArray[playerTurn-1].name)
@@ -431,7 +432,7 @@ class BlackjackViewController: UIViewController {
             }
         }
         /*else{
-            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("switchPlayer()"), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("switchPlayer()"), userInfo: nil, repeats: true)
         }*/
     }
     
@@ -444,6 +445,7 @@ class BlackjackViewController: UIViewController {
     
     func dealerDraw(){
         if(dealer.isOut == false){
+            updateLabelScores()
             UIView.animateWithDuration(1.5, animations: { () -> Void in
                 self.introLabelObject.alpha = 0.0
                 }, completion: { finished in
@@ -846,6 +848,40 @@ class BlackjackViewController: UIViewController {
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
             }
+        }
+    }
+    
+    func updateLabelScores(){
+        
+        for(var i = 0; i < playerArray2.count; i++){
+            if(i == 0){
+                if let test:User = playerArray2[i]{
+                    p1ScoreLabel.hidden = false
+                    p1ScoreLabel.text = playerArray2[i].name + "'s Score: " + String(playerArray2[i].score)
+                }
+                else{
+                    p1ScoreLabel.text = playerArray[i].name + " is out."
+                }
+            }
+            if(i == 1){
+                if let test:User = playerArray2[i]{
+                    p2ScoreLabel.hidden = false
+                    p2ScoreLabel.text = playerArray2[i].name + "'s Score: " + String(playerArray2[i].score)
+                }
+                else{
+                    p2ScoreLabel.text = playerArray[i].name + " is out."
+                }
+            }
+            if(i == 2){
+                if let test:User = playerArray2[i]{
+                    p3ScoreLabel.hidden = false
+                    p3ScoreLabel.text = playerArray2[i].name + "'s Score: " + String(playerArray2[i].score)
+                }
+                else{
+                    p3ScoreLabel.text = playerArray[i].name + " is out."
+                }
+            }
+            
         }
     }
 }
