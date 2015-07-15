@@ -27,6 +27,7 @@ class GoFishModalViewController: UIViewController {
     @IBOutlet weak var king: UIImageView!
     @IBOutlet weak var endTurnButton: UIButton!
     
+    
     var player = "Player One"
     var notPlayer = "Player Two"
     var numberReceived = 1
@@ -47,7 +48,10 @@ class GoFishModalViewController: UIViewController {
         super.viewDidLoad()
         cardImageArray = [ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king]
         cardTypes = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
+        askingLabel.text = "Please choose a Card"
+        answerLabel.text = ""
         endTurnButton.enabled = false
+        canBeTapped = true
         print("\(aiDeck.count)")
         for card in aiDeck {
             print(card.name)
@@ -86,6 +90,7 @@ class GoFishModalViewController: UIViewController {
                             let randomCard : Card = middleDeck.deck[randomNumber]
                             playerOneDeck.append(randomCard)
                             middleDeck.deck.removeAtIndex(randomNumber)
+                            answerLabel.text = "The AI has no \(selectedCard)s, you Go Fish."
                         }
                     }
                     else if numberReceived == 2 {
@@ -189,7 +194,7 @@ class GoFishModalViewController: UIViewController {
         top.playersTurn = player
         top.notPlayersTurn = opposingPlayer
         top.numberReceived = numberReceived
-        top.middleDeck = middleDeck
+        top.middleDeck.deck = middleDeck.deck
         top.playerOneDeck = playerOneDeck
         top.playerTwoDeck = playerTwoDeck
     }

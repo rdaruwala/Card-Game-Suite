@@ -90,7 +90,6 @@ class ViewController: UIViewController {
             next.numberRecieved = numPlayers
         }
         else {
-            print("num \(self.numPlayers!)")
             let next = segue.destinationViewController as! UINavigationController
             let top = next.topViewController as! GoFishViewController
             top.numberReceived = numPlayers!
