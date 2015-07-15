@@ -71,6 +71,8 @@ class GoFishViewController: UIViewController {
         getStartingCards()
         displayPlayer()
         print("\(numberReceived)")
+        print(booksPlayerOne.count)
+        print(booksAI.count)
     }
     
     func display(playerDeck : [Card]) {

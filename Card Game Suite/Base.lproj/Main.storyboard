@@ -320,6 +320,9 @@
                                 <rect key="frame" x="243" y="516" width="111" height="40"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="End Turn"/>
+                                <connections>
+                                    <action selector="onEndTurnButtonPressed:" destination="gt3-Gb-tcD" eventType="touchUpInside" id="eVF-jb-b6v"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOi-da-1FY">
                                 <rect key="frame" x="96" y="157" width="405" height="21"/>
@@ -340,6 +343,7 @@
                         <outlet property="answerLabel" destination="DOi-da-1FY" id="O7B-NG-dah"/>
                         <outlet property="askingLabel" destination="zZp-ac-RGN" id="CCw-k8-UMB"/>
                         <outlet property="eight" destination="bfr-Sp-EBA" id="c0h-UH-MKa"/>
+                        <outlet property="endTurnButton" destination="Bt7-Ll-7HV" id="jcs-FJ-XOO"/>
                         <outlet property="five" destination="kJi-9B-TOq" id="BrE-iF-gAF"/>
                         <outlet property="four" destination="hJz-u0-Hun" id="2T5-RE-U8g"/>
                         <outlet property="jack" destination="7YX-Mn-NGX" id="SOG-XK-kji"/>
