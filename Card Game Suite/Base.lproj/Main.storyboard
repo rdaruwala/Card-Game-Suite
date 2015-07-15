@@ -355,6 +355,7 @@
                         <outlet property="ten" destination="24e-Eg-bKI" id="Zjf-rd-Yf8"/>
                         <outlet property="three" destination="8Ev-QJ-jd2" id="VWO-Cr-J1T"/>
                         <outlet property="two" destination="5ae-YA-meI" id="m5t-ME-UHn"/>
+                        <segue destination="aAE-vl-rUz" kind="showDetail" identifier="return2GFSegue" id="evh-ps-URu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HCQ-2i-Ach" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -365,7 +366,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3428" y="1144"/>
+            <point key="canvasLocation" x="3007" y="1192"/>
         </scene>
         <!--Blackjack View Controller-->
         <scene sceneID="NUh-JD-8nf">
@@ -579,7 +580,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WGO-C4-cQk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2752" y="1144"/>
+            <point key="canvasLocation" x="3007" y="481"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bQT-TW-22j">
@@ -615,4 +616,7 @@
         <image name="dk" width="71" height="96"/>
         <image name="dq" width="71" height="96"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="evh-ps-URu"/>
+    </inferredMetricsTieBreakers>
 </document>

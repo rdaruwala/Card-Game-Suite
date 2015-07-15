@@ -50,6 +50,7 @@ class GoFishViewController: UIViewController {
     @IBOutlet weak var cardView38: UIImageView!
     @IBOutlet weak var cardView39: UIImageView!
     
+    var cardTypes : [String] = []
     var viewArray : [UIImageView] = []
     var middleDeck : Deck = Deck()
     var numberReceived = 0
@@ -64,11 +65,22 @@ class GoFishViewController: UIViewController {
     var booksPlayerTwo : [String] = []
     var booksAI : [String] = []
     var a : [String] = []
+    var playerOneWin = false
+    var playerTwoWin = false
+    var aiWin = false
+    var stolenCards = 0
+    var stolenCardType = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewArray = [cardView1, cardView2, cardView3, cardView4, cardView5, cardView6, cardView7, cardView8, cardView9, cardView10, cardView11, cardView12, cardView13, cardView14, cardView15, cardView16, cardView17, cardView18, cardView19, cardView20, cardView21, cardView22, cardView23, cardView24, cardView25, cardView26, cardView27, cardView28, cardView29, cardView30, cardView31, cardView32, cardView33, cardView34, cardView35, cardView36, cardView37, cardView38, cardView39]
-        getStartingCards()
+        cardTypes = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
+        if playerOneDeck.count == 0 && playerTwoDeck.count == 0 && aiDeck.count == 0 {
+            getStartingCards()
+        }
+        if playersTurn == "AI" {
+            aiTurn()
+        }
         displayPlayer()
         print("\(numberReceived)")
         print(booksPlayerOne.count)
@@ -85,11 +97,7 @@ class GoFishViewController: UIViewController {
     
     func displayPlayer() {
         if numberReceived == 1 {
-            if playersTurn == "Player One" {
-                display(playerOneDeck)
-            }
-            else {
-            }
+            display(playerOneDeck)
         }
         if numberReceived == 2 {
             if playersTurn == "Player One" {
@@ -176,6 +184,29 @@ class GoFishViewController: UIViewController {
         }
     }
     
+    func aiTurn() {
+        if playerOneWin == false && aiWin == false {
+            let randomNumber = Int(arc4random_uniform(UInt32(13)))
+            var removalNumber = 0
+            stolenCardType = cardTypes[randomNumber]
+            for card in playerOneDeck {
+                if card.name == cardTypes[randomNumber] {
+                    aiDeck.append(card)
+                    playerOneDeck.removeAtIndex(removalNumber)
+                    stolenCards++
+                }
+                removalNumber++
+            }
+            checkForBooks()
+            let aiActionController = UIAlertController(title: "AI's Turn", message: "The AI has taken it's turn. It asked you for a \(stolenCardType). It took \(stolenCards) \(stolenCardType)s.", preferredStyle: UIAlertControllerStyle.Alert)
+            let aiAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                self.playersTurn = "Player One"
+            })
+            aiActionController.addAction(aiAlertAction)
+            self.presentViewController(aiActionController, animated: true, completion: nil)
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let next = segue.destinationViewController as! UINavigationController
         let top = next.topViewController as! GoFishModalViewController
@@ -184,6 +215,7 @@ class GoFishViewController: UIViewController {
             top.aiDeck = aiDeck
             top.middleDeck = middleDeck
             top.numberReceived = numberReceived
+            top.player = playersTurn
             top.notPlayer = notPlayersTurn
         }
         else if numberReceived == 2 {
@@ -191,6 +223,7 @@ class GoFishViewController: UIViewController {
             top.playerTwoDeck = playerTwoDeck
             top.middleDeck = middleDeck
             top.numberReceived = numberReceived
+            top.player = playersTurn
             top.notPlayer = notPlayersTurn
         }
     }
