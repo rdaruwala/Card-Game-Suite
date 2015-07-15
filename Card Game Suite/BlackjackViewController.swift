@@ -378,11 +378,14 @@ class BlackjackViewController: UIViewController {
     }
     
     func dealCardOne(){
+        introLabelObject.hidden = false
+        introLabelObject.alpha = 1.0
         for(var i = 0; i < playerArray.count; i++){
+            
             let a = playerArray[i]
+            loadPlayerSetup(a)
             if(a.cardsInHand.isEmpty){
             introLabelObject.text = "Now giving two cards to: " + playerArray[i].name
-            introLabelObject.hidden = false
                 
             let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
             let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
@@ -390,20 +393,67 @@ class BlackjackViewController: UIViewController {
             cardImage1.image = cardPicked.image
             
             if(cardPicked.name == "Ace"){
-                let actionSheet = UIAlertController(title: playerArray[self.pickNumber].name + "'s Card", message: playerArray[self.pickNumber].name + ", please select the value of your Ace", preferredStyle: .ActionSheet)
+                let actionSheet = UIAlertController(title: a.name + "'s Card", message: a.name + ", please select the value of your Ace", preferredStyle: .ActionSheet)
                 let oneOption = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
                     cardPicked.BJValue = 1
                     self.waiting = true
                     self.playerArray[i].cardsInHand.append(cardPicked)
-                    sleep(2)
-                    self.dealCardTwo(self.playerArray[i])
+                    dispatch_after(3, dispatch_get_main_queue(), { () -> Void in
+                        let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+                        let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
+                        self.gameDeck.deck.removeAtIndex(indexToPick)
+                        self.cardImage2.image = cardPicked.image
+                        
+                        if(cardPicked.name == "Ace"){
+                            let actionSheet = UIAlertController(title: a.name + "'s Card", message: a.name + ", please select the value of your Ace", preferredStyle: .ActionSheet)
+                            let oneOption = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
+                                cardPicked.BJValue = 1
+                                a.cardsInHand.append(cardPicked)
+                            }
+                            let elevenOption = UIAlertAction(title: "Eleven", style: .Default){ (action) -> Void in
+                                cardPicked.BJValue = 11
+                                a.cardsInHand.append(cardPicked)
+                            }
+                            actionSheet.addAction(oneOption)
+                            actionSheet.addAction(elevenOption)
+                            self.presentViewController(actionSheet, animated: true, completion: nil)                        }
+                        else{
+                            a.cardsInHand.append(cardPicked)
+                        }
+
+                    })
                 }
                 let elevenOption = UIAlertAction(title: "Eleven", style: .Default){ (action) -> Void in
                     cardPicked.BJValue = 11
                     self.waiting = true
                     self.playerArray[i].cardsInHand.append(cardPicked)
-                    sleep(2)
-                    self.dealCardTwo(self.playerArray[i])
+                    dispatch_after(3, dispatch_get_main_queue(), { () -> Void in
+                        let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+                        let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
+                        self.gameDeck.deck.removeAtIndex(indexToPick)
+                        self.cardImage2.image = cardPicked.image
+                        
+                        if(cardPicked.name == "Ace"){
+                            let actionSheet = UIAlertController(title: a.name + "'s Card", message: a.name + ", please select the value of your Ace", preferredStyle: .ActionSheet)
+                            let oneOption = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
+                                cardPicked.BJValue = 1
+                                a.cardsInHand.append(cardPicked)
+                            }
+                            let elevenOption = UIAlertAction(title: "Eleven", style: .Default){ (action) -> Void in
+                                cardPicked.BJValue = 11
+                                a.cardsInHand.append(cardPicked)
+                            }
+                            actionSheet.addAction(oneOption)
+                            actionSheet.addAction(elevenOption)
+                            self.presentViewController(actionSheet, animated: true, completion: nil)
+                            return
+                        }
+                        else{
+                            a.cardsInHand.append(cardPicked)
+                        }
+                        
+                    })
+                    
                 }
                 actionSheet.addAction(oneOption)
                 actionSheet.addAction(elevenOption)
@@ -412,8 +462,32 @@ class BlackjackViewController: UIViewController {
             }
             else{
                 self.playerArray[i].cardsInHand.append(cardPicked)
-                sleep(2)
-                self.dealCardTwo(playerArray[i])
+                dispatch_after(3, dispatch_get_main_queue(), { () -> Void in
+                    let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+                    let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
+                    self.gameDeck.deck.removeAtIndex(indexToPick)
+                    self.cardImage2.image = cardPicked.image
+                    
+                    if(cardPicked.name == "Ace"){
+                        let actionSheet = UIAlertController(title: a.name + "'s Card", message: a.name + ", please select the value of your Ace", preferredStyle: .ActionSheet)
+                        let oneOption = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
+                            cardPicked.BJValue = 1
+                            a.cardsInHand.append(cardPicked)
+                        }
+                        let elevenOption = UIAlertAction(title: "Eleven", style: .Default){ (action) -> Void in
+                            cardPicked.BJValue = 11
+                            a.cardsInHand.append(cardPicked)
+                        }
+                        actionSheet.addAction(oneOption)
+                        actionSheet.addAction(elevenOption)
+                        self.presentViewController(actionSheet, animated: true, completion: nil)
+                        return
+                    }
+                    else{
+                        a.cardsInHand.append(cardPicked)
+                    }
+                    
+                })
             }
             }
             }
@@ -436,18 +510,20 @@ class BlackjackViewController: UIViewController {
         cardImage2.image = cardPicked.image
         
         if(cardPicked.name == "Ace"){
-            let actionSheet = UIAlertController(title: playerArray[self.pickNumber].name + "'s Card", message: playerArray[self.pickNumber].name + ", please select the value of your Ace", preferredStyle: .ActionSheet)
+            let actionSheet = UIAlertController(title: player.name + "'s Card", message: player.name + ", please select the value of your Ace", preferredStyle: .ActionSheet)
             let oneOption = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
                 cardPicked.BJValue = 1
                 player.cardsInHand.append(cardPicked)
-                sleep(2)
-                self.pickFirstCard()
+                dispatch_after(3, dispatch_get_main_queue(), { () -> Void in
+                    self.dealCardOne()
+                })
             }
             let elevenOption = UIAlertAction(title: "Eleven", style: .Default){ (action) -> Void in
                 cardPicked.BJValue = 11
                 player.cardsInHand.append(cardPicked)
-                sleep(2)
-                self.pickFirstCard()
+                dispatch_after(3, dispatch_get_main_queue(), { () -> Void in
+                    self.dealCardOne()
+                })
             }
             actionSheet.addAction(oneOption)
             actionSheet.addAction(elevenOption)
@@ -456,8 +532,9 @@ class BlackjackViewController: UIViewController {
         }
         else{
             player.cardsInHand.append(cardPicked)
-            sleep(2)
-            dealCardOne()
+            dispatch_after(3, dispatch_get_main_queue(), { () -> Void in
+                self.dealCardOne()
+            })
             return
         }
         
@@ -572,7 +649,7 @@ class BlackjackViewController: UIViewController {
           //  let indexToPick2:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
             let indexToPick2:Int = 0
             let cardPicked2:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick2])
-            gameDeck.deck.removeAtIndex(indexToPick2)
+      //      gameDeck.deck.removeAtIndex(indexToPick2)
             cardImage2.image = cardPicked2.image
             print("2 " + cardPicked2.name)
             waiting = true
