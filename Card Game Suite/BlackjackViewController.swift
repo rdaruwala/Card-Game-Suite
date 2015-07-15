@@ -54,6 +54,7 @@ class BlackjackViewController: UIViewController {
     var toNormalIterate = true
     var startSetup = true
     var pickNumber:Int!
+    var checkScreen = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -233,26 +234,30 @@ class BlackjackViewController: UIViewController {
         
         
     }
+    ///THE FUNCTION IS LOOPING THIS vvvv FOLLOW AND FIND OUT WHERE FIX. PROBABLY PUT CONDITIONAL SO YOU CAN JUMP TO PICKPLAYER?
     
     func aBeginNewGame(){
         if(waiting){
             print(loopIteration)
             toNormalIterate = true
             if (loopIteration >= numberRecieved){
-                loopIteration = 9001
-                
-                let indexToPick3:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
-                let cardPicked3:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick3])
-                gameDeck.deck.removeAtIndex(indexToPick3)
-                dealer.score += cardPicked3.BJValue
-                
-                let indexToPick4:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
-                let cardPicked4:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick4])
-                gameDeck.deck.removeAtIndex(indexToPick4)
-                dealer.score += cardPicked4.BJValue
-                
-                NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("switchPlayer"), userInfo: nil, repeats: false)
-                
+                if(checkScreen){
+                    loopIteration = 9001
+                    
+                    let indexToPick3:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+                    let cardPicked3:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick3])
+                    gameDeck.deck.removeAtIndex(indexToPick3)
+                    dealer.score += cardPicked3.BJValue
+                    
+                    let indexToPick4:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+                    let cardPicked4:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick4])
+                    gameDeck.deck.removeAtIndex(indexToPick4)
+                    dealer.score += cardPicked4.BJValue
+                    calculateScore()
+                    switchPlayer()
+                    return
+                    //  NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("switchPlayer"), userInfo: nil, repeats: false)
+                }
             }
             if(loopIteration < numberRecieved){
                 if(loopIteration < 3){
@@ -276,11 +281,11 @@ class BlackjackViewController: UIViewController {
             }
             // }
         }
-        //  NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("aBeginNewGame"), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("aBeginNewGame"), userInfo: nil, repeats: true)
     }
     
     func pickFirstCard(){
-        if(waiting && cardImage1.image != nil && cardImage2.image != nil){
+        if(cardImage1.image != nil && cardImage2.image != nil){
             return
         }
         
@@ -337,20 +342,22 @@ class BlackjackViewController: UIViewController {
             }
         }
         else{
-            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("pickFirstCard"), userInfo: nil, repeats: false) //CHECK
+            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("pickFirstCard"), userInfo: nil, repeats: true)
         }
         
         
     }
     
     func pickSecondCard(){
-        if(waiting && cardImage1.image != nil && cardImage2.image != nil){
-            return
+        if(cardImage1.image != nil && cardImage2.image != nil){
+            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("aBeginNewGame"), userInfo: nil, repeats: false)
         }
+        
         if(waiting){
-            let indexToPick2:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+            //  let indexToPick2:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+            let indexToPick2:Int = 0
             let cardPicked2:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick2])
-            gameDeck.deck.removeAtIndex(indexToPick2)
+            //  gameDeck.deck.removeAtIndex(indexToPick2)
             cardImage2.image = cardPicked2.image
             print("2 " + cardPicked2.name)
             waiting = true
@@ -387,20 +394,15 @@ class BlackjackViewController: UIViewController {
         }
         
         if(!waiting){
-            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("pickSecondCard"), userInfo: nil, repeats: true)
+            //NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("pickSecondCard"), userInfo: nil, repeats: false)
+            return
         }
     }
     
     func switchPlayer(){
         if(waiting){
-            
-            for(var i = 0; i < playerArray2.count; i++){
-                playerArray2[i].score = 0
-                for(var j = 0; j < playerArray2[i].cardsInHand.count; j++){
-                    playerArray2[i].score += BlackjackCard(type: playerArray2[i].cardsInHand[j]).BJValue
-                }
-            }
-            
+            checkScreen = false
+            calculateScore()
             print("TOP")
             unloadPlayerSetup()
             if(playerTurn == 0){playerTurn++}
@@ -889,5 +891,15 @@ class BlackjackViewController: UIViewController {
             }
             
         }
+    }
+    
+    func calculateScore(){
+        for(var i = 0; i < playerArray2.count; i++){
+            playerArray2[i].score = 0
+            for(var j = 0; j < playerArray2[i].cardsInHand.count; j++){
+               /// playerArray2[i].score += playerArray2[i].cardsInHand[j].BJValue
+            }
+        }
+
     }
 }
