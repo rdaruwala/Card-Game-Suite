@@ -52,12 +52,13 @@ class GoFishViewController: UIViewController {
     
     var viewArray : [UIImageView] = []
     var middleDeck : Deck = Deck()
-    var numberReceived = 1
+    var numberReceived = 0
     var playerOneDeck : [Card] = []
     var playerTwoDeck : [Card] = []
     var aiDeck : [Card] = []
     var randomNumber = 0
     var playersTurn = "Player One"
+    var notPlayersTurn = "Player Two"
     var potentialBookNumber = 0
     var booksPlayerOne : [String] = []
     var booksPlayerTwo : [String] = []
@@ -69,6 +70,7 @@ class GoFishViewController: UIViewController {
         viewArray = [cardView1, cardView2, cardView3, cardView4, cardView5, cardView6, cardView7, cardView8, cardView9, cardView10, cardView11, cardView12, cardView13, cardView14, cardView15, cardView16, cardView17, cardView18, cardView19, cardView20, cardView21, cardView22, cardView23, cardView24, cardView25, cardView26, cardView27, cardView28, cardView29, cardView30, cardView31, cardView32, cardView33, cardView34, cardView35, cardView36, cardView37, cardView38, cardView39]
         getStartingCards()
         displayPlayer()
+        print("\(numberReceived)")
     }
     
     func display(playerDeck : [Card]) {
@@ -173,12 +175,21 @@ class GoFishViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let next = segue.destinationViewController as! GoFishModalViewController
+        let next = segue.destinationViewController as! UINavigationController
+        let top = next.topViewController as! GoFishModalViewController
         if numberReceived == 1 {
-            next.playerOneDeck = playerOneDeck
-            next.aiDeck = aiDeck
-            next.middleDeck = middleDeck
-            next.numberReceived = numberReceived
+            top.playerOneDeck = playerOneDeck
+            top.aiDeck = aiDeck
+            top.middleDeck = middleDeck
+            top.numberReceived = numberReceived
+            top.notPlayer = notPlayersTurn
+        }
+        else if numberReceived == 2 {
+            top.playerOneDeck = playerOneDeck
+            top.playerTwoDeck = playerTwoDeck
+            top.middleDeck = middleDeck
+            top.numberReceived = numberReceived
+            top.notPlayer = notPlayersTurn
         }
     }
 }

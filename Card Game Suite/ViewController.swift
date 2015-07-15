@@ -86,12 +86,14 @@ class ViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "main2BJsegue"){
-        let next =  segue.destinationViewController as! BlackjackViewController
-        next.numberRecieved = numPlayers
+            let next =  segue.destinationViewController as! BlackjackViewController
+            next.numberRecieved = numPlayers
         }
-        else if(segue.identifier == "home2GFSegue)"){
-            let next = segue.destinationViewController as! GoFishViewController
-            next.numberReceived = numPlayers!
+        else {
+            print("num \(self.numPlayers!)")
+            let next = segue.destinationViewController as! UINavigationController
+            let top = next.topViewController as! GoFishViewController
+            top.numberReceived = numPlayers!
         }
     }
     

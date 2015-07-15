@@ -11,6 +11,7 @@ import UIKit
 class GoFishModalViewController: UIViewController {
     
     @IBOutlet weak var askingLabel: UILabel!
+    @IBOutlet weak var answerLabel: UILabel!
     @IBOutlet weak var ace: UIImageView!
     @IBOutlet weak var two: UIImageView!
     @IBOutlet weak var three: UIImageView!
@@ -26,6 +27,7 @@ class GoFishModalViewController: UIViewController {
     @IBOutlet weak var king: UIImageView!
     
     var player = "Player One"
+    var notPlayer = "Player Two"
     var numberReceived = 1
     var opposingPlayer = "AI"
     var cardImageArray : [UIImageView] = []
@@ -49,6 +51,7 @@ class GoFishModalViewController: UIViewController {
     @IBAction func cardTapRecognizer(sender: UITapGestureRecognizer) {
         cardAsking = 0
         cardRemoval = 0
+        numberOfGottenCards = 0
         if canBeTapped == true {
             for image in cardImageArray {
                 if (CGRectContainsPoint(image.frame, sender.locationInView(view))) {
@@ -67,20 +70,39 @@ class GoFishModalViewController: UIViewController {
                                     cardRemoval++
                                 }
                             }
+                            answerLabel.text = "The AI has \(numberOfGottenCards) \(cardTypes[cardAsking])s"
                         }
                     }
                     else if numberReceived == 2 {
-                        for card in aiDeck {
-                            if card.name == selectedCard {
-                                numberOfGottenCards++
-                                playerOneDeck.append(card)
-                                for twoCard in playerTwoDeck {
-                                    if twoCard.name == card.name {
-                                        playerTwoDeck.removeAtIndex(cardRemoval)
+                        if player == "Player One" {
+                            for card in playerTwoDeck {
+                                if card.name == selectedCard {
+                                    numberOfGottenCards++
+                                    playerOneDeck.append(card)
+                                    for twoCard in playerTwoDeck {
+                                        if twoCard.name == card.name {
+                                            playerTwoDeck.removeAtIndex(cardRemoval)
+                                        }
+                                        cardRemoval++
                                     }
-                                    cardRemoval++
                                 }
                             }
+                            answerLabel.text = "\(notPlayer) has \(numberOfGottenCards) \(cardTypes[cardAsking])s"
+                        }
+                        else if player == "Player Two" {
+                            for card in playerOneDeck {
+                                if card.name == selectedCard {
+                                    numberOfGottenCards++
+                                    playerOneDeck.append(card)
+                                    for oneCard in playerOneDeck {
+                                        if oneCard.name == card.name {
+                                            playerTwoDeck.removeAtIndex(cardRemoval)
+                                        }
+                                        cardRemoval++
+                                    }
+                                }
+                            }
+                            answerLabel.text = "\(notPlayer) has \(numberOfGottenCards) \(cardTypes[cardAsking])s"
                         }
                     }
                 }
