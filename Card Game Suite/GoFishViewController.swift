@@ -53,6 +53,7 @@ class GoFishViewController: UIViewController {
     @IBOutlet weak var cardView39: UIImageView!
     @IBOutlet weak var playerLabel: UILabel!
     @IBOutlet weak var cardsRemainingLabel: UILabel!
+    @IBOutlet weak var middleDeckLabel: UILabel!
     @IBOutlet weak var yourBook1: UILabel!
     @IBOutlet weak var yourBook2: UILabel!
     @IBOutlet weak var yourBook3: UILabel!
@@ -120,6 +121,7 @@ class GoFishViewController: UIViewController {
         }
         if playersTurn == "AI" {
             aiTurn()
+            playersTurn = "Player One"
         }
         if numberReceived == 2 && playersTurn == "Player One" {
             notPlayersTurn = "Player Two"
@@ -132,6 +134,7 @@ class GoFishViewController: UIViewController {
         }
         totalCards = playerOneDeck.count + playerTwoDeck.count + aiDeck.count + middleDeck.deck.count
         winConditions()
+        playerLabel.text = playersTurn
         displayPlayer()
     }
     
@@ -151,6 +154,7 @@ class GoFishViewController: UIViewController {
             yourBooksDisplayed = 0
             opponentBooksDisplayed = 0
             playerLabel.text = playersTurn
+            middleDeckLabel.text = "Middle Deck: \(middleDeck.deck.count) Cards"
             for book in booksPlayerOne {
                 yourBookLabels[yourBooksDisplayed].text = book
                 yourBooksDisplayed++
@@ -164,6 +168,7 @@ class GoFishViewController: UIViewController {
             yourBooksDisplayed = 0
             opponentBooksDisplayed = 0
             playerLabel.text = playersTurn
+            middleDeckLabel.text = "Middle Deck: \(middleDeck.deck.count) Cards"
             if playersTurn == "Player One" {
                 display(playerOneDeck)
                 for book in booksPlayerOne {
@@ -303,7 +308,6 @@ class GoFishViewController: UIViewController {
             checkForBooks()
             let aiActionController = UIAlertController(title: "AI's Turn", message: "The AI has taken it's turn. It asked you for a \(stolenCardType). It took \(stolenCards) \(stolenCardType)(s).", preferredStyle: UIAlertControllerStyle.Alert)
             let aiAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-                self.playersTurn = "Player One"
                 self.notPlayersTurn = "AI"
             })
             aiActionController.addAction(aiAlertAction)
