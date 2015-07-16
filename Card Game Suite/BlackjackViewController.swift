@@ -267,11 +267,12 @@ class BlackjackViewController: UIViewController {
                 }
             }
             if(loopIteration >= numberRecieved){
-                
+                return
             }
             else{
                 loopIteration++
                 NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("aBeginNewGame"), userInfo: nil, repeats: false)
+                
             }
         }
     }
@@ -281,13 +282,15 @@ class BlackjackViewController: UIViewController {
     **/
     func pickFirstCard(){
         if(cardImage1.image != nil && cardImage2.image != nil){
+            aBeginNewGame()
             return
         }
         
         if(waiting && startSetup){
-            unloadPlayerSetup()
             startSetup = false
             pickNumber = loopIteration
+            if(pickNumber >= numberRecieved && pickNumber != 9001){aBeginNewGame(); return}
+            else if(pickNumber == 9001){switchPlayer(); return}
             introLabelObject.text = "Now giving two cards to: " + playerArray[self.pickNumber].name
             introLabelObject.alpha = 1.0
             
@@ -321,10 +324,11 @@ class BlackjackViewController: UIViewController {
             }
             else{
                 if let temp:BlackjackUser? = playerArray[self.pickNumber]{
-                    
-                    playerArray[self.pickNumber].BJcardsInHand.append(cardPicked)
-                    self.pickSecondCard()
-                    return
+                    if(pickNumber == loopIteration){
+                        playerArray[self.pickNumber].BJcardsInHand.append(cardPicked)
+                        self.pickSecondCard()
+                        return
+                    }
                 }
             }
         }
@@ -354,6 +358,7 @@ class BlackjackViewController: UIViewController {
             let cardPicked2:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick2])
             gameDeck.deck.removeAtIndex(indexToPick2)
             cardImage2.image = cardPicked2.image
+            if(pickNumber == 9001){switchPlayer(); return}
             waiting = true
             if(cardPicked2.name == "Ace"){
                 waiting = false
@@ -380,8 +385,8 @@ class BlackjackViewController: UIViewController {
             }
             else{
                 if let temp:BlackjackUser? = playerArray[self.pickNumber]{
-                    playerArray[self.pickNumber].BJcardsInHand.append(cardPicked2)
-                    startSetup = true
+                        playerArray[self.pickNumber].BJcardsInHand.append(cardPicked2)
+                        startSetup = true
                 }
             }
         }
@@ -398,7 +403,6 @@ class BlackjackViewController: UIViewController {
         if(waiting){
             checkScreen = false
             calculateScore()
-            checkForWinner()
             unloadPlayerSetup()
             if(playerTurn == 0){playerTurn++}
             if(playerTurn > playerArray.count){
@@ -799,6 +803,7 @@ class BlackjackViewController: UIViewController {
         for(var i = 0; i < playerArray2.count; i++){
             if(playerArray2[i].score == 21){
                 winner(playerArray2[0])
+                return
             }
         }
         
@@ -877,6 +882,8 @@ class BlackjackViewController: UIViewController {
     **/
     func updateLabelScores(){
         calculateScore()
+        dealerScoreLabel.text = "The Dealer's score: " + String(dealer.score)
+        dealerScoreLabel.hidden = false
         for(var i = 0; i < playerArray2.count; i++){
             if(i == 0){
                 if let test:BlackjackUser = playerArray2[i]{
