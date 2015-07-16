@@ -36,7 +36,6 @@ class BlackjackViewController: UIViewController {
     
     var loopIteration = 0
     var waiting = true
-    //var condition = NSCondition()
     var num:Int!
     
     
@@ -67,8 +66,6 @@ class BlackjackViewController: UIViewController {
         introLabelObject.numberOfLines = 5
         introLabelObject.alpha = 0
         cardImageArray = [cardImage1, cardImage2, cardImage3, cardImage4, cardImage5, cardImage6, cardImage7, cardImage8, cardImage9, cardImage10, cardImage11]
-        
-        //for image in cardImageArray{image.image = gameDeck.deck[42].image}
         
         for image in cardImageArray{
             image.image = nil
@@ -104,7 +101,6 @@ class BlackjackViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func setupGame(){
@@ -234,8 +230,6 @@ class BlackjackViewController: UIViewController {
         
         
     }
-    ///THE FUNCTION IS LOOPING THIS vvvv FOLLOW AND FIND OUT WHERE FIX. PROBABLY PUT CONDITIONAL SO YOU CAN JUMP TO PICKPLAYER?
-    
     func aBeginNewGame(){
         if(waiting){
             print(loopIteration)
@@ -256,7 +250,6 @@ class BlackjackViewController: UIViewController {
                     calculateScore()
                     switchPlayer()
                     return
-                    //  NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("switchPlayer"), userInfo: nil, repeats: false)
                 }
             }
             if(loopIteration < numberRecieved){
@@ -264,22 +257,14 @@ class BlackjackViewController: UIViewController {
                     unloadPlayerSetup()
                     pickFirstCard()
                 }
-                /* else{
-                NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("switchPlayer"), userInfo: nil, repeats: false)
-                }*/
             }
             if(loopIteration >= numberRecieved){
                 
             }
             else{
-                //  if(waiting){
-                
-                //    if(startSetup){
                 loopIteration++
                 NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("aBeginNewGame"), userInfo: nil, repeats: false)
-                //    }
             }
-            // }
         }
         NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("aBeginNewGame"), userInfo: nil, repeats: true)
     }
@@ -297,7 +282,6 @@ class BlackjackViewController: UIViewController {
             introLabelObject.alpha = 1.0
             
             let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
-            //let indexToPick:Int = 0
             let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
             gameDeck.deck.removeAtIndex(indexToPick)
             cardImage1.image = cardPicked.image
@@ -354,10 +338,9 @@ class BlackjackViewController: UIViewController {
         }
         
         if(waiting){
-            //  let indexToPick2:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
-            let indexToPick2:Int = 0
+            let indexToPick2:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
             let cardPicked2:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick2])
-            //  gameDeck.deck.removeAtIndex(indexToPick2)
+            gameDeck.deck.removeAtIndex(indexToPick2)
             cardImage2.image = cardPicked2.image
             print("2 " + cardPicked2.name)
             waiting = true
@@ -394,7 +377,6 @@ class BlackjackViewController: UIViewController {
         }
         
         if(!waiting){
-            //NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("pickSecondCard"), userInfo: nil, repeats: false)
             return
         }
     }
@@ -440,9 +422,6 @@ class BlackjackViewController: UIViewController {
                 })
             }
         }
-        /*else{
-        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("switchPlayer()"), userInfo: nil, repeats: true)
-        }*/
     }
     
     func passThePhone(){
@@ -754,7 +733,6 @@ class BlackjackViewController: UIViewController {
                             }, completion: { finished in
                                 self.playerArray[playersTurn].isTurn = false
                                 self.playerArray.removeAtIndex(playersTurn)
-                                //self.playerTurn++
                                 self.switchPlayer()
                         })
                 }
@@ -898,9 +876,9 @@ class BlackjackViewController: UIViewController {
         for(var i = 0; i < playerArray2.count; i++){
             playerArray2[i].score = 0
             for(var j = 0; j < playerArray2[i].BJcardsInHand.count; j++){
-            playerArray2[i].score += playerArray2[i].BJcardsInHand[j].BJValue
+                playerArray2[i].score += playerArray2[i].BJcardsInHand[j].BJValue
             }
         }
-
+        
     }
 }
