@@ -108,7 +108,7 @@ class GoFishViewController: UIViewController {
     var opponentBooksDisplayed = 0
     
     /**
-    Runs when the view is loaded. Initalizes the variables
+    Runs when the view is loaded. Initalizes the variables, performs the AI's turn if needed, and displays the players cards
     **/
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -212,7 +212,7 @@ class GoFishViewController: UIViewController {
     }
     
     /**
-    Helper function that checks all the possibilities for a match
+    Helper function that checks all the possibilities for a book
     **/
     func checkAllTypes(playerDeck : [Card], booksCollection : [String]) {
         checker("Ace", playerDeck: playerDeck, booksCollection: booksCollection)
@@ -232,7 +232,7 @@ class GoFishViewController: UIViewController {
     }
     
     /**
-    Helper function that checks for all possible matches for all the players and AI if applicable
+    Helper function that checks for all possible books for all the players and AI if applicable
     **/
     func checkForBooks() {
         potentialBookNumber = 0
@@ -251,7 +251,7 @@ class GoFishViewController: UIViewController {
     }
     
     /**s
-    Function that appends randomly chosen cards to each player
+    Function that appends randomly chosen cards from the middle deck to each player
     **/
     func getStartingCards() {
         if numberReceived == 1 {
@@ -316,7 +316,20 @@ class GoFishViewController: UIViewController {
     }
     
     /**
-    Function that checks if there is a winner, and segues back to the main menu on the completion of the game
+    Helper function that returns all cards to the middle Deck, and removes all Books and Cards from each player
+    **/
+    func resetGame() {
+        playerOneDeck = []
+        playerTwoDeck = []
+        aiDeck = []
+        booksPlayerOne = []
+        booksPlayerTwo = []
+        booksAI = []
+        middleDeck = Deck()
+    }
+    
+    /**
+    Function that checks if there is a winner, resets the game, and segues back to the main menu on the completion of the game
     **/
     func winConditions() {
         if numberReceived == 1 {
@@ -324,6 +337,7 @@ class GoFishViewController: UIViewController {
                 if booksPlayerOne.count > booksAI.count {
                     let winningActionController = UIAlertController(title: "You Won!", message: "You have won the game against the AI!", preferredStyle: UIAlertControllerStyle.Alert)
                     let winningAlertAction = UIAlertAction(title: "Return to Main Menu", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                        self.resetGame()
                         self.performSegueWithIdentifier("return2MMSegue", sender: self)
                     })
                     winningActionController.addAction(winningAlertAction)
@@ -332,6 +346,7 @@ class GoFishViewController: UIViewController {
                 else if booksAI.count > booksPlayerOne.count {
                     let winningActionController = UIAlertController(title: "You Lost!", message: "You have lost the game to the AI!", preferredStyle: UIAlertControllerStyle.Alert)
                     let winningAlertAction = UIAlertAction(title: "Return to Main Menu", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                        self.resetGame()
                         self.performSegueWithIdentifier("return2MMSegue", sender: self)
                     })
                     winningActionController.addAction(winningAlertAction)
@@ -344,6 +359,7 @@ class GoFishViewController: UIViewController {
                 if booksPlayerOne.count > booksPlayerTwo.count {
                     let winningActionController = UIAlertController(title: "You Won!", message: "You have won the game against Player Two!", preferredStyle: UIAlertControllerStyle.Alert)
                     let winningAlertAction = UIAlertAction(title: "Return to Main Menu", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                        self.resetGame()
                         self.performSegueWithIdentifier("return2MMSegue", sender: self)
                     })
                     winningActionController.addAction(winningAlertAction)
@@ -352,6 +368,7 @@ class GoFishViewController: UIViewController {
                 else if booksPlayerTwo.count > booksPlayerOne.count {
                     let winningActionController = UIAlertController(title: "You Won!", message: "You have won the game against Player One!", preferredStyle: UIAlertControllerStyle.Alert)
                     let winningAlertAction = UIAlertAction(title: "Return to Main Menu", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                        self.resetGame()
                         self.performSegueWithIdentifier("return2MMSegue", sender: self)
                     })
                     winningActionController.addAction(winningAlertAction)
