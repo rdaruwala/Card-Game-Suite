@@ -85,7 +85,7 @@ class GoFishModalViewController: UIViewController {
                             endTurnButton.enabled = true
                         }
                         if numberOfGottenCards == 0 {
-                            if middleDeck.deck.count == 0 {
+                            if middleDeck.deck.count != 0 {
                                 let randomNumber = Int(arc4random_uniform(UInt32(middleDeck.deck.count)))
                                 let randomCard : Card = middleDeck.deck[randomNumber]
                                 playerOneDeck.append(randomCard)

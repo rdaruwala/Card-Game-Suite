@@ -131,10 +131,9 @@ class GoFishViewController: UIViewController {
     }
     
     func display(playerDeck : [Card]) {
-        for number in 0...38 {
-            if playerDeck.count - 1 >= number{
-                viewArray[number].image = playerDeck[number].image
-            }
+        let playerDeckCount = playerDeck.count - 1
+        for number in 0...playerDeckCount {
+            viewArray[number].image = playerDeck[number].image!
         }
     }
     
@@ -154,6 +153,8 @@ class GoFishViewController: UIViewController {
             }
         }
         if numberReceived == 2 {
+            yourBooksDisplayed = 0
+            opponentBooksDisplayed = 0
             playerLabel.text = playersTurn
             if playersTurn == "Player One" {
                 display(playerOneDeck)
