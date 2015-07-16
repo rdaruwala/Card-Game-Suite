@@ -8,6 +8,10 @@
 
 import UIKit
 
+/**
+User class that inherits from the User class. Uses a modified cardsInHand suited for Blackjack object cards
+**/
+
 class BlackjackUser: User {
 
     var BJcardsInHand:[BlackjackCard]

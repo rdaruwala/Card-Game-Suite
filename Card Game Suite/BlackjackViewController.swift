@@ -279,7 +279,7 @@ class BlackjackViewController: UIViewController {
     }
     
     /**
-    Helper function to pick a given player's first card. If this card is an ace, the player is presented with an ActionView to decide whether they would like its value to be one or eleven.
+    Helper function to pick a given player's first card. If this card is an ace, the player is presented with an ActionSheet to decide whether they would like its value to be one or eleven.
     **/
     func pickFirstCard(){
         if(cardImage1.image != nil && cardImage2.image != nil){
@@ -345,7 +345,7 @@ class BlackjackViewController: UIViewController {
     }
     
     /**
-    Helper function to pick a given player's second card. If this card is an ace, the player is presented with an ActionView to decide whether they would like its value to be one or eleven.
+    Helper function to pick a given player's second card. If this card is an ace, the player is presented with an ActionSheet to decide whether they would like its value to be one or eleven.
     **/
     func pickSecondCard(){
         if(cardImage1.image != nil && cardImage2.image != nil){
@@ -730,19 +730,6 @@ class BlackjackViewController: UIViewController {
     }
     
     /**
-    A helper function to find the user whose turn it is currently
-    **/
-    func findUserTurn()->Int{
-        for(var i = 0; i < playerArray.count; i++){
-            if(playerArray[i].isTurn){
-                return i
-            }
-        }
-        return -1
-    }
-    
-    
-    /**
     Action function to run if the player decides to stay. The function sets the label text, and then removes the player from the active player Array and then returns and the next player's turn starts
     **/
     @IBAction func stayButtonAction(sender: AnyObject) {
@@ -881,6 +868,18 @@ class BlackjackViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    /**
+    A helper function to find the user whose turn it is currently
+    **/
+    func findUserTurn()->Int{
+        for(var i = 0; i < playerArray.count; i++){
+            if(playerArray[i].isTurn){
+                return i
+            }
+        }
+        return -1
     }
     
     /**
