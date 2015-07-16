@@ -96,9 +96,9 @@
 			isa = PBXGroup;
 			children = (
 				C171BA421B5039A00087D024 /* Card.swift */,
+				C171BA441B5044670087D024 /* BlackjackCard.swift */,
 				0485D6A01B5056B800BD271E /* User.swift */,
 				C1F96E441B5728AA00C35919 /* BlackjackUser.swift */,
-				C171BA441B5044670087D024 /* BlackjackCard.swift */,
 				C17E78721B505D1900D67C95 /* Deck.swift */,
 			);
 			name = Classes;
