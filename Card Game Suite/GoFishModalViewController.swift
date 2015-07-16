@@ -42,6 +42,9 @@ class GoFishModalViewController: UIViewController {
     var cardRemoval = 0
     var numberOfGottenCards = 0
     var canBeTapped : Bool = true
+    var booksPlayerOne : [String] = []
+    var booksPlayerTwo : [String] = []
+    var booksAI : [String] = []
     
     /**
     Runs when the view is loaded. Initializes variables and creates card arrays
@@ -54,10 +57,6 @@ class GoFishModalViewController: UIViewController {
         answerLabel.text = ""
         endTurnButton.enabled = false
         canBeTapped = true
-        print("\(aiDeck.count)")
-        for card in aiDeck {
-            print(card.name)
-        }
     }
     
     /**
@@ -84,7 +83,6 @@ class GoFishModalViewController: UIViewController {
                                         cardRemoval--
                                     }
                                     cardRemoval++
-                                    print(cardRemoval)
                                 }
                             }
                             answerLabel.text = "The AI has \(numberOfGottenCards) \(cardTypes[cardAsking])s"
@@ -104,6 +102,7 @@ class GoFishModalViewController: UIViewController {
                         }
                     }
                     else if numberReceived == 2 {
+                        cardRemoval = 0
                         if player == "Player One" {
                             for card in playerTwoDeck {
                                 if card.name == selectedCard {
@@ -112,6 +111,7 @@ class GoFishModalViewController: UIViewController {
                                     for twoCard in playerTwoDeck {
                                         if twoCard.name == card.name {
                                             playerTwoDeck.removeAtIndex(cardRemoval)
+                                            cardRemoval--
                                         }
                                         cardRemoval++
                                     }
@@ -133,13 +133,15 @@ class GoFishModalViewController: UIViewController {
                             }
                         }
                         else if player == "Player Two" {
+                            cardRemoval = 0
                             for card in playerOneDeck {
                                 if card.name == selectedCard {
                                     numberOfGottenCards++
-                                    playerOneDeck.append(card)
+                                    playerTwoDeck.append(card)
                                     for oneCard in playerOneDeck {
                                         if oneCard.name == card.name {
-                                            playerTwoDeck.removeAtIndex(cardRemoval)
+                                            playerOneDeck.removeAtIndex(cardRemoval)
+                                            cardRemoval--
                                         }
                                         cardRemoval++
                                     }
@@ -237,5 +239,8 @@ class GoFishModalViewController: UIViewController {
         top.middleDeck.deck = middleDeck.deck
         top.playerOneDeck = playerOneDeck
         top.playerTwoDeck = playerTwoDeck
+        top.booksPlayerOne = booksPlayerOne
+        top.booksPlayerTwo = booksPlayerTwo
+        top.booksAI = booksAI
     }
 }
