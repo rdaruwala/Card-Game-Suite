@@ -294,7 +294,7 @@ class BlackjackViewController: UIViewController {
             introLabelObject.text = "Now giving two cards to: " + playerArray[self.pickNumber].name
             introLabelObject.alpha = 1.0
             
-            let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+            let indexToPick:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count-4))))
             let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
             gameDeck.deck.removeAtIndex(indexToPick)
             cardImage1.image = cardPicked.image
@@ -354,7 +354,7 @@ class BlackjackViewController: UIViewController {
         }
         
         if(waiting){
-            let indexToPick2:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count))))
+            let indexToPick2:Int = Int(arc4random_uniform(UInt32((self.gameDeck.deck.count-4))))
             let cardPicked2:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick2])
             gameDeck.deck.removeAtIndex(indexToPick2)
             cardImage2.image = cardPicked2.image
@@ -486,6 +486,7 @@ class BlackjackViewController: UIViewController {
                                                             self.introLabelObject.textColor = UIColor.greenColor()
                                                             self.dealer.isOut = true
                                                             self.dealerIn = false
+                                                            self.updateLabelScores()
                                                             self.checkForWinner()
                                                             UIView.animateWithDuration(1.5, animations: { () -> Void in
                                                                 self.introLabelObject.alpha = 1.5
@@ -502,6 +503,7 @@ class BlackjackViewController: UIViewController {
                                                             })
                                                         }
                                                         else if(self.dealer.score == 21){
+                                                            self.updateLabelScores()
                                                             self.winner(self.dealer)
                                                         }
                                                         toHit = false
@@ -511,7 +513,7 @@ class BlackjackViewController: UIViewController {
                                                             }
                                                         }
                                                         if(toHit){self.dealerDraw()}
-                                                        else{self.checkForWinner()}
+                                                        else{self.updateLabelScores(); self.checkForWinner()}
                                                 })
                                         })
                                     }
@@ -524,6 +526,7 @@ class BlackjackViewController: UIViewController {
                                                     self.introLabelObject.alpha = 0.0
                                                     }, completion: { finished in
                                                         self.dealerIn = false
+                                                        self.updateLabelScores()
                                                         self.checkForWinner()
                                                         
                                                 })
