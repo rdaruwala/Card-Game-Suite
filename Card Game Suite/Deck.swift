@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+/**
+Deck class which initializes an array of all possible cards. For the Blackjack variant, a BJValue is added representing the numerical value of the card
+**/
+
 class Deck{
     var deck : [Card]!
     

@@ -22,6 +22,7 @@
 		C171BA471B504A220087D024 /* LeftToRightSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C171BA461B504A220087D024 /* LeftToRightSegue.swift */; };
 		C171BA4D1B5052CB0087D024 /* BlackjackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C171BA4C1B5052CB0087D024 /* BlackjackViewController.swift */; };
 		C17E78731B505D1900D67C95 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17E78721B505D1900D67C95 /* Deck.swift */; };
+		C1F96E451B5728AA00C35919 /* BlackjackUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F96E441B5728AA00C35919 /* BlackjackUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		C171BA461B504A220087D024 /* LeftToRightSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftToRightSegue.swift; sourceTree = "<group>"; };
 		C171BA4C1B5052CB0087D024 /* BlackjackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlackjackViewController.swift; sourceTree = "<group>"; };
 		C17E78721B505D1900D67C95 /* Deck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
+		C1F96E441B5728AA00C35919 /* BlackjackUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlackjackUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +96,9 @@
 			isa = PBXGroup;
 			children = (
 				C171BA421B5039A00087D024 /* Card.swift */,
-				0485D6A01B5056B800BD271E /* User.swift */,
 				C171BA441B5044670087D024 /* BlackjackCard.swift */,
+				0485D6A01B5056B800BD271E /* User.swift */,
+				C1F96E441B5728AA00C35919 /* BlackjackUser.swift */,
 				C17E78721B505D1900D67C95 /* Deck.swift */,
 			);
 			name = Classes;
@@ -307,6 +310,7 @@
 				C171BA431B5039A00087D024 /* Card.swift in Sources */,
 				04798BE71B53FF9900D61CE7 /* GoFishViewController.swift in Sources */,
 				C171BA471B504A220087D024 /* LeftToRightSegue.swift in Sources */,
+				C1F96E451B5728AA00C35919 /* BlackjackUser.swift in Sources */,
 				C171BA451B5044670087D024 /* BlackjackCard.swift in Sources */,
 				C17E78731B505D1900D67C95 /* Deck.swift in Sources */,
 				C171BA151B5039070087D024 /* AppDelegate.swift in Sources */,

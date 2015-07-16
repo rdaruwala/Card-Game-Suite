@@ -43,6 +43,9 @@ class GoFishModalViewController: UIViewController {
     var numberOfGottenCards = 0
     var canBeTapped : Bool = true
     
+    /**
+    Runs when the view is loaded. Initializes variables and creates card arrays
+    **/
     override func viewDidLoad() {
         super.viewDidLoad()
         cardImageArray = [ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king]
@@ -57,6 +60,9 @@ class GoFishModalViewController: UIViewController {
         }
     }
     
+    /**
+    Action function that runs when a card is selected. Checks the image that has been selected. If the card is in the other player's deck, then the card is transferred to the player's deck. If not, the player is told to go fish
+    **/
     @IBAction func cardTapRecognizer(sender: UITapGestureRecognizer) {
         cardAsking = 0
         cardRemoval = 0
@@ -161,6 +167,9 @@ class GoFishModalViewController: UIViewController {
         }
     }
     
+    /**
+    Action function that runs when the 'End Turn' button is pressed. Changes player states and segues back to the main view controller
+    **/
     @IBAction func onEndTurnButtonPressed(sender: AnyObject) {
         if player == "Player One" && opposingPlayer == "Player Two" {
             let endTurnController = UIAlertController(title: "Turn Complete", message: "Please pass the phone to \(opposingPlayer)", preferredStyle: UIAlertControllerStyle.Alert)
@@ -215,7 +224,9 @@ class GoFishModalViewController: UIViewController {
             self.presentViewController(endTurnController, animated: true, completion: nil)
         }
     }
-    
+    /**
+    Function that transfers the variables before the segue back to the main view controller occurs
+    **/
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let next = segue.destinationViewController as! UINavigationController
         let top = next.topViewController as! GoFishViewController

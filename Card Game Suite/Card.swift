@@ -6,6 +6,10 @@
 //  Copyright © 2015 iOS Mobile Makers Class. All rights reserved.
 //
 
+/**
+Card class which is used as the basis for cards used in other games
+**/
+
 import Foundation
 import UIKit
 

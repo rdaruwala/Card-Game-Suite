@@ -10,6 +10,8 @@ import UIKit
 
 class GoFishViewController: UIViewController {
     
+    
+    ///IBOutlets for each image in the maximum case
     @IBOutlet weak var cardView1: UIImageView!
     @IBOutlet weak var cardView2: UIImageView!
     @IBOutlet weak var cardView3: UIImageView!
@@ -104,6 +106,9 @@ class GoFishViewController: UIViewController {
     var yourBooksDisplayed = 0
     var opponentBooksDisplayed = 0
     
+    /**
+    Runs when the view is loaded. Initalizes the variables
+    **/
     override func viewDidLoad() {
         super.viewDidLoad()
         viewArray = [cardView1, cardView2, cardView3, cardView4, cardView5, cardView6, cardView7, cardView8, cardView9, cardView10, cardView11, cardView12, cardView13, cardView14, cardView15, cardView16, cardView17, cardView18, cardView19, cardView20, cardView21, cardView22, cardView23, cardView24, cardView25, cardView26, cardView27, cardView28, cardView29, cardView30, cardView31, cardView32, cardView33, cardView34, cardView35, cardView36, cardView37, cardView38, cardView39]
@@ -137,6 +142,9 @@ class GoFishViewController: UIViewController {
         }
     }
     
+    /**
+    Function that displays the player's turn
+    **/
     func displayPlayer() {
         if numberReceived == 1 {
             display(playerOneDeck)
@@ -181,6 +189,9 @@ class GoFishViewController: UIViewController {
         }
     }
     
+    /**
+    Helper function that checks if a match of four has been found
+    **/
     func checker(cardType : String, playerDeck : [Card], booksCollection : [String]) {
         potentialBookNumber = 0
         var a = booksCollection
@@ -190,11 +201,14 @@ class GoFishViewController: UIViewController {
             }
         }
         if potentialBookNumber == 4 {
-            a.append("\(cardType)s")
+            a.append("\(cardType)(s)")
         }
         potentialBookNumber = 0
     }
     
+    /**
+    Helper function that checks all the possibilities for a match
+    **/
     func checkAllTypes(playerDeck : [Card], booksCollection : [String]) {
         checker("Ace", playerDeck: playerDeck, booksCollection: booksCollection)
         checker("One", playerDeck: playerDeck, booksCollection: booksCollection)
@@ -212,6 +226,9 @@ class GoFishViewController: UIViewController {
         checker("King", playerDeck: playerDeck, booksCollection: booksCollection)
     }
     
+    /**
+    Helper function that checks for all possible matches for all the players and AI if applicable
+    **/
     func checkForBooks() {
         potentialBookNumber = 0
         if playersTurn == "Player One" {
@@ -228,6 +245,9 @@ class GoFishViewController: UIViewController {
         }
     }
     
+    /**s
+    Function that appends randomly chosen cards to each player
+    **/
     func getStartingCards() {
         if numberReceived == 1 {
             randomNumber = Int(arc4random_uniform(52))
@@ -257,6 +277,9 @@ class GoFishViewController: UIViewController {
         }
     }
     
+    /**
+    Function that performs the AI's turn
+    **/
     func aiTurn() {
         if playerOneWin == false && aiWin == false {
             let randomNumber = Int(arc4random_uniform(UInt32(13)))
@@ -278,7 +301,7 @@ class GoFishViewController: UIViewController {
                 middleDeck.deck.removeAtIndex(randomNumber)
             }
             checkForBooks()
-            let aiActionController = UIAlertController(title: "AI's Turn", message: "The AI has taken it's turn. It asked you for a \(stolenCardType). It took \(stolenCards) \(stolenCardType)s.", preferredStyle: UIAlertControllerStyle.Alert)
+            let aiActionController = UIAlertController(title: "AI's Turn", message: "The AI has taken it's turn. It asked you for a \(stolenCardType). It took \(stolenCards) \(stolenCardType)(s).", preferredStyle: UIAlertControllerStyle.Alert)
             let aiAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
                 self.playersTurn = "Player One"
                 self.notPlayersTurn = "AI"
@@ -288,6 +311,9 @@ class GoFishViewController: UIViewController {
         }
     }
     
+    /**
+    Function that checks if there is a winner, and segues back to the main menu on the completion of the game
+    **/
     func winConditions() {
         if numberReceived == 1 {
             if totalCards == 0 {
@@ -331,6 +357,9 @@ class GoFishViewController: UIViewController {
         }
     }
     
+    /**
+    Function that transfers variables before a segue occurs
+    **/
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let next = segue.destinationViewController as! UINavigationController
         let top = next.topViewController as! GoFishModalViewController

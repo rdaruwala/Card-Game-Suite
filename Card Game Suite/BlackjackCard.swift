@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+/**
+Blackjack card class which inherits from the card class. This object is used for Blackjack-related games
+**/
+
 class BlackjackCard : Card{
     
     var BJValue:Int

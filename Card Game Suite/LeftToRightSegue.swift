@@ -6,6 +6,10 @@
 //  Copyright (c) 2015 MARIAM ALJAMEA. All rights reserved.
 //
 
+
+/**
+Custom class for the segue seen in the transition between the main VC and the Backjack game VC
+**/
 import UIKit
 
 class LeftToRightSegue: UIStoryboardSegue {

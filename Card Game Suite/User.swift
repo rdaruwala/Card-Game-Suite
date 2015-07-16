@@ -8,6 +8,10 @@
 
 import UIKit
 
+/**
+Base User class. This class is used as the base User setup
+**/
+
 class User {
     
     var name:String!
