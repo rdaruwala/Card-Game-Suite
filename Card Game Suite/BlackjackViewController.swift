@@ -594,7 +594,6 @@ class BlackjackViewController: UIViewController {
                                                                             self.introLabelObject.alpha = 0.0
                                                                             }, completion: { finished in
                                                                                 self.playerArray.removeAtIndex(playersTurn)
-                                                                                //self.playerTurn++
                                                                                 self.switchPlayer()
                                                                         })
                                                                 })
