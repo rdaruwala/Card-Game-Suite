@@ -241,7 +241,6 @@ class BlackjackViewController: UIViewController {
     **/
     func aBeginNewGame(){
         if(waiting){
-            print(loopIteration)
             toNormalIterate = true
             if (loopIteration >= numberRecieved){
                 if(checkScreen){
@@ -275,7 +274,7 @@ class BlackjackViewController: UIViewController {
                 NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("aBeginNewGame"), userInfo: nil, repeats: false)
             }
         }
-        NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("aBeginNewGame"), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("aBeginNewGame"), userInfo: nil, repeats: false)
     }
     
     /**
@@ -297,7 +296,6 @@ class BlackjackViewController: UIViewController {
             let cardPicked:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick])
             gameDeck.deck.removeAtIndex(indexToPick)
             cardImage1.image = cardPicked.image
-            print("1 " + cardPicked.name)
             waiting = true
             
             if(cardPicked.name == "Ace" && waiting){
@@ -357,10 +355,8 @@ class BlackjackViewController: UIViewController {
             let cardPicked2:BlackjackCard = BlackjackCard(type: self.gameDeck.deck[indexToPick2])
             gameDeck.deck.removeAtIndex(indexToPick2)
             cardImage2.image = cardPicked2.image
-            print("2 " + cardPicked2.name)
             waiting = true
             if(cardPicked2.name == "Ace"){
-                print("14")
                 waiting = false
                 let actionSheet2 = UIAlertController(title: playerArray[self.pickNumber].name + "'s Card", message: playerArray[self.pickNumber].name + ", please select the value of your Ace", preferredStyle: .ActionSheet)
                 let oneOption2 = UIAlertAction(title: "One", style: .Default){ (action) -> Void in
@@ -404,7 +400,6 @@ class BlackjackViewController: UIViewController {
             checkScreen = false
             calculateScore()
             checkForWinner()
-            print("TOP")
             unloadPlayerSetup()
             if(playerTurn == 0){playerTurn++}
             if(playerTurn > playerArray.count){
@@ -413,16 +408,12 @@ class BlackjackViewController: UIViewController {
             if(playerArray.count == 0){
                 dealerDraw()
             }
-            
-            print(playerArray.count)
-            print(playerArray2.count)
             if(playerArray.count >= 1){
                 if(playerArray.count != 1){
                     passThePhone()
                 }
                 introLabelObject.text = "It is now " + playerArray[playerTurn-1].name + "'s turn."
                 playerArray[playerTurn-1].isTurn = true
-                print(playerArray[playerTurn-1].name)
                 loadPlayerSetup(playerArray[playerTurn-1])
                 UIView.animateWithDuration(1.5, animations: { () -> Void in
                     self.introLabelObject.alpha = 1.0
