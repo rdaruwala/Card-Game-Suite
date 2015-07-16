@@ -12,6 +12,7 @@ import Darwin
 
 class BlackjackViewController: UIViewController {
     
+    ///IBOutlets regarding all labels, buttons, picture views & potential labels
     @IBOutlet weak var introLabelObject: UILabel!
     @IBOutlet weak var hitButton: UIButton!
     @IBOutlet weak var stayButton: UIButton!
@@ -34,14 +35,11 @@ class BlackjackViewController: UIViewController {
     @IBOutlet weak var p3ScoreLabel: UILabel!
     @IBOutlet weak var p4ScoreLabel: UILabel!
     
+    ///Total number of variables used to check cases throughout the code
     var loopIteration = 0
     var waiting = true
     var num:Int!
-    
-    
     var cardImageArray:[UIImageView]!
-    
-    
     var numberRecieved:Int!
     var gameDeck:Deck!
     var playerSetup:Int = 1
@@ -55,6 +53,10 @@ class BlackjackViewController: UIViewController {
     var pickNumber:Int!
     var checkScreen = true
     
+    
+    /**
+    Runs on view load. Initializes variables and adds borders around the buttons & makes them hidden.
+    **/
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,9 +91,11 @@ class BlackjackViewController: UIViewController {
         p3ScoreLabel.hidden = true
         p4ScoreLabel.hidden = true
         
-        
     }
     
+    /**
+    Runs the setup game function
+    **/
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         setupGame()
@@ -103,6 +107,9 @@ class BlackjackViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    /**
+    For the number of players chosen for the game, an alert view is created for BlackjackUser objects to be created from each name. Once this process is completed, an animated UILabel shows introductory text to the game ("Presented by, Cardgame Suite, etc")
+    **/
     func setupGame(){
         if(playerSetup == 1){
             let beginningController = UIAlertController(
@@ -227,9 +234,11 @@ class BlackjackViewController: UIViewController {
             self.presentViewController(alertController, animated: true, completion: nil)
             
         }
-        
-        
     }
+    
+    /**
+    Recursive function to setup the first two card for each given player. Helper functions setup the cards for both the first and second cards. After that's completed, this function sets up the dealer's first two cards before starting the game.
+    **/
     func aBeginNewGame(){
         if(waiting){
             print(loopIteration)
@@ -269,6 +278,9 @@ class BlackjackViewController: UIViewController {
         NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("aBeginNewGame"), userInfo: nil, repeats: true)
     }
     
+    /**
+    Helper function to pick a given player's first card. If this card is an ace, the player is presented with an ActionView to decide whether they would like its value to be one or eleven.
+    **/
     func pickFirstCard(){
         if(cardImage1.image != nil && cardImage2.image != nil){
             return
@@ -332,6 +344,9 @@ class BlackjackViewController: UIViewController {
         
     }
     
+    /**
+    Helper function to pick a given player's second card. If this card is an ace, the player is presented with an ActionView to decide whether they would like its value to be one or eleven.
+    **/
     func pickSecondCard(){
         if(cardImage1.image != nil && cardImage2.image != nil){
             NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("aBeginNewGame"), userInfo: nil, repeats: false)
@@ -381,6 +396,9 @@ class BlackjackViewController: UIViewController {
         }
     }
     
+    /**
+    One of the main functions regarding the game. If an ace is not being chosen (the waiting check), it calculates everyone's score and then checks to see if there's a winner. After that, it iterates through all the players indefinitely & asks whether they want to hit or stay. This continues until there are no active players left, at which it cues the dealer's move.
+    **/
     func switchPlayer(){
         if(waiting){
             checkScreen = false
@@ -424,6 +442,9 @@ class BlackjackViewController: UIViewController {
         }
     }
     
+    /**
+    Helper function that creates an alert to pass the iPhone to the player in the playerTurn variable, which is iterated in the switchPlayer function
+    **/
     func passThePhone(){
         let alert = UIAlertController(title: "Pass Phone", message: "Please pass the phone to: " + playerArray[playerTurn-1].name + ".", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.Default, handler: {void in
@@ -431,6 +452,9 @@ class BlackjackViewController: UIViewController {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
+    /**
+    This function is the dealer's turn. If the dealer's card value is lower than that of any not-out player, then the dealer will hit. The function then checks if the dealer is out. If not, then the dealer will repeat the function. If the dealer stays, then the endGame functions are cued.
+    **/
     func dealerDraw(){
         if(dealer.isOut == false){
             updateLabelScores()
@@ -521,6 +545,9 @@ class BlackjackViewController: UIViewController {
         
     }
     
+    /**
+    Action function to run if the hit button is tapped. It picks a random card from the deck, and adds it to the player's cards. If the new score is over 21, then the player is out. If under 21, the function returns and the next player's turn starts
+    **/
     @IBAction func hitButtonAction(sender: AnyObject) {
         
         hitButton.hidden = true
@@ -702,7 +729,9 @@ class BlackjackViewController: UIViewController {
         }
     }
     
-    
+    /**
+    A helper function to find the user whose turn it is currently
+    **/
     func findUserTurn()->Int{
         for(var i = 0; i < playerArray.count; i++){
             if(playerArray[i].isTurn){
@@ -713,7 +742,9 @@ class BlackjackViewController: UIViewController {
     }
     
     
-    
+    /**
+    Action function to run if the player decides to stay. The function sets the label text, and then removes the player from the active player Array and then returns and the next player's turn starts
+    **/
     @IBAction func stayButtonAction(sender: AnyObject) {
         
         hitButton.hidden = true
@@ -740,6 +771,9 @@ class BlackjackViewController: UIViewController {
         
     }
     
+    /**
+    Helper function to display an alert stating the winner, and then return to the home screen
+    **/
     func winner(winner: BlackjackUser){
         introLabelObject.text = winner.name + " is the winner!"
         introLabelObject.textColor = UIColor.orangeColor()
@@ -752,19 +786,27 @@ class BlackjackViewController: UIViewController {
         self.presentViewController(alert, animated: true, completion: nil)
         
     }
-    
+    /**
+    Helper function that takes a BlackjackUser input and then adds all of its images to the display
+    **/
     func loadPlayerSetup(player: BlackjackUser){
         for(var i = 0; i < player.BJcardsInHand.count; i++){
             cardImageArray[i].image = player.BJcardsInHand[i].image
         }
     }
     
+    /**
+    Helper function that empties all the views in the display
+    **/
     func unloadPlayerSetup(){
         for image in cardImageArray{
             image.image = nil
         }
     }
     
+    /**
+    Helper function that finds and returns the value of the next empty display
+    **/
     func findEmptyImageSlot(player: BlackjackUser)-> Int{
         for(var i = 0; i < cardImageArray.count; i++){
             if(cardImageArray[i].image == nil){return i}
@@ -772,6 +814,9 @@ class BlackjackViewController: UIViewController {
         return -1
     }
     
+    /**
+    Function that checks if there is a winner. If there is none, it displays a draw and returns to the home screen
+    **/
     func checkForWinner(){
         
         for(var i = 0; i < playerArray2.count; i++){
@@ -838,8 +883,11 @@ class BlackjackViewController: UIViewController {
         }
     }
     
+    /**
+    Updates the label scores at the bottom of the screen with the most recent player scores
+    **/
     func updateLabelScores(){
-        
+        calculateScore()
         for(var i = 0; i < playerArray2.count; i++){
             if(i == 0){
                 if let test:BlackjackUser = playerArray2[i]{
@@ -872,6 +920,9 @@ class BlackjackViewController: UIViewController {
         }
     }
     
+    /**
+    Helper function to calculate and update all the scores for the players
+    **/
     func calculateScore(){
         for(var i = 0; i < playerArray2.count; i++){
             playerArray2[i].score = 0

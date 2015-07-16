@@ -277,7 +277,7 @@ class GoFishViewController: UIViewController {
                 middleDeck.deck.removeAtIndex(randomNumber)
             }
             checkForBooks()
-            let aiActionController = UIAlertController(title: "AI's Turn", message: "The AI has taken it's turn. It asked you for a \(stolenCardType). It took \(stolenCards) \(stolenCardType)s.", preferredStyle: UIAlertControllerStyle.Alert)
+            let aiActionController = UIAlertController(title: "AI's Turn", message: "The AI has taken it's turn. It asked you for a \(stolenCardType). It took \(stolenCards) \(stolenCardType)(s).", preferredStyle: UIAlertControllerStyle.Alert)
             let aiAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
                 self.playersTurn = "Player One"
                 self.notPlayersTurn = "AI"
