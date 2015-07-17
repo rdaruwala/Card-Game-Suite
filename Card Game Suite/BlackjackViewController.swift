@@ -169,6 +169,7 @@ class BlackjackViewController: UIViewController {
                     
                     alertController.addTextFieldWithConfigurationHandler {
                         (playerName) -> Void in
+                        //playerName.autocorrectionType = UITextAutocapitalizationType.Sentences
                     }
                     
                     alertController.addAction(okAction)
